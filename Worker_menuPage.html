@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <script src="js/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" type="text/css" href="css/boostrap/bootstrap.css"/>
+</head>
+	<body background="img/login-bg.png">   
+		<form style="margin-left:10px;margin-top:120px;">
+    	<h1 id="h1" class="text-center"style="margin-bottom: 50px; color: white;" >先生，你好 </h1>
+        <div class="text-center">
+        <input type="button" class="btn btn-primary " value="排餐信息" style="width: 200px;font-size: 25px;" onclick="getMenu()"></input>
+        </div>
+        <div class="text-center" style="margin-top:20px ;">
+        <input type="button" class="btn btn-primary " value="消费记录" style="width: 200px;font-size: 25px;" onclick="getOrder()"></input>
+        </div>
+        <div class="text-center" style="margin-top:20px ;">
+        <input type="button" class="btn btn-primary " value="我的二维码" style="width: 200px;font-size: 25px;" onclick="getqrcode()"></input>
+        </div>
+    </form>
+	</body>
+	<script type="text/javascript">
+		//取index传的值,Name,id
+		var url=decodeURI(location.search);
+		var Request = new Object();
+		if(url.indexOf("?")!=-1)
+		{
+		　　var str = url.substr(1)　//去掉?号
+		　　strs = str.split("&");
+		　　for(var i=0;i<strs.length;i++)
+		　　{
+		 　　　 Request[strs[i ].split("=")[0]]=unescape(strs[ i].split("=")[1]);
+		　　}
+		}
+		$("#h1").text("你好!   "+localStorage.getItem("Name"));
+		var personId=localStorage.getItem("personId");
+		var PcBool=localStorage.getItem("PcWorkerBool");
+		//ajax拿取排餐数据
+		function getMenu () {
+				window.location.href="Worker_OrderPage.html?id="+personId;
+		}
+		
+		//跳转取餐页面
+		function getqrcode () {
+			window.location.href="Worker_MyQrcode.html?id="+personId;
+		}
+		
+		
+	</script>
+</html>

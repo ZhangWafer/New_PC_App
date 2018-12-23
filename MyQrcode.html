@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	    <meta charset="utf-8">
+	    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	    <title></title>
+	    <script src="js/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="css/boostrap/bootstrap.css"/>
+		<script src="js/bootstrap-select.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="css/select/bootstrap-select.css"/>
+	</head>
+	<body background="img/login-bg.png">
+		<div  style="margin-top:10px ;">
+			<a href="Pc_menuPage.html" style="color: white;">
+			<span class="glyphicon glyphicon-chevron-left" style="font-size: 15px;"></span><h4 style="display: inline;">返回</h4>
+			</a>
+        </div>
+		<h1 class="text-center"style="margin-bottom: 50px; color: white;" >我的二维码</h1>
+		
+		<div class="text-center" style="margin-top:20px ;">
+        <img id="img_qrcode" class="text-center" style="margin-top: 20px" />
+        </div>
+	</body>
+	<script type="text/javascript">
+		function getQrcode () {
+			$("#img_qrcode").attr("src",localStorage.getItem("Qrcode_url"));
+		}
+		getQrcode();
+	</script>
+</html>

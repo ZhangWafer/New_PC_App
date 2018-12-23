@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <script src="js/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" type="text/css" href="css/boostrap/bootstrap.css"/>
+	<script src="js/bootstrap-select.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" type="text/css" href="css/select/bootstrap-select.css"/>
+</head>
+<body background="img/login-bg.png">
+    <!-- 登录表单 -->
+    <form style="margin-left:10px;margin-top:120px;">
+    	<h1 class="text-center"style="margin-bottom: 50px; color: white;" > 食堂订餐系统</h1>
+    	<div class="text-center"  >
+		<div class="btn-group" >
+	    	<select id="select1" class="selectpicker" >
+	    		<option value="1">警员登录</option>
+	    		<option value="2">职工登录</option>
+			</select>
+		</div>
+		</div>
+        <div class="form-group text-center" >
+            <input type="text" placeholder="账户" class="form-control" id="user" style="display:inline;width:220px;margin-top: 20px;"autocomplete="off" />
+        </div>
+        <div class="form-group text-center">
+            <input type="text" placeholder="密码" class="form-control inp" id="password" style="display:inline;width:220px;"autocomplete="off" />
+        </div>
+        <div class="text-center">
+        <input type="button" class="btn btn-primary " value="登录" style="width: 200px;font-size: 20px;" onclick="loginSubmit()"></input>
+        </div>
+    </form>
+
+    <script type="text/javascript">
+    	var post_url_all_header="http://120.236.239.118:9000";
+    	localStorage.setItem("url_header",post_url_all_header);
+	function loginSubmit () {
+		var account=$("#user").val();
+		var pwd=$("#password").val();
+		var BoolValue=$("#select1").val();
+		var url;
+		if	(BoolValue==1)
+		{
+			 url = post_url_all_header+"/Interface/PC/PcStaffLogin.ashx?PcNum="+account+"&password="+pwd;
+		}
+		else
+		{
+			url = post_url_all_header+"/Interface/Worker/WorkerLogin.ashx?InformationNum="+account+"&password="+pwd;
+		}
+
+$.ajax({
+                    url:url,
+                    data:{'name':'ssss'},
+                    dataType:'json',  //【这里要小心啊，不要用jsonp，一定是json】
+                    type:'post',
+					async:false,
+                    crossDomain: true,  //【这个很重要，一定要加】
+                    success:function(result){
+                        console.log(result);
+						if (result.Msg=="成功") {
+							if(BoolValue==1)
+							{
+								//警员
+							localStorage.setItem("Name",result.pcInfo.Name);
+							localStorage.setItem("personId",result.pcInfo.Id);
+							localStorage.setItem("PcWorkerBool",BoolValue);
+							window.location.href=encodeURI("Pc_menuPage.html?Name="+result.pcInfo.Name+"&id="+result.pcInfo.Id);
+							localStorage.setItem("Qrcode_url",result.pcInfo.InformationQrcodeImage);
+							}
+							else
+							{								
+								//职员
+							localStorage.setItem("Name",result.workerInfo.Name);
+							localStorage.setItem("personId",result.workerInfo.Id);
+							localStorage.setItem("PcWorkerBool",BoolValue);
+							window.location.href="Worker_menuPage.html"
+							}
+						} else{
+							alert(result.Msg.toString());
+						}
+                    },
+                    error:function(result){
+                        console.log(result);
+                    }
+                });
+
+	}
+
+</script>
+</body>
+
+</html>

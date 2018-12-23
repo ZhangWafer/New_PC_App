@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <script src="js/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/bootstrap-select.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" type="text/css" href="css/boostrap/bootstrap.css"/>
+	<link rel="stylesheet" type="text/css" href="css/select/bootstrap-select.css"/>
+		
+</head>
+	<body background="img/login-bg.png">
+		<div  style="margin-top:10px ;">
+			<a href="Pc_menuPage.html" style="color: white;">
+			<span class="glyphicon glyphicon-chevron-left" style="font-size: 15px;"></span><h4 style="display: inline;">返回</h4>
+			</a>
+        </div>
+		<form style="margin-left:10px;margin-top:80px;">
+    	<h1 id="h1" class="text-center"style="margin-bottom: 50px; color: white;" >选择订餐日期 </h1>
+    	<div class="text-center">
+		<div class="btn-group">
+	    	<select id="select1" class="selectpicker" >
+			    <option >选择日期</option>
+			</select>
+		</div>
+		</div>
+        <div class="text-center" style="margin-top:20px ;">
+        <input type="button" class="btn btn-primary " onclick="onclick_function()" value="确定" style="width: 200px;font-size: 25px;"></input>
+        </div>
+    </form>
+	</body>
+	<script type="text/javascript">
+		var url_header=localStorage.getItem("url_header");
+		//去重方法
+			function unique4(arr){
+			  var hash=[];
+			  for (var i = 0; i < arr.length; i++) {
+			    for (var j = i+1; j < arr.length; j++) {
+			      if(arr[i]===arr[j]){
+			        ++i;
+			      }
+			    }
+			      hash.push(arr[i]);
+			  }
+			  return hash;
+			}
+//		var arr = [112,112,34,'你好',112,112,34,'你好','str','str1'];
+//		alert(arr.unique3());
+		
+		//分析拿到的数据
+		var url=location.search;
+		var Request = new Object();
+		if(url.indexOf("?")!=-1)
+		{
+		　　var str = url.substr(1)　//去掉?号
+		　　strs = str.split("&");
+		　　for(var i=0;i<strs.length;i++)
+		　　{
+		 　　　 Request[strs[i ].split("=")[0]]=unescape(strs[ i].split("=")[1]);
+		　　}
+		}
+		
+		//选择日期数组
+		var selectdays=[];
+		//从cookie看是警员还是职工
+		var PcBool=localStorage.getItem("PcWorkerBool");
+		//ajax拿取排餐数据
+		if(PcBool==1)
+		{
+			var menu_url=url_header+"/Interface/PC/GetPcCookbookSetInDate.ashx?pcid="+Request["id"];
+		}
+		else
+		{
+			var menu_url=url_header+"/Interface/Worker/GetWorkerCookbookSetInDate.ashx?WorkerId="+Request["id"];
+		}
+		
+		function getMenu () {
+			$.ajax({
+                    url:menu_url,
+                    data:{'new':'ssss'},
+                    dataType:'json', 
+                    type:'post',
+					async:false,
+                    crossDomain: true, 
+                    success:function(result){
+                        if(result.Msg=="失败"){return;}
+						//返回排餐数据数量
+					 	var dataNum = result.pccsidList.length;
+					 	//选择餐次数组
+						for (var i=0;i<dataNum;i++) {
+						//分割日期与时间
+						var arr =	result.pccsidList[i].ChooseDate.split("T");
+						selectdays[i]= arr[0];
+						}
+						//去重复日期
+						var selectdays_uni=unique4(selectdays);
+						//添加进去select
+						 $("#select1").empty();
+						selectdays_uni.forEach(function  (val,index) {
+						$("#select1").append("<option value='"+val+"'>"+val+"</option>"); //为Select追加一个Option(下拉项) 
+						})	
+                    },
+                    error:function(result){
+                        console.log(result);
+                    }
+                });
+		}
+		getMenu();
+		
+		
+		//跳转并且传值
+		function onclick_function () {
+			if($("#select1").val()=="")
+			{
+				alert("选择日期为空");
+				return;
+			}
+			//调出选择日期的餐次序号
+			var selected_date_meal=[];
+			selectdays.forEach(function (val,index) {
+				if	(val==$("#select1").val())
+					selected_date_meal.push(index);
+			})
+			var longstr="";
+			selected_date_meal.forEach(function  (val) {
+				longstr+=val+"*";
+			})
+			longstr+=$("#select1").val();
+			longstr+="*"+Request["id"];
+			window.location.href="meal_show.html?val="+longstr;
+		}
+		
+
+	</script>
+</html>

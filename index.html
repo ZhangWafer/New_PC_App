@@ -66,8 +66,10 @@ $.ajax({
 							localStorage.setItem("Name",result.pcInfo.Name);
 							localStorage.setItem("personId",result.pcInfo.Id);
 							localStorage.setItem("PcWorkerBool",BoolValue);
-							window.location.href=encodeURI("Pc_menuPage.html?Name="+result.pcInfo.Name+"&id="+result.pcInfo.Id);
 							localStorage.setItem("Qrcode_url",result.pcInfo.InformationQrcodeImage);
+							localStorage.setItem("money",result.pcInfo.Amount);
+							window.location.href=encodeURI("Pc_menuPage.html?Name="+result.pcInfo.Name+"&id="+result.pcInfo.Id);
+							
 							}
 							else
 							{								
@@ -75,7 +77,9 @@ $.ajax({
 							localStorage.setItem("Name",result.workerInfo.Name);
 							localStorage.setItem("personId",result.workerInfo.Id);
 							localStorage.setItem("PcWorkerBool",BoolValue);
-							window.location.href="Worker_menuPage.html"
+							localStorage.setItem("Qrcode_url",result.workerInfo.InformationQrcodeImage);
+							localStorage.setItem("money",result.workerInfo.Amount);
+							window.location.href="Worker_menuPage.html";
 							}
 						} else{
 							alert(result.Msg.toString());

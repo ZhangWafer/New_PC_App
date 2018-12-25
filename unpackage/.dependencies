@@ -1,1 +1,58 @@
-null
+{
+  "Worker_Record.html": {
+    "href": "Worker_Record.html",
+    "resources": [
+      "img/login-bg.png",
+      "js/jquery-3.3.1.js",
+      "js/bootstrap.js",
+      "css/boostrap/bootstrap.css",
+      "css/fonts/glyphicons-halflings-regular.eot",
+      "css/fonts/glyphicons-halflings-regular.woff2",
+      "css/fonts/glyphicons-halflings-regular.woff",
+      "css/fonts/glyphicons-halflings-regular.ttf",
+      "css/fonts/glyphicons-halflings-regular.svg",
+      "js/bootstrap-select.js",
+      "css/select/bootstrap-select.css"
+    ],
+    "refer": [
+      "Worker_menuPage.html"
+    ],
+    "priority": 2
+  },
+  "Worker_menuPage.html": {
+    "href": "Worker_menuPage.html",
+    "resources": [],
+    "refer": [
+      "Worker_Record.html"
+    ],
+    "priority": 0
+  },
+  "PC_Record.html": {
+    "href": "PC_Record.html",
+    "resources": [
+      "img/login-bg.png",
+      "js/jquery-3.3.1.js",
+      "js/bootstrap.js",
+      "css/boostrap/bootstrap.css",
+      "css/fonts/glyphicons-halflings-regular.eot",
+      "css/fonts/glyphicons-halflings-regular.woff2",
+      "css/fonts/glyphicons-halflings-regular.woff",
+      "css/fonts/glyphicons-halflings-regular.ttf",
+      "css/fonts/glyphicons-halflings-regular.svg",
+      "js/bootstrap-select.js",
+      "css/select/bootstrap-select.css"
+    ],
+    "refer": [
+      "Pc_menuPage.html"
+    ],
+    "priority": 1
+  },
+  "Pc_menuPage.html": {
+    "href": "Pc_menuPage.html",
+    "resources": [],
+    "refer": [
+      "PC_Record.html"
+    ],
+    "priority": 1
+  }
+}

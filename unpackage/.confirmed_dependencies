@@ -55,7 +55,8 @@
     ],
     "refer": [
       "Worker_OrderPage.html",
-      "Worker_MyQrcode.html"
+      "Worker_MyQrcode.html",
+      "Worker_Record.html"
     ],
     "priority": 0
   },
@@ -131,7 +132,8 @@
     "refer": [
       "PC_FamilyMember.html",
       "MyQrcode.html",
-      "OrderPage.html"
+      "OrderPage.html",
+      "PC_Record.html"
     ],
     "priority": 0
   },
@@ -147,6 +149,36 @@
     ],
     "refer": [
       "Worker_menuPage.html",
+      "Pc_menuPage.html"
+    ],
+    "priority": 0
+  },
+  "Worker_Record.html": {
+    "href": "Worker_Record.html",
+    "resources": [
+      "img/login-bg.png",
+      "js/jquery-3.3.1.js",
+      "js/bootstrap.js",
+      "css/boostrap/bootstrap.css",
+      "js/bootstrap-select.js",
+      "css/select/bootstrap-select.css"
+    ],
+    "refer": [
+      "Worker_menuPage.html"
+    ],
+    "priority": 0
+  },
+  "PC_Record.html": {
+    "href": "PC_Record.html",
+    "resources": [
+      "img/login-bg.png",
+      "js/jquery-3.3.1.js",
+      "js/bootstrap.js",
+      "css/boostrap/bootstrap.css",
+      "js/bootstrap-select.js",
+      "css/select/bootstrap-select.css"
+    ],
+    "refer": [
       "Pc_menuPage.html"
     ],
     "priority": 0

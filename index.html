@@ -34,6 +34,10 @@
     </form>
 
     <script type="text/javascript">
+    	//一打开app就显示账号
+    	var accountValue= localStorage.getItem("account");
+    	$("#user").val(accountValue);
+    	//分割线
     	var post_url_all_header="http://120.236.239.118:9000";
     	localStorage.setItem("url_header",post_url_all_header);
 	function loginSubmit () {
@@ -43,7 +47,8 @@
 		var url;
 		if	(BoolValue==1)
 		{
-			 url = post_url_all_header+"/Interface/PC/PcStaffLogin.ashx?PcNum="+account+"&password="+pwd;
+			//1343124132431242
+			 url = post_url_all_header+"/Interface/PC/PcStaffLogin.ashx?informationNum="+account+"&password="+pwd;
 		}
 		else
 		{
@@ -63,6 +68,7 @@ $.ajax({
 							if(BoolValue==1)
 							{
 								//警员
+							localStorage.setItem("account",account);
 							localStorage.setItem("Name",result.pcInfo.Name);
 							localStorage.setItem("personId",result.pcInfo.Id);
 							localStorage.setItem("PcWorkerBool",BoolValue);
@@ -74,6 +80,7 @@ $.ajax({
 							else
 							{								
 								//职员
+							localStorage.setItem("account",account);
 							localStorage.setItem("Name",result.workerInfo.Name);
 							localStorage.setItem("personId",result.workerInfo.Id);
 							localStorage.setItem("PcWorkerBool",BoolValue);

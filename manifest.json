@@ -1,6 +1,6 @@
 {
     "@platforms" : [ "android", "iPhone", "iPad" ],
-    "id" : "H53B54864", /*应用的标识，创建应用时自动生成，勿手动修改*/
+    "id" : "io.android.ZhsPLCCanteenH5", /*应用的标识，创建应用时自动生成，勿手动修改*/
     "name" : "公安局点餐系统", /*应用名称，程序桌面图标名称*/
     "version" : {
         "name" : "1.0", /*应用版本名称*/
@@ -37,7 +37,7 @@
         "signature" : "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==", /*可选，保留给应用签名，暂不使用*/
         "distribute" : {
             "apple" : {
-                "appid" : "", /*iOS应用标识，苹果开发网站申请的appid，如io.dcloud.HelloH5*/
+                "appid" : "io.IOS.ZhsPLCCanteenH5", /*iOS应用标识，苹果开发网站申请的appid，如io.dcloud.HelloH5*/
                 "mobileprovision" : "", /*iOS应用打包配置文件*/
                 "password" : "", /*iOS应用打包个人证书导入密码*/
                 "p12" : "", /*iOS应用打包个人证书，打包配置文件关联的个人证书*/
@@ -45,7 +45,7 @@
                 "frameworks" : [] /*调用Native.js调用原生Objective-c API需要引用的FrameWork，如需调用GameCenter，则添加"GameKit.framework"*/
             },
             "google" : {
-                "packagename" : "", /*Android应用包名，如io.dcloud.HelloH5*/
+                "packagename" : "io.android.ZhsPLCCanteenH5", /*Android应用包名，如io.dcloud.HelloH5*/
                 "keystore" : "", /*Android应用打包使用的密钥库文件*/
                 "password" : "", /*Android应用打包使用密钥库中证书的密码*/
                 "aliasname" : "", /*Android应用打包使用密钥库中证书的别名*/

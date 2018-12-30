@@ -4,14 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title></title>
-    <script src="js/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
-	<script src="js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
-	<script src="js/bootstrap-select.js" type="text/javascript" charset="utf-8"></script>
-	<link rel="stylesheet" type="text/css" href="css/boostrap/bootstrap.css"/>
-	<link rel="stylesheet" type="text/css" href="css/select/bootstrap-select.css"/>
+    <script src="../js/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/bootstrap-select.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" type="text/css" href="../css/boostrap/bootstrap.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/select/bootstrap-select.css"/>
 		
 </head>
-	<body background="img/login-bg.png">
+	<body background="../img/login-bg.png">
 		<div  style="margin-top:10px ;">
 			<a href="Pc_menuPage.html" style="color: white;">
 			<span class="glyphicon glyphicon-chevron-left" style="font-size: 15px;"></span><h4 style="display: inline;">返回</h4>
@@ -29,9 +29,9 @@
 		<div class="text-center" style="margin-bottom: 20px;">
 		<div class="btn-group">
 	    	<select id="select2" class="selectpicker" >
-			    <option >早餐</option>
-			    <option >午餐</option>
-			    <option >晚餐</option>
+			    <option value="1">早餐</option>
+			    <option value="2">午餐</option>
+			    <option value="3">晚餐</option>
 			</select>
 		</div>
 		</div>
@@ -84,6 +84,8 @@
 			var menu_url=url_header+"/Interface/Worker/GetWorkerCookbookSetInDate.ashx?WorkerId="+personId;
 		}
 		
+		var RResult=null;
+		
 		function getMenu () {
 			$.ajax({
                     url:menu_url,
@@ -93,6 +95,7 @@
 					async:false,
                     crossDomain: true, 
                     success:function(result){
+						RResult=result;
                         if(result.Msg=="失败"){return;}
 						//返回排餐数据数量
 					 	var dataNum = result.pccsidList.length;
@@ -125,19 +128,42 @@
 		}
 		getMenu();
 		
-		
 		//跳转并且传值
 		function onclick_function () {
-			if($("#select1").val()==""||$("#select2").val()||$("#select3").val())
+			if($("#select1").val()==""||$("#select2").val()==""||$("#select3").val()=="")
 			{
 				alert("选择条件不得为空");
 				return;
 			}
 			//把选择的条件暂存起来
-			localStorage.setItem("SelectedDay",$("#select1").val());
-			localStorage.setItem("SelectedMeal",$("#select2").val());
-			localStorage.setItem("SelectedCanteen",$("#select3").val());
-			//跳转到菜单显示页面
+			var SelectedDay=$("#select1").val();
+			var SelectedMeal=$("#select2").find("option:selected").val();
+			var SelectedCanteen=$("#select3").val();
+			
+			localStorage.setItem("SelectedDay",SelectedDay);
+			localStorage.setItem("SelectedMeal",SelectedMeal);
+			localStorage.setItem("SelectedCanteen",SelectedCanteen);
+			//拿出选择排餐的id号，传到下一个页面
+			var ExistBool=false;
+			for (var i=0;i<RResult.pccsidList.length;i++) {
+			var resultDate=RResult.pccsidList[i].ChooseDate.split('T');
+			if(resultDate[0]==SelectedDay&&RResult.pccsidList[i].CookbookEnum==SelectedMeal&& RResult.pccsidList[i].CafeteriaName==SelectedCanteen)
+			{
+				localStorage.setItem("selectedOrderDetailID",RResult.pccsidList[i].Id);
+				ExistBool=true;
+				break;
+			}
+			}
+			//判断是否存在，存在就跳转
+			if(ExistBool)
+			{
+				//跳转到菜单显示页面
+				window.location.href="PC_OrderMealShow.html";
+			}
+			else
+			{
+				alert("不存在此餐");
+			}
 			
 		}
 		

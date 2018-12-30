@@ -4,13 +4,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title></title>
-    <script src="js/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
-	<script src="js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
-	<link rel="stylesheet" type="text/css" href="css/boostrap/bootstrap.css"/>
+    <script src="../js/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" type="text/css" href="../css/boostrap/bootstrap.css"/>
 </head>
-	<body background="img/login-bg.png">   
+	<body background="../img/login-bg.png">   
 		<div  style="margin-top:10px ;">
-			<a href="device.html" style="color: white;">
+			<a href="../device.html" style="color: white;">
 			<span class="glyphicon glyphicon-chevron-left" style="font-size: 15px;"></span><h4 style="display: inline;">退出登录</h4>
 			</a>
         </div>
@@ -29,14 +29,15 @@
         <div class="text-center" style="margin-top:15px ;">
         <input type="button" class="btn btn-primary " value="个人账户" style="width: 200px;font-size: 25px;" onclick="jumpImformation()"></input>
         </div>
-        <div class="text-center" style="margin-top:15px ;">
-        <input type="button" class="btn btn-primary " value="我的评价" style="width: 200px;font-size: 25px;"  onclick=""></input>
-        </div>
+        
         <div class="text-center" style="margin-top:15px ;">
         <input type="button" class="btn btn-primary " value="我的二维码" style="width: 200px;font-size: 25px;"  onclick="jumpQrcode()"></input>
         </div>
         <div class="text-center" style="margin-top:15px ;">
         <input type="button" class="btn btn-primary " value="修改密码" style="width: 200px;font-size: 25px;"  onclick="jumpChangePwd()"></input>
+        </div>
+        <div class="text-center" style="margin-top:15px ;">
+        <input type="button" class="btn btn-primary " value="我的评价" style="width: 200px;font-size: 25px;"  onclick=""></input>
         </div>
 
     </form>
@@ -75,7 +76,7 @@
 		}
 		//跳转二维码页面
 		function jumpQrcode () {
-			window.location.href="MyQrcode.html";
+			window.location.href="../MyQrcode.html";
 		}
 		
 		//跳转消费记录页面
@@ -90,7 +91,7 @@
 		
 		//跳转修改密码页面
 		function jumpChangePwd () {
-			window.location.href="ChangePwd.html";
+			window.location.href="../ChangePwd.html";
 		}
 	</script>
 </html>

@@ -23,7 +23,7 @@
 		<div class="btn-group" >
 	    	<select id="select1" class="selectpicker" >
 	    		<option value="1">警员登录</option>
-	    		<option value="2">职工登录</option>
+	    		<!--<option value="2">职工登录</option>-->
 			</select>
 		</div>
 		</div>
@@ -31,7 +31,7 @@
             <input type="text" placeholder="账户" class="form-control" id="user" style="display:inline;width:220px;margin-top: 20px;"autocomplete="off" />
         </div>
         <div class="form-group text-center">
-            <input type="text" placeholder="密码" class="form-control inp" id="password" style="display:inline;width:220px;"autocomplete="off" />
+            <input type="password" placeholder="密码" class="form-control inp" id="password" style="display:inline;width:220px;"autocomplete="off" />
         </div>
         <div class="text-center">
         <input type="button" class="btn btn-primary " value="登录" style="width: 200px;font-size: 20px;" onclick="loginSubmit()"></input>
@@ -59,7 +59,8 @@
     	var accountValue= localStorage.getItem("account");
     	$("#user").val(accountValue);
     	//分割线
-    	var post_url_all_header="http://120.236.239.118:9000";
+//  	var post_url_all_header="http://20.97.10.67:7034";
+		var post_url_all_header="http://192.168.6.46:7030";
     	localStorage.setItem("url_header",post_url_all_header);
 	function loginSubmit () {
 		var account=$("#user").val();
@@ -68,7 +69,7 @@
 		var url;
 		if	(BoolValue==1)
 		{
-			//1343124132431242
+			//440221196011081611
 			 url = post_url_all_header+"/Interface/PC/PcStaffLogin.ashx?informationNum="+account+"&password="+pwd;
 		}
 		else
@@ -121,10 +122,10 @@ $.ajax({
 	}
 
 </script>
-		<button onclick="getDeviceInfo()">13456123</button>
+		<!--<button onclick="getDeviceInfo()">13456123</button>
 		<div id="output">
 Device可获取手机设备相关信息，包括硬件、软件、网络等信息。
-		</div>
+		</div>-->
 </body>
 	<script src="js/immersed.js" type="text/javascript" charset="utf-8"></script>
 </html>

@@ -49,31 +49,22 @@
 //		var arr = [112,112,34,'你好',112,112,34,'你好','str','str1'];
 //		alert(arr.unique3());
 		
-		//分析拿到的数据
-		var url=location.search;
-		var Request = new Object();
-		if(url.indexOf("?")!=-1)
-		{
-		　　var str = url.substr(1)　//去掉?号
-		　　strs = str.split("&");
-		　　for(var i=0;i<strs.length;i++)
-		　　{
-		 　　　 Request[strs[i ].split("=")[0]]=unescape(strs[ i].split("=")[1]);
-		　　}
-		}
+
 		
 		//选择日期数组
 		var selectdays=[];
 		//从cookie看是警员还是职工
 		var PcBool=localStorage.getItem("PcWorkerBool");
+		var personId=localStorage.getItem("personId");
 		//ajax拿取排餐数据
 		if(PcBool==1)
 		{
-			var menu_url=url_header+"/Interface/PC/GetPcCookbookSetInDate.ashx?pcid="+Request["id"];
+			var menu_url=url_header+"/Interface/PC/GetPcCookbookSetInDate.ashx?pcid="+personId;
+			
 		}
 		else
 		{
-			var menu_url=url_header+"/Interface/Worker/GetWorkerCookbookSetInDate.ashx?WorkerId="+Request["id"];
+			var menu_url=url_header+"/Interface/Worker/GetWorkerCookbookSetInDate.ashx?WorkerId="+personId;
 		}
 		
 		function getMenu () {
@@ -128,7 +119,7 @@
 				longstr+=val+"*";
 			})
 			longstr+=$("#select1").val();
-			longstr+="*"+Request["id"];
+			longstr+="*"+personId;
 			window.location.href="meal_show.html?val="+longstr;
 		}
 		

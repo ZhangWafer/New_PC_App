@@ -19,10 +19,26 @@
         </div>
 		<form style="margin-left:10px;margin-top:80px;">
     	<h1 id="h1" class="text-center"style="margin-bottom: 50px; color: white;" >选择订餐日期 </h1>
-    	<div class="text-center">
+    	<div class="text-center" style="margin-bottom: 20px;">
 		<div class="btn-group">
 	    	<select id="select1" class="selectpicker" >
 			    <option >选择日期</option>
+			</select>
+		</div>
+		</div>
+		<div class="text-center" style="margin-bottom: 20px;">
+		<div class="btn-group">
+	    	<select id="select2" class="selectpicker" >
+			    <option >早餐</option>
+			    <option >午餐</option>
+			    <option >晚餐</option>
+			</select>
+		</div>
+		</div>
+		<div class="text-center" >
+		<div class="btn-group">
+	    	<select id="select3" class="selectpicker" >
+			    <option >选择饭堂</option>
 			</select>
 		</div>
 		</div>
@@ -53,6 +69,8 @@
 		
 		//选择日期数组
 		var selectdays=[];
+		//选择饭堂数组
+		var selectCateen=[];
 		//从cookie看是警员还是职工
 		var PcBool=localStorage.getItem("PcWorkerBool");
 		var personId=localStorage.getItem("personId");
@@ -60,7 +78,6 @@
 		if(PcBool==1)
 		{
 			var menu_url=url_header+"/Interface/PC/GetPcCookbookSetInDate.ashx?pcid="+personId;
-			
 		}
 		else
 		{
@@ -84,14 +101,22 @@
 						//分割日期与时间
 						var arr =	result.pccsidList[i].ChooseDate.split("T");
 						selectdays[i]= arr[0];
+						selectCateen[i]=result.pccsidList[i].CafeteriaName;
 						}
 						//去重复日期
 						var selectdays_uni=unique4(selectdays);
+						selectCateen= unique4(selectCateen);
+						//把去重复的饭堂添加进去
+						$("#select3").empty();
+						selectCateen.forEach(function  (val,index) {
+							$("#select3").append("<option value='"+val+"'>"+val+"</option>"); //为Select追加一个Option(下拉项) 
+						});
+						
 						//添加进去select
 						 $("#select1").empty();
 						selectdays_uni.forEach(function  (val,index) {
 						$("#select1").append("<option value='"+val+"'>"+val+"</option>"); //为Select追加一个Option(下拉项) 
-						})	
+						});	
                     },
                     error:function(result){
                         console.log(result);
@@ -103,24 +128,17 @@
 		
 		//跳转并且传值
 		function onclick_function () {
-			if($("#select1").val()=="")
+			if($("#select1").val()==""||$("#select2").val()||$("#select3").val())
 			{
-				alert("选择日期为空");
+				alert("选择条件不得为空");
 				return;
 			}
-			//调出选择日期的餐次序号
-			var selected_date_meal=[];
-			selectdays.forEach(function (val,index) {
-				if	(val==$("#select1").val())
-					selected_date_meal.push(index);
-			})
-			var longstr="";
-			selected_date_meal.forEach(function  (val) {
-				longstr+=val+"*";
-			})
-			longstr+=$("#select1").val();
-			longstr+="*"+personId;
-			window.location.href="meal_show.html?val="+longstr;
+			//把选择的条件暂存起来
+			localStorage.setItem("SelectedDay",$("#select1").val());
+			localStorage.setItem("SelectedMeal",$("#select2").val());
+			localStorage.setItem("SelectedCanteen",$("#select3").val());
+			//跳转到菜单显示页面
+			
 		}
 		
 

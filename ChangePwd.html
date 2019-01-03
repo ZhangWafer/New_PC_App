@@ -33,7 +33,16 @@
         		var pwd1= $("#pwd1").val();
         		var pwd2= $("#pwd2").val();
         		var accountId=localStorage.getItem("personId");
-        		var pwd_url=localStorage.getItem("url_header")+"/Interface/PC/PcStaffPasswordChanage.ashx?pcid="+accountId+"&password="+pwd1;
+        		var PC_Worker_Bool=localStorage.getItem("PcWorkerBool");
+        		var pwd_url;
+        		if(PC_Worker_Bool==1)
+        		{
+        			pwd_url=localStorage.getItem("url_header")+"/Interface/PC/PcStaffPasswordChanage.ashx?pcid="+accountId+"&password="+pwd1;
+        		}
+        		else
+        		{
+        			pwd_url=localStorage.getItem("url_header")+"/Interface/worker/WorkerPasswordChanage.ashx?workerId="+accountId+"&password="+pwd1;
+        		}
         		if(pwd1!=pwd2)
         		{
         			alert("两次输入的密码不相同");
@@ -52,7 +61,15 @@
                         console.log(result);
 						if (result.Msg=="修改密码成功") {
 						   alert("修改成功！");
-						   window.location.href="Pc_menuPage.html";
+						   if(PC_Worker_Bool==1)
+						   {
+						   	 window.location.href="PC_HTML/Pc_menuPage.html";
+						   }
+						   else
+						   {
+						   	 window.location.href="Worker/Worker_menuPage.html";
+						   }
+						 
 						} else{
 							alert(result.Msg);
 						}

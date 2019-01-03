@@ -23,7 +23,7 @@
 		<div class="btn-group" >
 	    	<select id="select1" class="selectpicker" >
 	    		<option value="1">警员登录</option>
-	    		<!--<option value="2">职工登录</option>-->
+	    		<option value="2">职工登录</option>
 			</select>
 		</div>
 		</div>
@@ -61,7 +61,7 @@
     	//分割线
 //  	var post_url_all_header="http://20.97.10.67:7034";
 	//	var post_url_all_header="http://192.168.6.46:7030";
-	var post_url_all_header="http://localhost:7029";
+	var post_url_all_header="http://120.236.239.118:7030";
     	localStorage.setItem("url_header",post_url_all_header);
 	function loginSubmit () {
 		var account=$("#user").val();
@@ -109,7 +109,7 @@ $.ajax({
 							localStorage.setItem("PcWorkerBool",BoolValue);
 							localStorage.setItem("Qrcode_url",result.workerInfo.InformationQrcodeImage);
 							localStorage.setItem("money",result.workerInfo.Amount);
-							window.location.href="Worker_menuPage.html";
+							window.location.href="Worker/Worker_menuPage.html";
 							}
 						} else{
 							alert(result.Msg.toString());

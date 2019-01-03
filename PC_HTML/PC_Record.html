@@ -4,13 +4,13 @@
 	    <meta charset="utf-8">
 	    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 	    <title></title>
-	    <script src="js/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
-		<link rel="stylesheet" type="text/css" href="css/boostrap/bootstrap.css"/>
-		<script src="js/bootstrap-select.js" type="text/javascript" charset="utf-8"></script>
-		<link rel="stylesheet" type="text/css" href="css/select/bootstrap-select.css"/>
+	    <script src="../js/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="../css/boostrap/bootstrap.css"/>
+		<script src="../js/bootstrap-select.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="../css/select/bootstrap-select.css"/>
 	</head>
-	<body background="img/login-bg.png">
+	<body background="../img/login-bg.png">
 	<div  style="margin-top:10px ;">
 		<a href="Pc_menuPage.html" style="color: white;">
 		<span class="glyphicon glyphicon-chevron-left" style="font-size: 15px;"></span><h4 style="display: inline;">返回</h4>
@@ -86,7 +86,7 @@
 								var lastString= wholeString.substring(5,wholeString.length);
 								var payday=result.pccsidList[i].ChooseDate;
 								var paydayDate=payday.split("T");
-								$("#tbody1").append("<tr style='font-size: 12px;'><td style='width:100px ;'>"+wholeString+"</td><td>"+cookBool+"-"+result.pccsidList[i].CookbookStandardName+"</td><td style='width: 60px;'>"+realPrice+"</td><td style='width: 110px;'>"+paydayDate[0]+"</td></tr>");
+								$("#tbody1").append("<tr style='font-size: 12px;'><td style='width:100px ;'>"+wholeString+"</td><td>"+cookBool+"</td><td style='width: 60px;'>"+realPrice+"</td><td style='width: 110px;'>"+paydayDate[0]+"</td></tr>");
 							}
 							
 						}					

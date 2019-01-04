@@ -32,7 +32,7 @@
 	<script type="text/javascript">
 
 		function Sign () {
-					var sign_url="http://localhost:7029/Interface/Familay/RegisterPCStaffFamily.ashx?pcid="+localStorage.getItem("personId")+"&name="+$("#user").val()+"&informationNum="+$("#ImforNum").val();
+					var sign_url=localStorage.getItem("url_header")+"/Interface/Familay/RegisterPCStaffFamily.ashx?pcid="+localStorage.getItem("personId")+"&name="+$("#user").val()+"&informationNum="+$("#ImforNum").val();
 						$.ajax({
                     url:sign_url,
                     data:{'new':'ssss'},

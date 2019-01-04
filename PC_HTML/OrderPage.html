@@ -43,7 +43,7 @@
 		</div>
 		</div>
         <div class="text-center" style="margin-top:20px ;">
-        <input type="button" class="btn btn-primary " onclick="onclick_function()" value="确定" style="width: 200px;font-size: 25px;"></input>
+        <input id="submitButton" type="button" class="btn btn-primary " onclick="onclick_function()" value="确定" style="width: 200px;font-size: 25px;"></input>
         </div>
     </form>
 	</body>
@@ -95,10 +95,15 @@
 					async:false,
                     crossDomain: true, 
                     success:function(result){
+						
 						RResult=result;
                         if(result.Msg=="失败"){return;}
 						//返回排餐数据数量
 					 	var dataNum = result.pccsidList.length;
+					 	if(dataNum==0)
+					 	{
+					 		$("#submitButton").attr("disabled","disabled");
+					 	}
 					 	//选择餐次数组
 						for (var i=0;i<dataNum;i++) {
 						//分割日期与时间
@@ -150,6 +155,7 @@
 			if(resultDate[0]==SelectedDay&&RResult.pccsidList[i].CookbookEnum==SelectedMeal&& RResult.pccsidList[i].CafeteriaName==SelectedCanteen)
 			{
 				localStorage.setItem("selectedOrderDetailID",RResult.pccsidList[i].Id);
+				localStorage.setItem("canteenBool",RResult.pccsidList[i].CafeteriaTypeEnum);
 				ExistBool=true;
 				break;
 			}

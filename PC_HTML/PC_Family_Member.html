@@ -23,7 +23,7 @@
 	</body>
 	<script type="text/javascript">
 		//ajax获取家庭成员
-		var MemberUrl="http://localhost:7029/Interface/Familay/GetPcFamily.ashx?pcid="+localStorage.getItem("personId");
+		var MemberUrl=localStorage.getItem("url_header")+"/Interface/Familay/GetPcFamily.ashx?pcid="+localStorage.getItem("personId");
 						$.ajax({
                     url:MemberUrl,
                     data:{'new':'ssss'},

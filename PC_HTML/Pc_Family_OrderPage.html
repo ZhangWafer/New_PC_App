@@ -13,7 +13,7 @@
 </head>
 	<body background="../img/login-bg.png">
 		<div  style="margin-top:10px ;">
-			<a href="Worker_menuPage.html" style="color: white;">
+			<a href="Pc_menuPage.html" style="color: white;">
 			<span class="glyphicon glyphicon-chevron-left" style="font-size: 15px;"></span><h4 style="display: inline;">返回</h4>
 			</a>
         </div>
@@ -32,6 +32,7 @@
 			    <option value="1">早餐</option>
 			    <option value="2">午餐</option>
 			    <option value="3">晚餐</option>
+			    <option value="4">宵夜</option>
 			</select>
 		</div>
 		</div>
@@ -43,7 +44,7 @@
 		</div>
 		</div>
         <div class="text-center" style="margin-top:20px ;">
-        <input type="button" class="btn btn-primary " onclick="onclick_function()" value="确定" style="width: 200px;font-size: 25px;"></input>
+        <input id="submitButton" type="button" class="btn btn-primary " onclick="onclick_function()" value="确定" style="width: 200px;font-size: 25px;"></input>
         </div>
     </form>
 	</body>
@@ -62,9 +63,7 @@
 			  }
 			  return hash;
 			}
-//		var arr = [112,112,34,'你好',112,112,34,'你好','str','str1'];
-//		alert(arr.unique3());
-		
+
 
 		
 		//选择日期数组
@@ -72,27 +71,30 @@
 		//选择饭堂数组
 		var selectCateen=[];
 		//从cookie看是警员还是职工
-		var PcBool=localStorage.getItem("PcWorkerBool");
-		var personId=localStorage.getItem("personId");
+		var FamilyArray=localStorage.getItem("FamilyMemberImformation").split("*");
+		var personId=FamilyArray[2];
 		//ajax拿取排餐数据
-
-		var menu_url=url_header+"/Interface/Worker/GetWorkerCookbookSetInDate.ashx?WorkerId="+personId;
-		
+		var Family_menu_url=url_header+"/Interface/Familay/GetPcFamilyCookbookSetInDate.ashx?familyId="+personId;
 		var RResult=null;
 		
 		function getMenu () {
 			$.ajax({
-                    url:menu_url,
+                    url:Family_menu_url,
                     data:{'new':'ssss'},
                     dataType:'json', 
                     type:'post',
 					async:false,
                     crossDomain: true, 
                     success:function(result){
+						
 						RResult=result;
                         if(result.Msg=="失败"){return;}
 						//返回排餐数据数量
 					 	var dataNum = result.pccsidList.length;
+					 	if(dataNum==0)
+					 	{
+					 		$("#submitButton").attr("disabled","disabled");
+					 	}
 					 	//选择餐次数组
 						for (var i=0;i<dataNum;i++) {
 						//分割日期与时间
@@ -144,6 +146,7 @@
 			if(resultDate[0]==SelectedDay&&RResult.pccsidList[i].CookbookEnum==SelectedMeal&& RResult.pccsidList[i].CafeteriaName==SelectedCanteen)
 			{
 				localStorage.setItem("selectedOrderDetailID",RResult.pccsidList[i].Id);
+				localStorage.setItem("canteenBool",RResult.pccsidList[i].CafeteriaTypeEnum);
 				ExistBool=true;
 				break;
 			}
@@ -152,7 +155,7 @@
 			if(ExistBool)
 			{
 				//跳转到菜单显示页面
-				window.location.href="Worker_OrderMealShow.html";
+				window.location.href="PC_Family_OrderMealShow.html";
 			}
 			else
 			{

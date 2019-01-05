@@ -269,7 +269,8 @@
 	        "css/select/bootstrap-select.css"
 	      ],
 	      "refer": [
-	        "Pc_menuPage.html"
+	        "Pc_menuPage.html",
+	        "PC_HTML/Pc_menuPage.html"
 	      ],
 	      "priority": 2
 	    },
@@ -395,27 +396,388 @@
 	        "Pc_menuPage.html"
 	      ],
 	      "priority": 1
+	    },
+	    "Worker/Worker_PersonImformation.html": {
+	      "href": "Worker/Worker_PersonImformation.html",
+	      "resources": [
+	        "css/person.css",
+	        "css/boostrap/bootstrap.css",
+	        "css/fonts/glyphicons-halflings-regular.eot",
+	        "css/fonts/glyphicons-halflings-regular.woff2",
+	        "css/fonts/glyphicons-halflings-regular.woff",
+	        "css/fonts/glyphicons-halflings-regular.ttf",
+	        "css/fonts/glyphicons-halflings-regular.svg",
+	        "js/jquery-3.3.1.js",
+	        "img/login-bg.png"
+	      ],
+	      "refer": [
+	        "Worker/Worker_menuPage.html"
+	      ],
+	      "priority": 0
+	    },
+	    "Worker/Worker_OrderMealShow.html": {
+	      "href": "Worker/Worker_OrderMealShow.html",
+	      "resources": [
+	        "js/jquery-3.3.1.js",
+	        "js/bootstrap.js",
+	        "css/boostrap/bootstrap.css",
+	        "css/fonts/glyphicons-halflings-regular.eot",
+	        "css/fonts/glyphicons-halflings-regular.woff2",
+	        "css/fonts/glyphicons-halflings-regular.woff",
+	        "css/fonts/glyphicons-halflings-regular.ttf",
+	        "css/fonts/glyphicons-halflings-regular.svg",
+	        "js/bootstrap-select.js",
+	        "css/select/bootstrap-select.css",
+	        "js/common.js",
+	        "css/Shopping.css",
+	        "css/button.css",
+	        "img/login-bg.png"
+	      ],
+	      "priority": 1
+	    },
+	    "Worker/Worker_OrderPage.html": {
+	      "href": "Worker/Worker_OrderPage.html",
+	      "resources": [
+	        "img/login-bg.png",
+	        "js/jquery-3.3.1.js",
+	        "js/bootstrap.js",
+	        "js/bootstrap-select.js",
+	        "css/boostrap/bootstrap.css",
+	        "css/fonts/glyphicons-halflings-regular.eot",
+	        "css/fonts/glyphicons-halflings-regular.woff2",
+	        "css/fonts/glyphicons-halflings-regular.woff",
+	        "css/fonts/glyphicons-halflings-regular.ttf",
+	        "css/fonts/glyphicons-halflings-regular.svg",
+	        "css/select/bootstrap-select.css"
+	      ],
+	      "refer": [
+	        "Worker/Worker_OrderMealShow.html"
+	      ],
+	      "priority": 1
+	    },
+	    "PC_HTML/PC_Record.html": {
+	      "href": "PC_HTML/PC_Record.html",
+	      "resources": [
+	        "img/login-bg.png",
+	        "js/jquery-3.3.1.js",
+	        "js/bootstrap.js",
+	        "css/boostrap/bootstrap.css",
+	        "css/fonts/glyphicons-halflings-regular.eot",
+	        "css/fonts/glyphicons-halflings-regular.woff2",
+	        "css/fonts/glyphicons-halflings-regular.woff",
+	        "css/fonts/glyphicons-halflings-regular.ttf",
+	        "css/fonts/glyphicons-halflings-regular.svg",
+	        "js/bootstrap-select.js",
+	        "css/select/bootstrap-select.css"
+	      ],
+	      "refer": [
+	        "PC_HTML/Pc_menuPage.html"
+	      ],
+	      "priority": 2
+	    },
+	    "PC_HTML/PC_SettleTable.html": {
+	      "href": "PC_HTML/PC_SettleTable.html",
+	      "resources": [
+	        "js/jquery-3.3.1.js",
+	        "js/bootstrap.js",
+	        "js/bootstrap-select.js",
+	        "css/boostrap/bootstrap.css",
+	        "css/fonts/glyphicons-halflings-regular.eot",
+	        "css/fonts/glyphicons-halflings-regular.woff2",
+	        "css/fonts/glyphicons-halflings-regular.woff",
+	        "css/fonts/glyphicons-halflings-regular.ttf",
+	        "css/fonts/glyphicons-halflings-regular.svg",
+	        "css/select/bootstrap-select.css"
+	      ],
+	      "refer": [
+	        "PC_HTML/Pc_menuPage.html"
+	      ],
+	      "priority": 3
+	    },
+	    "PC_HTML/PC_OrderMealShow.html": {
+	      "href": "PC_HTML/PC_OrderMealShow.html",
+	      "resources": [
+	        "js/jquery-3.3.1.js",
+	        "js/bootstrap.js",
+	        "css/boostrap/bootstrap.css",
+	        "css/fonts/glyphicons-halflings-regular.eot",
+	        "css/fonts/glyphicons-halflings-regular.woff2",
+	        "css/fonts/glyphicons-halflings-regular.woff",
+	        "css/fonts/glyphicons-halflings-regular.ttf",
+	        "css/fonts/glyphicons-halflings-regular.svg",
+	        "js/bootstrap-select.js",
+	        "css/select/bootstrap-select.css",
+	        "js/common.js",
+	        "css/Shopping.css",
+	        "css/button.css",
+	        "img/login-bg.png"
+	      ],
+	      "refer": [
+	        "PC_HTML/PC_SettleTable.html",
+	        "PC_HTML/Pc_menuPage.html"
+	      ],
+	      "priority": 3
+	    },
+	    "PC_HTML/OrderPage.html": {
+	      "href": "PC_HTML/OrderPage.html",
+	      "resources": [
+	        "img/login-bg.png",
+	        "js/jquery-3.3.1.js",
+	        "js/bootstrap.js",
+	        "js/bootstrap-select.js",
+	        "css/boostrap/bootstrap.css",
+	        "css/fonts/glyphicons-halflings-regular.eot",
+	        "css/fonts/glyphicons-halflings-regular.woff2",
+	        "css/fonts/glyphicons-halflings-regular.woff",
+	        "css/fonts/glyphicons-halflings-regular.ttf",
+	        "css/fonts/glyphicons-halflings-regular.svg",
+	        "css/select/bootstrap-select.css"
+	      ],
+	      "refer": [
+	        "PC_HTML/PC_OrderMealShow.html",
+	        "PC_HTML/Pc_menuPage.html"
+	      ],
+	      "priority": 3
+	    },
+	    "PC_HTML/PC_UnconsumedQrcode.html": {
+	      "href": "PC_HTML/PC_UnconsumedQrcode.html",
+	      "resources": [
+	        "img/login-bg.png",
+	        "js/jquery-3.3.1.js",
+	        "js/bootstrap.js",
+	        "js/bootstrap-select.js",
+	        "css/boostrap/bootstrap.css",
+	        "css/fonts/glyphicons-halflings-regular.eot",
+	        "css/fonts/glyphicons-halflings-regular.woff2",
+	        "css/fonts/glyphicons-halflings-regular.woff",
+	        "css/fonts/glyphicons-halflings-regular.ttf",
+	        "css/fonts/glyphicons-halflings-regular.svg",
+	        "css/select/bootstrap-select.css"
+	      ],
+	      "refer": [
+	        "PC_HTML/Pc_menuPage.html"
+	      ],
+	      "priority": 6
+	    },
+	    "PC_HTML/PC_PersonImformation.html": {
+	      "href": "PC_HTML/PC_PersonImformation.html",
+	      "resources": [
+	        "css/person.css",
+	        "css/boostrap/bootstrap.css",
+	        "css/fonts/glyphicons-halflings-regular.eot",
+	        "css/fonts/glyphicons-halflings-regular.woff2",
+	        "css/fonts/glyphicons-halflings-regular.woff",
+	        "css/fonts/glyphicons-halflings-regular.ttf",
+	        "css/fonts/glyphicons-halflings-regular.svg",
+	        "js/jquery-3.3.1.js",
+	        "img/login-bg.png"
+	      ],
+	      "refer": [
+	        "PC_HTML/Pc_menuPage.html",
+	        "PC_HTML/PC_Record.html"
+	      ],
+	      "priority": 7
+	    },
+	    "PC_HTML/PC_FamilySign.html": {
+	      "href": "PC_HTML/PC_FamilySign.html",
+	      "resources": [
+	        "img/login-bg.png",
+	        "js/jquery-3.3.1.js",
+	        "js/bootstrap.js",
+	        "css/boostrap/bootstrap.css",
+	        "css/fonts/glyphicons-halflings-regular.eot",
+	        "css/fonts/glyphicons-halflings-regular.woff2",
+	        "css/fonts/glyphicons-halflings-regular.woff",
+	        "css/fonts/glyphicons-halflings-regular.ttf",
+	        "css/fonts/glyphicons-halflings-regular.svg",
+	        "js/bootstrap-select.js",
+	        "css/select/bootstrap-select.css"
+	      ],
+	      "refer": [
+	        "PC_HTML/Pc_FamilyPage.html",
+	        "PC_HTML/Pc_menuPage.html"
+	      ],
+	      "priority": 8
+	    },
+	    "PC_HTML/PC_Family_Imformation.html": {
+	      "href": "PC_HTML/PC_Family_Imformation.html",
+	      "resources": [
+	        "css/person.css",
+	        "css/boostrap/bootstrap.css",
+	        "css/fonts/glyphicons-halflings-regular.eot",
+	        "css/fonts/glyphicons-halflings-regular.woff2",
+	        "css/fonts/glyphicons-halflings-regular.woff",
+	        "css/fonts/glyphicons-halflings-regular.ttf",
+	        "css/fonts/glyphicons-halflings-regular.svg",
+	        "js/jquery-3.3.1.js",
+	        "img/login-bg.png"
+	      ],
+	      "refer": [
+	        "PC_HTML/PC_Family_Member.html"
+	      ],
+	      "priority": 9
+	    },
+	    "PC_HTML/PC_Family_Member.html": {
+	      "href": "PC_HTML/PC_Family_Member.html",
+	      "resources": [
+	        "img/login-bg.png",
+	        "js/jquery-3.3.1.js",
+	        "js/bootstrap.js",
+	        "css/boostrap/bootstrap.css",
+	        "css/fonts/glyphicons-halflings-regular.eot",
+	        "css/fonts/glyphicons-halflings-regular.woff2",
+	        "css/fonts/glyphicons-halflings-regular.woff",
+	        "css/fonts/glyphicons-halflings-regular.ttf",
+	        "css/fonts/glyphicons-halflings-regular.svg",
+	        "js/bootstrap-select.js",
+	        "css/select/bootstrap-select.css"
+	      ],
+	      "refer": [
+	        "PC_HTML/PC_Family_Imformation.html",
+	        "PC_HTML/Pc_menuPage.html"
+	      ],
+	      "priority": 9
+	    },
+	    "PC_HTML/Pc_FamilyPage.html": {
+	      "href": "PC_HTML/Pc_FamilyPage.html",
+	      "resources": [
+	        "img/login-bg.png",
+	        "js/jquery-3.3.1.js",
+	        "js/bootstrap.js",
+	        "js/bootstrap-select.js",
+	        "css/select/bootstrap-select.css",
+	        "css/boostrap/bootstrap.css",
+	        "css/fonts/glyphicons-halflings-regular.eot",
+	        "css/fonts/glyphicons-halflings-regular.woff2",
+	        "css/fonts/glyphicons-halflings-regular.woff",
+	        "css/fonts/glyphicons-halflings-regular.ttf",
+	        "css/fonts/glyphicons-halflings-regular.svg"
+	      ],
+	      "refer": [
+	        "PC_HTML/PC_FamilySign.html",
+	        "PC_HTML/PC_Family_Member.html",
+	        "PC_HTML/Pc_menuPage.html"
+	      ],
+	      "priority": 8
+	    },
+	    "PC_HTML/Pc_menuPage.html": {
+	      "href": "PC_HTML/Pc_menuPage.html",
+	      "resources": [
+	        "img/login-bg.png",
+	        "js/jquery-3.3.1.js",
+	        "js/bootstrap.js",
+	        "css/boostrap/bootstrap.css",
+	        "css/fonts/glyphicons-halflings-regular.eot",
+	        "css/fonts/glyphicons-halflings-regular.woff2",
+	        "css/fonts/glyphicons-halflings-regular.woff",
+	        "css/fonts/glyphicons-halflings-regular.ttf",
+	        "css/fonts/glyphicons-halflings-regular.svg"
+	      ],
+	      "refer": [
+	        "PC_HTML/PC_Record.html",
+	        "PC_HTML/OrderPage.html",
+	        "ChangePwd.html",
+	        "MyQrcode.html",
+	        "PC_HTML/PC_UnconsumedQrcode.html",
+	        "PC_HTML/PC_PersonImformation.html",
+	        "PC_HTML/Pc_FamilyPage.html",
+	        "device.html"
+	      ],
+	      "priority": 2
+	    },
+	    "ChangePwd.html": {
+	      "href": "ChangePwd.html",
+	      "resources": [
+	        "img/login-bg.png",
+	        "js/jquery-3.3.1.js",
+	        "js/bootstrap.js",
+	        "css/boostrap/bootstrap.css",
+	        "css/fonts/glyphicons-halflings-regular.eot",
+	        "css/fonts/glyphicons-halflings-regular.woff2",
+	        "css/fonts/glyphicons-halflings-regular.woff",
+	        "css/fonts/glyphicons-halflings-regular.ttf",
+	        "css/fonts/glyphicons-halflings-regular.svg",
+	        "js/bootstrap-select.js",
+	        "css/select/bootstrap-select.css",
+	        "js/common.js"
+	      ],
+	      "refer": [
+	        "PC_HTML/Pc_menuPage.html",
+	        "Worker/Worker_menuPage.html"
+	      ],
+	      "priority": 2
+	    },
+	    "Worker/Worker_menuPage.html": {
+	      "href": "Worker/Worker_menuPage.html",
+	      "resources": [
+	        "img/login-bg.png",
+	        "js/jquery-3.3.1.js",
+	        "js/bootstrap.js",
+	        "css/boostrap/bootstrap.css",
+	        "css/fonts/glyphicons-halflings-regular.eot",
+	        "css/fonts/glyphicons-halflings-regular.woff2",
+	        "css/fonts/glyphicons-halflings-regular.woff",
+	        "css/fonts/glyphicons-halflings-regular.ttf",
+	        "css/fonts/glyphicons-halflings-regular.svg"
+	      ],
+	      "refer": [
+	        "Worker/Worker_PersonImformation.html",
+	        "Worker/Worker_OrderPage.html",
+	        "ChangePwd.html",
+	        "MyQrcode.html",
+	        "device.html"
+	      ],
+	      "priority": 0
+	    },
+	    "device.html": {
+	      "href": "device.html",
+	      "resources": [
+	        "img/login-bg.png",
+	        "js/immersed.js",
+	        "js/jquery-3.3.1.js",
+	        "js/bootstrap.js",
+	        "css/boostrap/bootstrap.css",
+	        "css/fonts/glyphicons-halflings-regular.eot",
+	        "css/fonts/glyphicons-halflings-regular.woff2",
+	        "css/fonts/glyphicons-halflings-regular.woff",
+	        "css/fonts/glyphicons-halflings-regular.ttf",
+	        "css/fonts/glyphicons-halflings-regular.svg",
+	        "js/bootstrap-select.js",
+	        "css/select/bootstrap-select.css",
+	        "js/common.js"
+	      ],
+	      "refer": [
+	        "Worker/Worker_menuPage.html",
+	        "PC_HTML/Pc_menuPage.html"
+	      ],
+	      "priority": 0
 	    }
 	  },
 	  "idle": {
 	    "resources": [
 	      "css/boostrap/bootstrap-theme.min.css",
+	      "PC_HTML/PC_Family_Qrcode.html",
 	      "js/app.js",
 	      "js/bootstrap-select.js.map",
+	      "css/style.css",
 	      "css/boostrap/bootstrap.min.css.map",
 	      "js/bootstrap-select.min.js",
-	      "css/style.css",
+	      "PC_HTML/Pc_AccountMoney.html",
 	      "js/mui.enterfocus.js",
 	      "css/select/bootstrap-select.min.css",
-	      "js/npm.js",
+	      "Worker/Worker_Record.html",
 	      "css/boostrap/bootstrap-theme.css.map",
+	      "js/npm.js",
+	      "Worker/Worker_MyQrcode.html",
+	      "PersonImformation.html",
 	      "js/bootstrap.min.js",
-	      "css/select/bootstrap-select.css.map",
 	      "js/mui.locker.js",
-	      "css/boostrap/bootstrap.min.css",
 	      "css/boostrap/bootstrap-theme.min.css.map",
 	      "css/boostrap/bootstrap.css.map",
-	      "css/boostrap/bootstrap-theme.css"
+	      "css/select/bootstrap-select.css.map",
+	      "css/boostrap/bootstrap.min.css",
+	      "css/boostrap/bootstrap-theme.css",
+	      "js/hm.js"
 	    ]
 	  }
 	},

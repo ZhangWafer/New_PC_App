@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <script src="../js/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" type="text/css" href="../css/boostrap/bootstrap.css"/>
+	<script src="../js/bootstrap-select.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" type="text/css" href="../css/select/bootstrap-select.css"/>
+</head>
+
+	<body background="../img/login-bg.png">
+		<div  style="margin-top:10px ;">
+			<a href="PC_Family_Order_Member.html" style="color: white;">
+			<span class="glyphicon glyphicon-chevron-left" style="font-size: 15px;"></span><h4 style="display: inline;">返回</h4>
+			</a>
+        </div>
+		<form id ="MemberFrom" style="margin-left:10px;margin-top:80px;" >
+			<h1  class="text-center" style="margin-bottom: 20px; color: white;" >家属成员</h1>
+		</form>
+	</body>
+	<script type="text/javascript">
+		//ajax获取家庭成员
+		var MemberUrl=localStorage.getItem("url_header")+"/Interface/Familay/GetPcFamily.ashx?pcid="+localStorage.getItem("personId");
+						$.ajax({
+                    url:MemberUrl,
+                    data:{'new':'ssss'},
+                    dataType:'json', 
+                    type:'post',
+					async:false,
+                    crossDomain: true, 
+                    success:function(result){
+						for (var i=0;i<result.pcFas.length;i++) {
+							$("#MemberFrom").append("	<div class='text-center'><button type='button' class='btn btn-primary '  value='"+result.pcFas[i].Name+"*"+result.pcFas[i].InformationNum+"*"+result.pcFas[i].Id+"'  onclick='SaveFamilyMemberId(this)' style='width: 200px;font-size: 20px;margin-top: 10px;'  >"+result.pcFas[i].Name+"</button></div>");	
+						}
+					}
+					});
+		//保存家属id到cookie
+		function SaveFamilyMemberId (obj) {
+			var SaveImformation=obj.value;
+			localStorage.setItem("FamilyMemberImformation",SaveImformation);
+			window.location.href="Pc_Family_OrderPage.html";
+		}
+	</script>
+</html>

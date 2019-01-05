@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+		<meta name="HandheldFriendly" content="true"/>
+		<meta name="MobileOptimized" content="320"/>
+		<title>Hello H5+</title>
+		<script src="../js/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="../css/boostrap/bootstrap.css"/>
+		<script src="../js/bootstrap-select.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="../css/select/bootstrap-select.css"/>
+		<script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="../css/Shopping.css"/>
+		<link rel="stylesheet" href="../css/button.css" />
+	</head>
+	<style type="text/css">
+		.li-title{
+			display: inline-block;
+		    font-size: 18px;
+		    color: black;
+		    vertical-align: sub;
+		    }
+	</style>
+	<body id ="body1">
+		<div style="background-image: url(../img/login-bg.png);padding-top: 10px;padding-left: 10px;">
+			<a href="Pc_menuPage.html" style="color: white;">
+			<span class="glyphicon glyphicon-chevron-left" style="font-size: 15px;"></span><h4 style="display: inline;">返回</h4>
+			</a>	
+		</div>
+		<ul style="height: 80px; background-image: url(../img/login-bg.png);">
+			
+		</ul>
+		
+		<div id ="AllDiv" >
+		</div>
+		<div class="col-xs-12" style="position: fixed;bottom: 0;height: 80px; background-color: #1FCD98;color: white;">
+		<a id="Price_all" style="color: white; margin-top: 26px;font-size: 18px;float: left;height: 80px;display: inline;" class="col-xs-8"></a>
+		<button class=" col-xs-4 button-primary" style=" font-size: 24px;display: inline;height: 80px;z-index: 999;position: fixed;bottom: 0;right: 0;"  onclick="SubmitFunction()">结算</button>
+		</div>
+		
+	</body>
+
+	<script>
+		var account_sum=0;
+		var price_sum=0;
+		function addNum(obj) {
+			
+			var idSplit= obj.id.split('*');
+			var input_num = document.getElementById("input-num"+idSplit[1].toString());
+			var num_jia = document.getElementById(obj.id);
+			if(input_num.value<1)
+			{
+				input_num.value = parseInt(input_num.value) + 1;
+				account_sum+=1;
+				price_sum=parseInt(price_sum)+parseInt(obj.value);
+				$("#Price_all").text("总数："+account_sum+" 总价："+price_sum +"元")
+			}
+
+		}
+		function decNum(obj) {
+			var idSplit= obj.id.split('*');
+			var num_jian = document.getElementById(obj.id);
+			var input_num = document.getElementById("input-num"+idSplit[1].toString());
+			if(input_num.value <= 0) {
+				input_num.value = 0;
+			} else {
+				input_num.value = parseInt(input_num.value) - 1;
+				account_sum-=1;
+				price_sum=parseInt(price_sum)-parseInt(obj.value);
+				$("#Price_all").text("总数："+account_sum+" 总价："+price_sum +"元")
+			}
+		}
+		
+		//拿取选中id数据
+		var selectedOrderDetailID=localStorage.getItem("selectedOrderDetailID");
+		var url_header=localStorage.getItem("url_header");
+		var selectOrderDetail_url= url_header+"/Interface/Familay/GetPcFamilyCookbookSetInDateDetail.ashx?csdId="+selectedOrderDetailID;
+		//菜品价格数组
+		var MenuPriceArray=[];
+		//记录食物数量变量
+		var FoodNumber=0;
+		//记录食物对应id，便于提交使用
+		var FoodIdArray=[];
+		//中文名数组
+		var FoodNameArray=[];
+		$.ajax({
+                    url:selectOrderDetail_url,
+                    data:{'new':'ssss'},
+                    dataType:'json', 
+                    type:'post',
+					async:false,
+                    crossDomain: true, 
+                    success:function(result){
+						console.log(result);
+						//记录食物数量
+						FoodNumber=result.detaliList.length;
+						for	(var i=0;i<result.detaliList.length;i++)
+						{
+							FoodNameArray.push(result.detaliList[i].CookbookName);
+							FoodIdArray[i]=result.detaliList[i].Id;
+							$("#AllDiv").append("<ul class='btn-numbox ' ><li><span class='li-title pull-left'>"+result.detaliList[i].PcPrice+"元"+"</span></li><li><span class='li-title pull-left' style='margin-left: 10px;'>"+result.detaliList[i].CookbookName+"</span></li><li style='padding-right: 20px;float: right;'><ul class='col-xs-12'><div ><li><button style='display: inline;' class='button button-circle button-tiny' id='num-jian*"+i+"' value='"+result.detaliList[i].PcPrice+"' onclick='decNum(this)'><span class='glyphicon glyphicon-minus'></span></button><input disabled='disabled' style='display: inline;width: 40px;' type='text' class=' input button-pill text-center' id='input-num"+i+"' value='0' /><button style='display: inline;' id='num-jia*"+i+"' value='"+result.detaliList[i].PcPrice+"' class='button button-circle button-tiny' onclick='addNum(this)'><span class='glyphicon glyphicon-plus'></span></button></li></div></ul></li></ul><hr size='2'/>");  
+						}
+                    },
+                    error:function(result){
+                        console.log(result);
+                    }
+                });
+
+	function SubmitFunction () {
+		//提交的菜品的数组
+		var SubmitFoodArrayString=[];
+		var SubmitFoodIndexArray=[];
+		
+		for (var i=0;i<FoodNumber;i++) {
+			var input_num = $("#input-num"+i.toString());
+			
+			//根据选择菜品的数量进行添加
+			var addTimes = input_num.val();
+			for (var j=0;j<addTimes;j++) {
+				SubmitFoodArrayString.push(FoodIdArray[i]);
+				SubmitFoodIndexArray.push(i);
+			}
+		}
+		localStorage.setItem("SubmitFoodArrayString",SubmitFoodArrayString);
+		localStorage.setItem("SubmitFoodIndexArray",SubmitFoodIndexArray);
+		localStorage.setItem("FoodNameArray",FoodNameArray);
+		localStorage.setItem("price_sum",price_sum);
+		window.location.href="PC_SettleTable.html";
+	}
+	</script>
+
+</html>

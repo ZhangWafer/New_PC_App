@@ -22,7 +22,7 @@
         <input type="button" class="btn btn-primary " value="警员点餐" style="width: 200px;font-size: 25px;"  onclick="getMenu()"></input>
         </div>
         <div class="text-center" style="margin-top:15px ;">
-        <input type="button" class="btn btn-primary " value="取餐" style="width:200px;font-size: 25px;"  onclick=""></input>
+        <input type="button" class="btn btn-primary " value="取餐" style="width:200px;font-size: 25px;"  onclick="JumpBookPage()"></input>
         </div>
         <div class="text-center" style="margin-top:15px ;">
         <input type="button" class="btn btn-primary " value="家属" style="width: 200px;font-size: 25px;"  onclick="MemberPage()"></input>
@@ -64,8 +64,8 @@
 		}
 		
 		//跳转取餐页面
-		function getOrder () {
-			window.location.href="QrcodePage.html?id="+personId;
+		function JumpBookPage () {
+			window.location.href="PC_UnconsumedQrcode.html";
 		}
 		//跳转注册画面
 		function jumpSign () {

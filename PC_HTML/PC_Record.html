@@ -26,8 +26,6 @@
 			<th>消费时间</th>
 		</tr>
 	</thead>
-	
-	
 	<tbody id="tbody1">
 
 	</tbody>
@@ -37,15 +35,8 @@
 		var PcBool=localStorage.getItem("PcWorkerBool");
 		var personId=localStorage.getItem("personId");
 		var url_header=localStorage.getItem("url_header");
-		if(PcBool==1)
-		{
-			var record_url=url_header+"/Interface/PC/GetPCStaffAlreadyOrderMeal.ashx?pcid="+personId;
-			
-		}
-		else
-		{
-			var record_url=url_header+"/Interface/worker/GetWorkerStaffAlreadyOrderMeal.ashx?workid="+personId;
-		}
+		var record_url=url_header+"/Interface/PC/GetPCStaffAlreadyOrderMeal.ashx?pcid="+personId;
+	
 		//发送请求post，拿取record数据
 		$.ajax({
                     url:record_url,
@@ -68,6 +59,9 @@
 										break;
 									case 3:
 										cookBool="晚餐";
+										break;
+									case 4:
+										cookBool="夜宵";
 										break;
 								}
 								//区别警员和职员

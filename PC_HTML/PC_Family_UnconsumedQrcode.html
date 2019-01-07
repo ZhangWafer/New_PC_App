@@ -12,7 +12,7 @@
 </head>
 	<body background="../img/login-bg.png">
 		<div  style="margin-top:10px ;">
-			<a href="Pc_Choose_FamilyOrPCPage.html" style="color: white;">
+			<a href="PC_Family_UmconsumedChoose_Member.html" style="color: white;">
 			<span class="glyphicon glyphicon-chevron-left" style="font-size: 15px;"></span><h4 style="display: inline;">返回</h4>
 			</a>
         </div>
@@ -32,9 +32,11 @@
         </div>
 	</body>
 	<script type="text/javascript">
-		var personId=localStorage.getItem("personId");
+		var FamilyId=localStorage.getItem("FamilyMemberImformation").split('*');
+		
 		//拿取未消费订单
-		var bookOrder_url= localStorage.getItem("url_header")+"/Interface/PC/GetPCStaffOrderMeal.ashx?pcid="+personId;
+		//http://192.168.6.46:9100/Interface/Familay/GetPcFamilyOrderMeal.ashx?familyId=2
+		var bookOrder_url= localStorage.getItem("url_header")+"/Interface/Familay/GetPcFamilyOrderMeal.ashx?familyId="+FamilyId[2];
 		function getMenu () {
 			$.ajax({
                     url:bookOrder_url,

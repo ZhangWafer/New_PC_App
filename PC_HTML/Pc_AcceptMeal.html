@@ -9,7 +9,7 @@
 	<script src="../js/bootstrap-select.js" type="text/javascript" charset="utf-8"></script>
 	<link rel="stylesheet" type="text/css" href="../css/boostrap/bootstrap.css"/>
 	<link rel="stylesheet" type="text/css" href="../css/select/bootstrap-select.css"/>
-		
+	<link rel="stylesheet" type="text/css" href="../css/button.css"/>
 </head>
 	<body background="../img/login-bg.png">
 		<div  style="margin-top:10px ;">
@@ -17,8 +17,10 @@
 			<span class="glyphicon glyphicon-chevron-left" style="font-size: 15px;"></span><h4 style="display: inline;">返回</h4>
 			</a>
         </div>
-		<form style="margin-top:80px;">
-    	<h1 id="h1" class="text-center"style="margin-bottom: 50px; color: white;" >选择订餐日期 </h1>
+		<form style="margin-top:20px;">
+		<div class="text-center">
+			<h1 id="h1" class="text-center"style="margin-bottom: 50px; color: white;" >接待餐申请 </h1>
+		</div>
     	<div class="text-center" style="margin-bottom: 20px;">
 		<div class="btn-group">
 	    	<select id="select1" class="selectpicker" >
@@ -43,8 +45,14 @@
 			</select>
 		</div>
 		</div>
+		<div class="text-center" style="margin-top: 20px;">
+			<input type="text" class="btn " style="width: 220px;" id="personNumber" placeholder="用餐人数" oninput = "value=value.replace(/[^\d]/g,'')" />
+		</div>
+		<div class="text-center" style="margin-top: 20px;">
+			<textarea style="width: 220px;height: 220px;"  id="inputContent" placeholder="用餐描述"></textarea>
+		</div>
         <div class="text-center" style="margin-top:20px ;">
-        <input id="submitButton" type="button" class="btn btn-primary " onclick="onclick_function()" value="确定" style="width: 200px;font-size: 25px;"></input>
+        <input id="submitButton" type="button" class="btn btn-primary button-pill" onclick="onclick_function()" value="确定" style="width: 200px;font-size: 25px;"></input>
         </div>
     </form>
 	</body>
@@ -143,7 +151,7 @@
 			}
 			//把选择的条件暂存起来
 			var SelectedDay=$("#select1").val();
-			var SelectedMeal=$("#select2").find("option:selected").val();
+			var SelectedMeal=$("#select2").find("option:selected").val();//早午晚，值：1,2,3
 			var SelectedCanteen=$("#select3").val();
 			
 			localStorage.setItem("SelectedDay",SelectedDay);
@@ -164,8 +172,37 @@
 			//判断是否存在，存在就跳转
 			if(ExistBool)
 			{
-				//跳转到菜单显示页面
-				window.location.href="PC_OrderMealShow.html";
+				var orderId=RResult.pccsidList[i].Id;
+				var personId2=localStorage.getItem("personId");
+				//人数变量
+				var pernumbers=$("#personNumber").val();
+				//描述内容
+				var content=$("#inputContent").val();
+				
+				if(pernumbers=="0")
+				{
+					alert("用餐人数不得为0");
+					return;
+				}
+				//接待餐url
+				var accept_url=url_header+"/Interface/PC/PCStaffReceptionOrderMeal.ashx?pcid="+personId2+"&cookbookSetInDateId="+orderId+"&persons="+pernumbers+"&description="+content;
+				accept_url=encodeURI(accept_url);
+				$.ajax({
+                url:accept_url,
+                data:{'new':'ssss'},
+                dataType:'json', 
+                type:'post',
+				async:false,
+                crossDomain: true, 
+                success:function(result){
+					alert("提交成功！");
+					window.location.href="Pc_menuPage.html";
+					},
+                    error:function(result){
+						alert("服务器错误!提交失败");
+                        console.log(result);
+                    }
+                });
 			}
 			else
 			{

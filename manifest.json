@@ -25,7 +25,7 @@
         },
         "Events" : {
             "description" : "应用扩展事件"
-        },"Payment":{}
+        }
     },
     "plus" : {
         "splashscreen" : {
@@ -35,7 +35,10 @@
         "popGesture" : "close", /*设置应用默认侧滑返回关闭Webview窗口，"none"为无侧滑返回功能，"hide"为侧滑隐藏Webview窗口。参考http://ask.dcloud.net.cn/article/102*/
         "runmode" : "normal", /*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
         "signature" : "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==", /*可选，保留给应用签名，暂不使用*/
-        "distribute" : {"plugins":{"payment":{"weixin":{"description":"微信支付","appid":""}}},
+        "distribute" : {
+            "plugins" : {
+                "payment" : {}
+            },
             "apple" : {
                 "appid" : "io.IOS.ZhsPLCCanteenH5", /*iOS应用标识，苹果开发网站申请的appid，如io.dcloud.HelloH5*/
                 "mobileprovision" : "", /*iOS应用打包配置文件*/
@@ -49,7 +52,15 @@
                 "keystore" : "", /*Android应用打包使用的密钥库文件*/
                 "password" : "", /*Android应用打包使用密钥库中证书的密码*/
                 "aliasname" : "", /*Android应用打包使用密钥库中证书的别名*/
-                "permissions" : ["<uses-feature android:name=\"android.hardware.camera.autofocus\"/>","<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>","<uses-feature android:name=\"android.hardware.camera\"/>","<uses-permission android:name=\"android.permission.VIBRATE\"/>","<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>","<uses-permission android:name=\"android.permission.CALL_PHONE\"/>","<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>","<uses-permission android:name=\"android.permission.CAMERA\"/>"]
+                "permissions" : [
+                    "<uses-feature android:name=\"android.hardware.camera\"/>",
+                    "<uses-feature android:name=\"android.hardware.camera.autofocus\"/>",
+                    "<uses-permission android:name=\"android.permission.CALL_PHONE\"/>",
+                    "<uses-permission android:name=\"android.permission.CAMERA\"/>",
+                    "<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>",
+                    "<uses-permission android:name=\"android.permission.VIBRATE\"/>",
+                    "<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>"
+                ]
             },
             /*使用Native.js调用原生安卓API需要使用到的系统权限*/
             "orientation" : [ "portrait-primary" ], /*应用支持的方向，portrait-primary：竖屏正方向；portrait-secondary：竖屏反方向；landscape-primary：横屏正方向；landscape-secondary：横屏反方向*/
@@ -621,7 +632,8 @@
                     "PC_HTML/PC_PersonImformation.html",
                     "PC_HTML/Pc_FamilyPage.html",
                     "device.html",
-                    "PC_HTML/Pc_Choose_FamilyOrPCPage.html"
+                    "PC_HTML/Pc_Choose_FamilyOrPCPage.html",
+                    "PC_HTML/Pc_AcceptMeal.html"
                 ],
                 "priority" : 2
             },
@@ -681,7 +693,9 @@
                     "css/fonts/glyphicons-halflings-regular.svg",
                     "js/bootstrap-select.js",
                     "css/select/bootstrap-select.css",
-                    "js/common.js"
+                    "js/common.js",
+                    "css/button.css",
+                    "img/logo.png"
                 ],
                 "refer" : [ "Worker/Worker_menuPage.html", "PC_HTML/Pc_menuPage.html" ],
                 "priority" : 0
@@ -819,31 +833,53 @@
                 ],
                 "refer" : [ "PC_HTML/Pc_Family_OrderPage.html", "PC_HTML/Pc_FamilyPage.html" ],
                 "priority" : 9
+            },
+            "PC_HTML/Pc_AcceptMeal.html" : {
+                "href" : "PC_HTML/Pc_AcceptMeal.html",
+                "resources" : [
+                    "img/login-bg.png",
+                    "js/jquery-3.3.1.js",
+                    "js/bootstrap.js",
+                    "js/bootstrap-select.js",
+                    "css/boostrap/bootstrap.css",
+                    "css/fonts/glyphicons-halflings-regular.eot",
+                    "css/fonts/glyphicons-halflings-regular.woff2",
+                    "css/fonts/glyphicons-halflings-regular.woff",
+                    "css/fonts/glyphicons-halflings-regular.ttf",
+                    "css/fonts/glyphicons-halflings-regular.svg",
+                    "css/select/bootstrap-select.css",
+                    "css/button.css"
+                ],
+                "refer" : [ "PC_HTML/Pc_menuPage.html" ],
+                "priority" : 6
             }
         },
         "idle" : {
             "resources" : [
                 "css/boostrap/bootstrap-theme.min.css",
                 "PC_HTML/PC_Family_Qrcode.html",
+                "css/boostrap/bootstrap.min.css.map",
+                "js/npm.js",
+                "PersonImformation.html",
+                "Worker/Worker_MyQrcode.html",
+                "img/button2.png",
+                "js/bootstrap.min.js",
+                "css/boostrap/bootstrap.css.map",
+                "img/button1.png",
                 "js/app.js",
                 "js/bootstrap-select.js.map",
-                "css/style.css",
-                "css/boostrap/bootstrap.min.css.map",
                 "js/bootstrap-select.min.js",
+                "css/style.css",
                 "PC_HTML/Pc_AccountMoney.html",
                 "js/mui.enterfocus.js",
                 "css/select/bootstrap-select.min.css",
+                "PC_HTML/Pc_menuPage_2.html",
                 "Worker/Worker_Record.html",
                 "css/boostrap/bootstrap-theme.css.map",
-                "js/npm.js",
-                "Worker/Worker_MyQrcode.html",
-                "PersonImformation.html",
-                "js/bootstrap.min.js",
                 "js/mui.locker.js",
-                "css/boostrap/bootstrap-theme.min.css.map",
-                "css/boostrap/bootstrap.css.map",
                 "css/select/bootstrap-select.css.map",
                 "css/boostrap/bootstrap.min.css",
+                "css/boostrap/bootstrap-theme.min.css.map",
                 "css/boostrap/bootstrap-theme.css",
                 "js/hm.js"
             ]

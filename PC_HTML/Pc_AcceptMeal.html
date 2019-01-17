@@ -41,7 +41,8 @@
 		<div class="text-center" >
 		<div class="btn-group">
 	    	<select id="select3" class="selectpicker" >
-			    <option >选择饭堂</option>
+			    <option value="16">机关饭堂(二楼)</option>
+			    <option value="17">机关饭堂(三楼)</option>
 			</select>
 		</div>
 		</div>
@@ -115,19 +116,19 @@
 					 	}
 					 	//选择餐次数组
 						for (var i=0;i<dataNum;i++) {
-						//分割日期与时间
-						var arr =	result.pccsidList[i].ChooseDate.split("T");
-						selectdays[i]= arr[0];
-						selectCateen[i]=result.pccsidList[i].CafeteriaName;
+							//分割日期与时间
+							var arr =	result.pccsidList[i].ChooseDate.split("T");
+							selectdays[i]= arr[0];
+							selectCateen[i]=result.pccsidList[i].CafeteriaName;
 						}
 						//去重复日期
 						var selectdays_uni=unique4(selectdays);
 						selectCateen= unique4(selectCateen);
 						//把去重复的饭堂添加进去
-						$("#select3").empty();
-						selectCateen.forEach(function  (val,index) {
-							$("#select3").append("<option value='"+val+"'>"+val+"</option>"); //为Select追加一个Option(下拉项) 
-						});
+//						$("#select3").empty();
+//						selectCateen.forEach(function  (val,index) {
+//							$("#select3").append("<option value='"+val+"'>"+val+"</option>"); //为Select追加一个Option(下拉项) 
+//						});
 						
 						//添加进去select
 						 $("#select1").empty();
@@ -161,7 +162,7 @@
 			var ExistBool=false;
 			for (var i=0;i<RResult.pccsidList.length;i++) {
 			var resultDate=RResult.pccsidList[i].ChooseDate.split('T');
-			if(resultDate[0]==SelectedDay&&RResult.pccsidList[i].CookbookEnum==SelectedMeal&& RResult.pccsidList[i].CafeteriaName==SelectedCanteen)
+			if(resultDate[0]==SelectedDay&&RResult.pccsidList[i].CookbookEnum==SelectedMeal&& RResult.pccsidList[i].CafeteriaId==SelectedCanteen)
 			{
 				localStorage.setItem("selectedOrderDetailID",RResult.pccsidList[i].Id);
 				localStorage.setItem("canteenBool",RResult.pccsidList[i].CafeteriaTypeEnum);
@@ -195,8 +196,15 @@
 				async:false,
                 crossDomain: true, 
                 success:function(result){
-					alert("提交成功！");
-					window.location.href="Pc_menuPage.html";
+					if(result.Msg=="招待餐报餐成功")
+					{
+						alert("提交成功！");
+						window.location.href="Pc_menuPage.html";
+					}
+					else
+					{
+							alert("服务器错误!提交失败");
+					}
 					},
                     error:function(result){
 						alert("服务器错误!提交失败");

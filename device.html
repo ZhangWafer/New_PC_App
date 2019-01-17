@@ -41,6 +41,9 @@
     </form>
 
     <script type="text/javascript">
+    	//默认选择选项
+    	var bbool= localStorage.getItem("PcWorkerBool");
+    	$("#select1").val(bbool);
     	//获取手机设备信息方法
 			function getDeviceInfo(){
 			    var str = "",i;
@@ -61,27 +64,26 @@
     	var accountValue= localStorage.getItem("account");
     	$("#user").val(accountValue);
     	//分割线
-  	//var post_url_all_header="http://20.97.10.67:7034";//公安局内网网址
+  //	var post_url_all_header="http://20.97.10.67:7034";//公安局内网网址 正式环境
 	//	var post_url_all_header="http://192.168.6.46:7030";
-    //var post_url_all_header="http://120.236.239.118:7030";//新域网址
-    var post_url_all_header="https://219.131.222.91:7029";//公安局外网网址
+    //var post_url_all_header="http://120.236.239.118:7030";//新域网址 测试环境
+    var post_url_all_header="https://219.131.222.91:7029";//公安局外网网址 正式环境
     
     	localStorage.setItem("url_header",post_url_all_header);
 	function loginSubmit () {
 		var account=$("#user").val();
 		var pwd=$("#password").val();
 		var BoolValue=$("#select1").val();
-		var url;
-		if	(BoolValue==1)
+		
+		if(BoolValue==1)
 		{
-			//440221196011081611
-			 url = post_url_all_header+"/Interface/PC/PcStaffLogin.ashx?informationNum="+account+"&password="+pwd;
+					//440221196011081611
+		var url = post_url_all_header+"/Interface/PC/PcStaffLogin.ashx?informationNum="+account+"&password="+pwd;
 		}
 		else
 		{
-			url = post_url_all_header+"/Interface/Worker/WorkerLogin.ashx?InformationNum="+account+"&password="+pwd;
+			var url = post_url_all_header+"/Interface/Worker/WorkerLogin.ashx?InformationNum="+account+"&password="+pwd;
 		}
-
 $.ajax({
                     url:url,
                     data:{'name':'ssss'},

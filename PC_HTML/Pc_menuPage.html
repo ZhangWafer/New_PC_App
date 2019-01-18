@@ -39,7 +39,7 @@
         <input type="button" class="btn btn-primary  button-pill"  value="修改密码" style="width: 200px;font-size: 25px;"  onclick="jumpChangePwd()"></input>
         </div>
         <div class="text-center" style="margin-top:15px ;">
-        <input type="button" class="btn btn-primary  button-pill"  value="接待餐申请" style="width: 200px;font-size: 25px;"  onclick="jumpAcceptMeal()"></input>
+        <input type="button" class="btn btn-primary  button-pill"  value="接待餐" style="width: 200px;font-size: 25px;"  onclick="jumpAcceptMeal()"></input>
         </div>
 <!--        <div class="text-center" style="margin-top:15px ;">
         <input type="button" class="btn btn-primary  button-pill"  value="我的评价" style="width: 200px;font-size: 25px;"  onclick=""></input>
@@ -64,7 +64,7 @@
 		var PcBool=localStorage.getItem("PcWorkerBool");
 		//接待餐
 		function jumpAcceptMeal () {
-			window.location.href="Pc_AcceptMeal.html";
+			window.location.href="Pc_AcceptChoose.html";
 		}
 		//ajax拿取排餐数据
 		function getMenu () {

@@ -12,19 +12,21 @@
 	</head>
 	<body background="../img/login-bg.png">
 	<div  style="margin-top:10px ;">
-		<a href="Pc_menuPage.html" style="color: white;">
+		<a href="Pc_AcceptChoose.html" style="color: white;">
 		<span class="glyphicon glyphicon-chevron-left" style="font-size: 15px;"></span><h4 style="display: inline;">返回</h4>
 		</a>
     </div>
-	<h1 class="text-center"style="margin-bottom: 50px; color: white;"> 消费记录</h1>	
+	<h1 class="text-center"style="margin-bottom: 50px; color: white;"> 接待餐查询</h1>	
 	<table class="table " style="color: white;">
 	<thead>
 		<tr bgcolor="#5BC0DE">
 			<th>餐厅</th>
 			<th>餐次</th>
-			<th>价格</th>
+			<th style="width: 90px;">审核状态</th>
 			<th>消费时间</th>
 		</tr>
+		
+		
 	</thead>
 	<tbody id="tbody1">
 
@@ -49,7 +51,7 @@
 							var cookBool;
 							for (var i=0;i<result.recepLst.length;i++) {
 								//区别早午晚餐
-								var cookenum=result.pccsidList[i].CookbookEnum;
+								var cookenum=result.recepLst[i].CookbookEnum;
 								switch (cookenum){
 									case 1:
 										cookBool="早餐";
@@ -69,18 +71,31 @@
 								var realPrice;
 								switch (boolPC){
 									case "1":
-										realPrice=result.pccsidList[i].PcPrice;
+										realPrice=result.recepLst[i].PcPrice;
 										break;
 									case "2":
-										realPrice=result.pccsidList[i].WorkerPrice;
+										realPrice=result.recepLst[i].WorkerPrice;
 										break;
 								}
-								var wholeString = result.pccsidList[i].CafeteriaName;
+								var wholeString = result.recepLst[i].CafeteriaName;
 								var fourString= wholeString.substring(0,5);
 								var lastString= wholeString.substring(5,wholeString.length);
-								var payday=result.pccsidList[i].ChooseDate;
+								var payday=result.recepLst[i].ChooseDate;
 								var paydayDate=payday.split("T");
-								$("#tbody1").append("<tr style='font-size: 12px;'><td style='width:100px ;'>"+wholeString+"</td><td>"+cookBool+"</td><td style='width: 60px;'>"+"价格"+"</td><td style='width: 110px;'>"+paydayDate[0]+"</td></tr>");
+								
+								var confirmState=result.recepLst[i].ConfirmState;
+								switch (confirmState){
+									case 0:
+									confirmState="未审核";
+										break;
+									case 1:
+									confirmState="同意";
+										break;
+									case 2:
+									confirmState="拒绝";
+										break;
+								}
+								$("#tbody1").append("<tr style='font-size: 12px;'><td style='width:100px ;'>"+wholeString+"</td><td>"+cookBool+"</td><td style='width: 60px;'>"+confirmState+"</td><td style='width: 110px;'>"+paydayDate[0]+"</td></tr><tr ><td>审批回复</td><td>"+result.recepLst[i].ConfirmDescription+"</td><td ></td><td></th></tr>");
 							}
 							
 						}					

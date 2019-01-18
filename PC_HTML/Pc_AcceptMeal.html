@@ -13,7 +13,7 @@
 </head>
 	<body background="../img/login-bg.png">
 		<div  style="margin-top:10px ;">
-			<a href="Pc_menuPage.html" style="color: white;">
+			<a href="Pc_AcceptChoose.html" style="color: white;">
 			<span class="glyphicon glyphicon-chevron-left" style="font-size: 15px;"></span><h4 style="display: inline;">返回</h4>
 			</a>
         </div>
@@ -186,6 +186,7 @@
 					return;
 				}
 				//接待餐url
+				
 				var accept_url=url_header+"/Interface/PC/PCStaffReceptionOrderMeal.ashx?pcid="+personId2+"&cookbookSetInDateId="+orderId+"&persons="+pernumbers+"&description="+content;
 				accept_url=encodeURI(accept_url);
 				$.ajax({

@@ -1,10 +1,10 @@
 {
     "@platforms" : [ "android", "iPhone", "iPad" ],
-    "id" : "io.android.ZhsPLCCanteenH5", /*应用的标识，创建应用时自动生成，勿手动修改*/
+    "id" : "io.android.ZhsPLCCanteenH5int", /*应用的标识，创建应用时自动生成，勿手动修改*/
     "name" : "公安局点餐系统", /*应用名称，程序桌面图标名称*/
     "version" : {
-        "name" : "3.1", /*应用版本名称*/
-        "code" : 4
+        "name" : "3.2", /*应用版本名称*/
+        "code" : 5
     },
     "description" : "公安局饭堂软件", /*应用描述信息*/
     "icons" : {

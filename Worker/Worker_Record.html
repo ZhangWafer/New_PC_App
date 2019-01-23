@@ -65,21 +65,15 @@
 								}
 								//区别警员和职员
 								var boolPC=localStorage.getItem("PcWorkerBool");
-								var realPrice;
-								switch (boolPC){
-									case "1":
-										realPrice=result.pccsidList[i].PcPrice;
-										break;
-									case "2":
-										realPrice=result.pccsidList[i].WorkerPrice;
-										break;
-								}
+								var realPrice=result.pccsidList[i].Price;
+
 								var wholeString = result.pccsidList[i].CafeteriaName;
 								var fourString= wholeString.substring(0,5);
 								var lastString= wholeString.substring(5,wholeString.length);
 								var payday=result.pccsidList[i].ChooseDate;
 								var paydayDate=payday.split("T");
-								$("#tbody1").append("<tr style='font-size: 12px;'><td style='width:100px ;'>"+wholeString+"</td><td>"+cookBool+"</td><td style='width: 60px;'>"+"价格"+"</td><td style='width: 110px;'>"+paydayDate[0]+"</td></tr>");
+							
+								$("#tbody1").append("<tr style='font-size: 12px;'><td style='width:100px ;'>"+wholeString+"</td><td>"+cookBool+"</td><td style='width: 60px;'>"+realPrice+"</td><td style='width: 110px;'>"+paydayDate[0]+"</td></tr>");
 							}
 							
 						}					

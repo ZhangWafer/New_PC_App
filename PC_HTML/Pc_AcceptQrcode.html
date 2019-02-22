@@ -19,7 +19,7 @@
         </div>
 		<form style="margin-top:20px;">
 		<div class="text-center">
-			<h1 id="h1" class="text-center"style="margin-bottom: 50px; color: white;" >工作餐取消 </h1>
+			<h1 id="h1" class="text-center"style="margin-bottom: 50px; color: white;" >工作餐二维码 </h1>
 		</div>
     	<div class="text-center" style="margin-bottom: 20px;">
 		<div class="btn-group">
@@ -28,12 +28,12 @@
 			</select>
 		</div>
 		</div>
-
-
-
         <div class="text-center" style="margin-top:20px ;">
-        <input id="submitButton" type="button" class="btn btn-primary button-pill" onclick="cancel_function()" value="确定取消" style="width: 200px;font-size: 25px;"></input>
+        <input id="submitButton" type="button" class="btn btn-primary button-pill" onclick="qrcode_function()" value="确定" style="width: 200px;font-size: 25px;"></input>
         </div>
+         <div class="text-center" style="margin-top:20px ;">
+        <img  id="img1" />
+          </div>
     </form>
 	</body>
 	<script type="text/javascript">
@@ -75,6 +75,7 @@
 					async:false,
                     crossDomain: true, 
                     success:function(result){
+					RResult=result;
 					for (var i=0;i<result.recepLst.length;i++) {
 		
 								var LB_namxe;
@@ -107,27 +108,9 @@
 		}
 		getMenu();
 		
-	function cancel_function () {
-		var cancelId= $("#select1").val();
-		var cancelUrl= url_header+"/Interface/PC/PCStaffReceptionCancelOrderMeal.ashx?orderMealId="+cancelId;
-			$.ajax({
-                    url:cancelUrl,
-                    data:{'new':'ssss'},
-                    dataType:'json', 
-                    type:'post',
-					async:false,
-                    crossDomain: true, 
-                    success:function(result){
-				if(result.Msg=="招待餐取消成功")
-				{
-					alert("取消成功！");
-				}
-	
-			},
-			        error:function(result){
-                     	alert("取消失败！");
-                    }
-});
+	function qrcode_function () {
+      
+        $("#img1").attr("src",RResult.recepLst[0].ReceptionQrcodeImage);
 	}
 		
 

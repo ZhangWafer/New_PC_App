@@ -41,7 +41,7 @@
 	</body>
 	<script type="text/javascript">
 		function Sign () {
-					var sign_url=localStorage.getItem("url_header")+"/Interface/Familay/RegisterPCStaffFamily.ashx?pcid="+localStorage.getItem("personId")+"&name="+$("#user").val()+"&informationNum="+$("#ImforNum").val()+"&informationNum="+$("#select2").val();
+					var sign_url=localStorage.getItem("url_header")+"/Interface/Familay/RegisterPCStaffFamily.ashx?pcid="+localStorage.getItem("personId")+"&name="+$("#user").val()+"&informationNum="+$("#ImforNum").val()+"&Relative="+$("#select2").val();
 						$.ajax({
                     url:sign_url,
                     data:{'new':'ssss'},

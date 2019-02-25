@@ -59,6 +59,8 @@
 	</body>
 	<script type="text/javascript">
 		var url_header=localStorage.getItem("url_header");
+		var personId=localStorage.getItem("personId");
+		var imforCardNum=localStorage.getItem("account");
 		//去重方法
 			function unique4(arr){
 			  var hash=[];
@@ -75,7 +77,35 @@
 //		var arr = [112,112,34,'你好',112,112,34,'你好','str','str1'];
 //		alert(arr.unique3());
 		
-
+		//拿取价格
+		var breakfastPrice=0;
+		var lunchPrice=0;
+		var dinnerPrice=0;
+		var AccountMoney=0;
+		var price_url=url_header+"/Interface/PC/GetPcReceptionPrice.ashx"
+					$.ajax({
+                    url:price_url,
+                    data:{'new':'ssss'},
+                    dataType:'json', 
+                    type:'post',
+					async:false,
+                    crossDomain: true, 
+                    success:function(result){
+						breakfastPrice=result.breakfast;
+						lunchPrice=result.lunch;
+						dinnerPrice=result.supper;
+					}});
+		//拿取余额
+					$.ajax({
+                    url:url_header+"/Interface/PC/GetPcStaff.ashx?informationNum="+imforCardNum,
+                    data:{'new':'ssss'},
+                    dataType:'json', 
+                    type:'post',
+					async:false,
+                    crossDomain: true, 
+                    success:function(result){
+						AccountMoney=result.pcInfo.Amount;
+					}});
 		
 		//选择日期数组
 		var selectdays=[];
@@ -83,7 +113,7 @@
 		var selectCateen=[];
 		//从cookie看是警员还是职工
 		var PcBool=localStorage.getItem("PcWorkerBool");
-		var personId=localStorage.getItem("personId");
+		
 		//ajax拿取排餐数据
 		if(PcBool==1)
 		{
@@ -185,8 +215,28 @@
 					alert("用餐人数不得为0");
 					return;
 				}
-				//接待餐url
 				
+				
+				//判断余额是否足够
+				var thisPrice=0;
+				switch (SelectedMeal){
+					case "1":
+					thisPrice=breakfastPrice
+						break;
+					case "2":
+					thisPrice=lunchPrice;
+						break;
+					case "3":
+					thisPrice=dinnerPrice;
+						break;						
+				}
+				if((AccountMoney-pernumbers*thisPrice)<0)
+				{
+					alert("余额不足！");
+					return;
+				}
+				
+				//接待餐url
 				var accept_url=url_header+"/Interface/PC/PCStaffReceptionOrderMeal.ashx?pcid="+personId2+"&cookbookSetInDateId="+orderId+"&persons="+pernumbers+"&description="+content;
 				accept_url=encodeURI(accept_url);
 				$.ajax({

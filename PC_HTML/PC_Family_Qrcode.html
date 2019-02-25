@@ -48,6 +48,10 @@
                     success:function(result){
 							for(var i=0;i<result.pcFas.length;i++)
 							{
+								if(result.pcFas[i].IsAudit==false)
+								{
+									continue;
+								}
 								member_url[i]=result.pcFas[i].InformationQrcodeImage;
 								$("#select1").append("<option value='"+i+"'>"+result.pcFas[i].Name+"</option>");
 							}	

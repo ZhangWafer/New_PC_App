@@ -33,7 +33,15 @@
                     crossDomain: true, 
                     success:function(result){
 						for (var i=0;i<result.pcFas.length;i++) {
-							$("#MemberFrom").append("	<div class='text-center'><button type='button' class='btn btn-primary '  value='"+result.pcFas[i].Name+"*"+result.pcFas[i].InformationNum+"'  onclick='SaveFamilyMemberId(this)' style='width: 200px;font-size: 20px;margin-top: 10px;'  >"+result.pcFas[i].Name+"</button></div>");	
+							if(result.pcFas[i].IsAudit==false)
+							{
+								
+							}
+							else
+							{
+								$("#MemberFrom").append("	<div class='text-center'><button type='button' class='btn btn-primary '  value='"+result.pcFas[i].Name+"*"+result.pcFas[i].InformationNum+"'  onclick='SaveFamilyMemberId(this)' style='width: 200px;font-size: 20px;margin-top: 10px;'  >"+result.pcFas[i].Name+"</button></div>");
+							}
+							
 						}
 					}
 					});

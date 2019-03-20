@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <script src="../js/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" type="text/css" href="../css/boostrap/bootstrap.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/button.css"/>
+</head>
+	<body background="../img/login-bg.png">   
+		<div  style="margin-top:10px ;">
+			<a href="../device.html" style="color: white;">
+			<span class="glyphicon glyphicon-chevron-left" style="font-size: 15px;"></span><h4 style="display: inline;">退出登录</h4>
+			</a>
+        </div>
+	<form class="text-center" style="margin-top: 60px;">
+		<!--style="margin-left:10px;margin-top:80px;"-->
+    	<div class="text-center" style="margin-bottom: 20px;">
+    		<img src="../img/logo.png" style="width: 120px;height: 48px;"/>
+    	</div>
+    	<!--<h1 id="h2" class="text-center"style="margin-bottom: 40px; color: white;" ></h1>-->
+  <!--      <div class="text-center">
+        <input type="button" class="btn btn-primary  button-pill" value="警员点餐" style="width: 200px;font-size: 25px;"  onclick="getMenu()"></input>
+        </div>
+        <div class="text-center" style="margin-top:15px ;">
+        <input type="button" class="btn btn-primary button-pill " value="取餐" style="width:200px;font-size: 25px;"  onclick="JumpBookPage()"></input>
+        </div>
+        <div class="text-center" style="margin-top:15px ;">
+        <input type="button" class="btn btn-primary  button-pill" value="家属" style="width: 200px;font-size: 25px;"  onclick="MemberPage()"></input>
+        </div> -->
+        <div class="text-center" style="margin-top:15px ;">
+        <input type="button" class="btn btn-primary  button-pill" value="个人账户" style="width: 200px;font-size: 25px;" onclick="jumpImformation()"></input>
+        </div>
+        <div class="text-center" style="margin-top:15px ;">
+        <input type="button" class="btn btn-primary button-pill "  value="我的二维码" style="width: 200px;font-size: 25px;"  onclick="jumpQrcode()"></input>
+        </div>
+        <div class="text-center" style="margin-top:15px ;">
+        <input type="button" class="btn btn-primary  button-pill"  value="修改密码" style="width: 200px;font-size: 25px;"  onclick="jumpChangePwd()"></input>
+        </div>
+       </form>
+<!--   	<div class="text-center" style="margin-top:15px ;">
+        <input type="button" class="btn btn-primary  button-pill"  value="我的评价" style="width: 200px;font-size: 25px;"  onclick=""></input>
+       </div> -->
+        <div id="">
+        	<h5>就餐服务</h5>
+        </div>
+        <hr />
+    <form >
+		<div >
+			<div style="display: inline;">
+				<input type="image"  style="width: 70px;height: 62px;margin-right: 10px;margin-left: 10px;" src="../img/button2.png" ></input>
+			</div>
+			<div style="display: inline;">
+				<input type="image"  style="width: 70px;height: 62px;margin-right: 10px;margin-left: 10px;" src="../img/button2.png" ></input>
+			</div>
+			<div  style="display: inline;">
+				<input type="image"  style="width: 70px;height: 62px;margin-right: 10px;margin-left: 10px;" src="../img/button2.png" ></input>
+			</div>
+			<div style="display: inline;">
+				<input type="image"  style="width: 70px;height: 62px;margin-right: 10px;margin-left: 10px;" src="../img/button2.png" ></input>
+			</div>
+		</div>
+    </form>
+	</body>
+	<script type="text/javascript">
+		//取index传的值,Name,id
+		var url=decodeURI(location.search);
+		var Request = new Object();
+		if(url.indexOf("?")!=-1)
+		{
+		　　var str = url.substr(1)　//去掉?号
+		　　strs = str.split("&");
+		　　for(var i=0;i<strs.length;i++)
+		　　{
+		 　　　 Request[strs[i ].split("=")[0]]=unescape(strs[ i].split("=")[1]);
+		　　}
+		}
+		var personId=localStorage.getItem("personId");
+		var PcBool=localStorage.getItem("PcWorkerBool");
+		//ajax拿取排餐数据
+		function getMenu () {
+				window.location.href="OrderPage.html";
+		}
+		//跳转取餐页面
+		function JumpBookPage () {
+			window.location.href="Pc_Choose_FamilyOrPCPage.html";
+		}
+		//跳转注册画面
+		function jumpSign () {
+			window.location.href="FamilySign.html";
+		}
+		//跳转家属页面
+		function MemberPage () {
+			window.location.href="Pc_FamilyPage.html";
+		}
+		//跳转二维码页面
+		function jumpQrcode () {
+			window.location.href="../MyQrcode.html";
+		}
+		//跳转消费记录页面
+		function jumpRecord () {
+			window.location.href="PC_Record.html";
+		}
+		
+		//跳转个人信息页面
+		function jumpImformation () {
+			window.location.href="PC_PersonImformation.html";
+		}
+		
+		//跳转修改密码页面
+		function jumpChangePwd () {
+			window.location.href="../ChangePwd.html";
+		}
+	</script>
+</html>

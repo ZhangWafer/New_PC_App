@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <script src="../js/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/bootstrap-select.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" type="text/css" href="../css/boostrap/bootstrap.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/select/bootstrap-select.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/button.css"/>
+</head>
+	<body background="../img/login-bg.png">
+		<div  style="margin-top:10px ;">
+			<a href="Pc_AcceptChoose.html" style="color: white;">
+			<span class="glyphicon glyphicon-chevron-left" style="font-size: 15px;"></span><h4 style="display: inline;">返回</h4>
+			</a>
+        </div>
+		<form style="margin-top:20px;">
+		<div class="text-center">
+			<h1 id="h1" class="text-center"style="margin-bottom: 50px; color: white;" >工作餐取消 </h1>
+		</div>
+    	<div class="text-center" style="margin-bottom: 20px;">
+		<div class="btn-group">
+	    	<select id="select1" class="selectpicker" >
+			    <option >选择日期</option>
+			</select>
+		</div>
+		</div>
+
+
+
+        <div class="text-center" style="margin-top:20px ;">
+        <input id="submitButton" type="button" class="btn btn-primary button-pill" onclick="cancel_function()" value="确定取消" style="width: 200px;font-size: 25px;"></input>
+        </div>
+    </form>
+	</body>
+	<script type="text/javascript">
+		var url_header=localStorage.getItem("url_header");
+		//去重方法
+			function unique4(arr){
+			  var hash=[];
+			  for (var i = 0; i < arr.length; i++) {
+			    for (var j = i+1; j < arr.length; j++) {
+			      if(arr[i]===arr[j]){
+			        ++i;
+			      }
+			    }
+			      hash.push(arr[i]);
+			  }
+			  return hash;
+			}
+//		var arr = [112,112,34,'你好',112,112,34,'你好','str','str1'];
+//		alert(arr.unique3());
+		
+
+		
+		//选择日期数组
+		var selectdays=[];
+		//选择饭堂数组
+		var selectCateen=[];
+		//从cookie看是警员还是职工
+		var personId=localStorage.getItem("personId");
+		//http://localhost:7029/Interface/PC/PCStaffReceptionCancelOrderMeal.ashx?orderMealId=11  取消
+		var record_url=url_header+"/Interface/PC/GetPCStaffReceptionOrderMeal.ashx?pcid="+personId;
+		var RResult=null;
+		
+		function getMenu () {
+			$.ajax({
+                    url:record_url,
+                    data:{'new':'ssss'},
+                    dataType:'json', 
+                    type:'post',
+					async:false,
+                    crossDomain: true, 
+                    success:function(result){
+					for (var i=0;i<result.recepLst.length;i++) {
+		
+								var LB_namxe;
+								switch (result.recepLst[i].CookbookEnum){
+								case 1:
+								 LB_name="早餐";
+								  break;
+								case 2:
+								  LB_name="午餐";
+								  break;
+								 case 3:
+								 LB_name="晚餐";
+								 break;
+								case 4:
+								LB_name="夜宵";
+								}
+						var datesplit= result.recepLst[i].ChooseDate.split('T');
+						//添加进去select
+						 $("#select1").empty();
+					
+						$("#select1").append("<option value='"+result.recepLst[i].OrderMealId+"'>"+datesplit[0]+"-"+LB_name+"</option>"); //为Select追加一个Option(下拉项) 
+				
+				
+							}
+                    },
+                    error:function(result){
+                        console.log(result);
+                    }
+                });
+		}
+		getMenu();
+		
+	function cancel_function () {
+		var cancelId= $("#select1").val();
+		var cancelUrl= url_header+"/Interface/PC/PCStaffReceptionCancelOrderMeal.ashx?orderMealId="+cancelId;
+			$.ajax({
+                    url:cancelUrl,
+                    data:{'new':'ssss'},
+                    dataType:'json', 
+                    type:'post',
+					async:false,
+                    crossDomain: true, 
+                    success:function(result){
+				if(result.Msg=="招待餐取消成功")
+				{
+					alert("取消成功！");
+				}
+	
+			},
+			        error:function(result){
+                     	alert("取消失败！");
+                    }
+});
+	}
+		
+
+	</script>
+</html>

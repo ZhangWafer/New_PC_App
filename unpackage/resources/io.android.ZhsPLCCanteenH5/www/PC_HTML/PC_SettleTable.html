@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <script src="../js/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/bootstrap-select.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" type="text/css" href="../css/boostrap/bootstrap.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/select/bootstrap-select.css"/>
+	</head>
+	<body>
+		<table class="table table-hover text-centers">
+			<caption class="text-center">订单</caption>
+			<tbody>
+				<tr class="text-center"> 
+					<td>选定日期</td>
+					<td id="SelectedDay"></td>
+				</tr>
+				<tr class="text-center"> 
+					<td>选定餐次</td>
+					<td id="SelectedMeal"></td>
+				</tr>
+				<tr class="text-center"> 
+					<td>选定饭堂</td>
+					<td id="SelectedCanteen"></td>
+				</tr>
+			</tbody>
+		</table>
+		<hr/>
+		<h4 class="text-center">选定菜品</h3>
+		<hr/>
+		<div id="MenuList">
+
+		</div>
+		<h4  class="text-center" id="price_sum"></h4>
+		<hr />
+		<button class="btn btn-primary" onclick="SubmitFunction()" style=" width: 100%; font-size: 24px;display: inline;height: 80px;z-index: 999;position: fixed;bottom: 0;right: 0;" class="button ">确认订单</button>
+	</body>
+	<script type="text/javascript">
+		var SubmitFoodArrayString=localStorage.getItem("SubmitFoodArrayString").split(',');
+		var SubmitFoodIndexArray=localStorage.getItem("SubmitFoodIndexArray").split(',');
+		var FoodNameArray=localStorage.getItem("FoodNameArray").split(',');
+		$("#SelectedDay").text(localStorage.getItem("SelectedDay"));
+		$("#SelectedCanteen").text(localStorage.getItem("SelectedCanteen"));
+		$("#price_sum").text("总价："+localStorage.getItem("price_sum")+"元");
+		var mealName;
+		switch (parseInt(localStorage.getItem("SelectedMeal"))){
+			case 1:
+				mealName="早餐";
+				break;
+			case 2:
+				mealName="午餐";
+				break;
+			case 3:
+				mealName="晚餐";
+				break;
+		}
+		$("#SelectedMeal").text(mealName);
+		
+		for (var i=0;i<SubmitFoodIndexArray.length;i++) {
+			var Index= parseInt(SubmitFoodIndexArray[i]);
+			var NameTemp=FoodNameArray[Index];
+			$("#MenuList").append("<h5 class='text-center' style='margin-top: 2px;'>"+NameTemp+"</h4><hr/>");
+		}
+		
+		
+		
+		function SubmitFunction () {
+			var submit_url=localStorage.getItem("url_header")+"/Interface/PC/PCStaffOrderMeal.ashx?pcid="+localStorage.getItem("personId")+"&cookbookSetInDateId="+localStorage.getItem("selectedOrderDetailID")+"&cookbookSetInDateDetailIds="+localStorage.getItem("SubmitFoodArrayString");
+						$.ajax({
+                    url:submit_url,
+                    data:{'new':'ssss'},
+                    dataType:'json', 
+                    type:'post',
+					async:false,
+                    crossDomain: true, 
+                    success:function(result){
+						if(result.Msg=="普通订餐成功")
+						{
+							alert("订餐成功！");
+							window.location.href="Pc_menuPage.html";
+						}
+					},
+					 error:function(result){
+                        console.log(result);
+                    }
+						});
+		}
+	</script>
+</html>

@@ -1,16 +1,16 @@
 {
     "@platforms" : [ "android", "iPhone", "iPad" ],
-    "id" : "io.android.ZhsPLCCanteenH5int", /*应用的标识，创建应用时自动生成，勿手动修改*/
-    "name" : "公安局点餐系统", /*应用名称，程序桌面图标名称*/
+    "id" : "io.android.ZhsPLCCanteenH5", /*应用的标识，创建应用时自动生成，勿手动修改*/
+    "name" : "公安局智慧餐厅", /*应用名称，程序桌面图标名称*/
     "version" : {
-        "name" : "3.6", /*应用版本名称*/
-        "code" : 8
+        "name" : "4.5", /*应用版本名称*/
+        "code" : 16
     },
-    "description" : "公安局饭堂软件", /*应用描述信息*/
+    "description" : "公安局智慧餐厅", /*应用描述信息*/
     "icons" : {
         "72" : "icon.png"
     },
-    "launch_path" : "device.html", /*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
+    "launch_path" : "index.html", /*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
     "developer" : {
         "name" : "", /*开发者名称*/
         "email" : "", /*开发者邮箱地址*/
@@ -605,7 +605,8 @@
                     "PC_HTML/PC_FamilySign.html",
                     "PC_HTML/PC_Family_Member.html",
                     "PC_HTML/Pc_menuPage.html",
-                    "PC_HTML/PC_Family_Order_Member.html"
+                    "PC_HTML/PC_Family_Order_Member.html",
+                    "PC_HTML/PC_Family_Qrcode.html"
                 ],
                 "priority" : 8
             },
@@ -633,7 +634,8 @@
                     "PC_HTML/Pc_FamilyPage.html",
                     "device.html",
                     "PC_HTML/Pc_Choose_FamilyOrPCPage.html",
-                    "PC_HTML/Pc_AcceptMeal.html"
+                    "PC_HTML/Pc_AcceptMeal.html",
+                    "PC_HTML/Pc_AcceptChoose.html"
                 ],
                 "priority" : 2
             },
@@ -674,7 +676,9 @@
                     "Worker/Worker_OrderPage.html",
                     "ChangePwd.html",
                     "MyQrcode.html",
-                    "device.html"
+                    "device.html",
+                    "Worker/Worker_MyQrcode.html",
+                    "Worker/Worker_ChangePwd.html"
                 ],
                 "priority" : 0
             },
@@ -850,37 +854,189 @@
                     "css/select/bootstrap-select.css",
                     "css/button.css"
                 ],
-                "refer" : [ "PC_HTML/Pc_menuPage.html" ],
+                "refer" : [ "PC_HTML/Pc_menuPage.html", "PC_HTML/Pc_AcceptChoose.html" ],
+                "priority" : 6
+            },
+            "Worker/Worker_MyQrcode.html" : {
+                "href" : "Worker/Worker_MyQrcode.html",
+                "resources" : [
+                    "img/login-bg.png",
+                    "js/jquery-3.3.1.js",
+                    "js/bootstrap.js",
+                    "css/boostrap/bootstrap.css",
+                    "css/fonts/glyphicons-halflings-regular.eot",
+                    "css/fonts/glyphicons-halflings-regular.woff2",
+                    "css/fonts/glyphicons-halflings-regular.woff",
+                    "css/fonts/glyphicons-halflings-regular.ttf",
+                    "css/fonts/glyphicons-halflings-regular.svg",
+                    "js/bootstrap-select.js",
+                    "css/select/bootstrap-select.css"
+                ],
+                "refer" : [ "Worker/Worker_menuPage.html" ],
+                "priority" : 2
+            },
+            "Worker/Worker_ChangePwd.html" : {
+                "href" : "Worker/Worker_ChangePwd.html",
+                "resources" : [
+                    "img/login-bg.png",
+                    "js/jquery-3.3.1.js",
+                    "js/bootstrap.js",
+                    "css/boostrap/bootstrap.css",
+                    "css/fonts/glyphicons-halflings-regular.eot",
+                    "css/fonts/glyphicons-halflings-regular.woff2",
+                    "css/fonts/glyphicons-halflings-regular.woff",
+                    "css/fonts/glyphicons-halflings-regular.ttf",
+                    "css/fonts/glyphicons-halflings-regular.svg",
+                    "js/bootstrap-select.js",
+                    "css/select/bootstrap-select.css",
+                    "js/common.js"
+                ],
+                "refer" : [ "Worker/Worker_menuPage.html" ],
+                "priority" : 3
+            },
+            "PC_HTML/PC_Family_Qrcode.html" : {
+                "href" : "PC_HTML/PC_Family_Qrcode.html",
+                "resources" : [
+                    "img/login-bg.png",
+                    "js/jquery-3.3.1.js",
+                    "js/bootstrap.js",
+                    "css/boostrap/bootstrap.css",
+                    "css/fonts/glyphicons-halflings-regular.eot",
+                    "css/fonts/glyphicons-halflings-regular.woff2",
+                    "css/fonts/glyphicons-halflings-regular.woff",
+                    "css/fonts/glyphicons-halflings-regular.ttf",
+                    "css/fonts/glyphicons-halflings-regular.svg",
+                    "js/bootstrap-select.js",
+                    "css/select/bootstrap-select.css"
+                ],
+                "refer" : [ "PC_HTML/Pc_FamilyPage.html" ],
+                "priority" : 5
+            },
+            "PC_HTML/Pc_AcceptCancel.html" : {
+                "href" : "PC_HTML/Pc_AcceptCancel.html",
+                "resources" : [
+                    "img/login-bg.png",
+                    "js/jquery-3.3.1.js",
+                    "js/bootstrap.js",
+                    "js/bootstrap-select.js",
+                    "css/boostrap/bootstrap.css",
+                    "css/fonts/glyphicons-halflings-regular.eot",
+                    "css/fonts/glyphicons-halflings-regular.woff2",
+                    "css/fonts/glyphicons-halflings-regular.woff",
+                    "css/fonts/glyphicons-halflings-regular.ttf",
+                    "css/fonts/glyphicons-halflings-regular.svg",
+                    "css/select/bootstrap-select.css",
+                    "css/button.css"
+                ],
+                "refer" : [ "PC_HTML/Pc_AcceptChoose.html" ],
+                "priority" : 6
+            },
+            "PC_HTML/Pc_AcceptQrcode.html" : {
+                "href" : "PC_HTML/Pc_AcceptQrcode.html",
+                "resources" : [
+                    "img/login-bg.png",
+                    "js/jquery-3.3.1.js",
+                    "js/bootstrap.js",
+                    "js/bootstrap-select.js",
+                    "css/boostrap/bootstrap.css",
+                    "css/fonts/glyphicons-halflings-regular.eot",
+                    "css/fonts/glyphicons-halflings-regular.woff2",
+                    "css/fonts/glyphicons-halflings-regular.woff",
+                    "css/fonts/glyphicons-halflings-regular.ttf",
+                    "css/fonts/glyphicons-halflings-regular.svg",
+                    "css/select/bootstrap-select.css",
+                    "css/button.css"
+                ],
+                "refer" : [ "PC_HTML/Pc_AcceptChoose.html" ],
+                "priority" : 7
+            },
+            "PC_HTML/Pc_AcceptMealRecord.html" : {
+                "href" : "PC_HTML/Pc_AcceptMealRecord.html",
+                "resources" : [
+                    "img/login-bg.png",
+                    "js/jquery-3.3.1.js",
+                    "js/bootstrap.js",
+                    "css/boostrap/bootstrap.css",
+                    "css/fonts/glyphicons-halflings-regular.eot",
+                    "css/fonts/glyphicons-halflings-regular.woff2",
+                    "css/fonts/glyphicons-halflings-regular.woff",
+                    "css/fonts/glyphicons-halflings-regular.ttf",
+                    "css/fonts/glyphicons-halflings-regular.svg",
+                    "js/bootstrap-select.js",
+                    "css/select/bootstrap-select.css"
+                ],
+                "refer" : [ "PC_HTML/Pc_AcceptChoose.html" ],
+                "priority" : 8
+            },
+            "PC_HTML/Pc_AcceptChoose.html" : {
+                "href" : "PC_HTML/Pc_AcceptChoose.html",
+                "resources" : [
+                    "img/login-bg.png",
+                    "js/jquery-3.3.1.js",
+                    "js/bootstrap.js",
+                    "css/boostrap/bootstrap.css",
+                    "css/fonts/glyphicons-halflings-regular.eot",
+                    "css/fonts/glyphicons-halflings-regular.woff2",
+                    "css/fonts/glyphicons-halflings-regular.woff",
+                    "css/fonts/glyphicons-halflings-regular.ttf",
+                    "css/fonts/glyphicons-halflings-regular.svg",
+                    "css/button.css"
+                ],
+                "refer" : [
+                    "PC_HTML/Pc_AcceptCancel.html",
+                    "PC_HTML/Pc_AcceptQrcode.html",
+                    "PC_HTML/Pc_AcceptMealRecord.html",
+                    "PC_HTML/Pc_AcceptMeal.html",
+                    "PC_HTML/Pc_menuPage.html"
+                ],
                 "priority" : 6
             }
         },
         "idle" : {
             "resources" : [
                 "css/boostrap/bootstrap-theme.min.css",
-                "PC_HTML/PC_Family_Qrcode.html",
+                "css/images/icon-refresh.png",
                 "css/boostrap/bootstrap.min.css.map",
+                "js/zepto.js",
+                "css/images/icon-list.png",
                 "js/npm.js",
+                "css/images/icon-home.png",
                 "PersonImformation.html",
-                "Worker/Worker_MyQrcode.html",
+                "js/bingotouch.js",
                 "img/button2.png",
+                "modules/api-link/statics/link_login.js",
+                "js/iscroll.js",
+                "js/linkplugins.js",
                 "js/bootstrap.min.js",
+                "js/app/app.js",
+                "css/images/pull-icon@2x.png",
                 "css/boostrap/bootstrap.css.map",
                 "img/button1.png",
+                "js/jquery.js",
                 "js/app.js",
+                "css/images/icon-back.png",
+                "css/images/icon-setting.png",
                 "js/bootstrap-select.js.map",
-                "js/bootstrap-select.min.js",
                 "css/style.css",
+                "css/bingotouch.css",
+                "js/bootstrap-select.min.js",
                 "PC_HTML/Pc_AccountMoney.html",
                 "js/mui.enterfocus.js",
+                "js/cordova.js",
                 "css/select/bootstrap-select.min.css",
                 "PC_HTML/Pc_menuPage_2.html",
                 "Worker/Worker_Record.html",
                 "css/boostrap/bootstrap-theme.css.map",
+                "modules/api-link/link_login.html",
+                "css/app.css",
                 "js/mui.locker.js",
-                "css/select/bootstrap-select.css.map",
-                "css/boostrap/bootstrap.min.css",
                 "css/boostrap/bootstrap-theme.min.css.map",
+                "css/boostrap/bootstrap.min.css",
+                "css/select/bootstrap-select.css.map",
+                "css/images/icon-del.png",
                 "css/boostrap/bootstrap-theme.css",
+                "css/images/icon-search.png",
+                "js/require.js",
                 "js/hm.js"
             ]
         }

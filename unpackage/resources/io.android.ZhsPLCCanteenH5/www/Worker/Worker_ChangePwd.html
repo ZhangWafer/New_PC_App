@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+		<meta name="HandheldFriendly" content="true"/>
+		<meta name="MobileOptimized" content="320"/>
+		<title>Hello H5+</title>
+		<script src="../js/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="../css/boostrap/bootstrap.css"/>
+		<script src="../js/bootstrap-select.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="../css/select/bootstrap-select.css"/>
+		<script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body background="../img/login-bg.png">
+		<a href="Worker_menuPage.html" style="color: white;">
+			<span class="glyphicon glyphicon-chevron-left" style="font-size: 15px;"></span><h4 style="display: inline;">返回</h4>
+		</a>
+		<h1 class="text-center"style="margin-top: 80px; color: white;" > 修改密码</h1>
+		<div class="form-group text-center" style="margin-top: 40px;">
+            <input type="text" placeholder="修改密码" class="form-control" id="pwd1" style="display:inline;width:220px;margin-top: 20px;"autocomplete="off" />
+        </div>
+        <div class="form-group text-center" >
+            <input type="text" placeholder="确认密码" class="form-control" id="pwd2" style="display:inline;width:220px;margin-top: 20px;"autocomplete="off" />
+        </div>
+		<div class="text-center">
+        <input type="button" class="btn btn-primary " value="确认" style="width: 200px;font-size: 20px;" onclick="ConfirmRight()"></input>
+        </div>
+        <script type="text/javascript">
+        	
+        	function ConfirmRight () {
+        		var pwd1= $("#pwd1").val();
+        		var pwd2= $("#pwd2").val();
+        		var accountId=localStorage.getItem("personId");
+        		var PC_Worker_Bool=localStorage.getItem("PcWorkerBool");
+        		var pwd_url;
+        		if(PC_Worker_Bool==1)
+        		{
+        			pwd_url=localStorage.getItem("url_header")+"/Interface/PC/PcStaffPasswordChanage.ashx?pcid="+accountId+"&password="+pwd1;
+        		}
+        		else
+        		{
+        			pwd_url=localStorage.getItem("url_header")+"/Interface/worker/WorkerPasswordChanage.ashx?workerId="+accountId+"&password="+pwd1;
+        		}
+        		if(pwd1!=pwd2)
+        		{
+        			alert("两次输入的密码不相同");
+        			return;
+        		}
+        		else
+        		{
+        			$.ajax({
+                    url:pwd_url,
+                    data:{'nnnn':'ssss'},
+                    dataType:'json',  //【这里要小心啊，不要用jsonp，一定是json】
+                    type:'post',
+					async:false,
+                    crossDomain: true,  //【这个很重要，一定要加】
+                    success:function(result){
+                        console.log(result);
+						if (result.Msg=="修改密码成功") {
+						   alert("修改成功！");
+
+						   	 window.location.href="Worker_menuPage.html";
+						   
+						 
+						} else{
+							alert(result.Msg);
+						}
+                    },
+                    error:function(result){
+                        console.log(result);
+                    }
+                });
+        		}
+        	}
+        </script>
+	</body>
+	
+</html>

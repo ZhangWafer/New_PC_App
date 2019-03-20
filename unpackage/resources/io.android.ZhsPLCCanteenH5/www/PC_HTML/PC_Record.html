@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	    <meta charset="utf-8">
+	    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	    <title></title>
+	    <script src="../js/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="../css/boostrap/bootstrap.css"/>
+		<script src="../js/bootstrap-select.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="../css/select/bootstrap-select.css"/>
+	</head>
+	<body background="../img/login-bg.png">
+	<div  style="margin-top:10px ;">
+		<a href="Pc_menuPage.html" style="color: white;">
+		<span class="glyphicon glyphicon-chevron-left" style="font-size: 15px;"></span><h4 style="display: inline;">返回</h4>
+		</a>
+    </div>
+	<h1 class="text-center"style="margin-bottom: 50px; color: white;" > 消费记录</h1>	
+	<table class="table " style="color: white;">
+	<thead>
+		<tr bgcolor="#5BC0DE">
+			<th>餐厅</th>
+			<th>餐次</th>
+			<th>价格</th>
+			<th>消费时间</th>
+		</tr>
+	</thead>
+	<tbody id="tbody1">
+
+	</tbody>
+</table>
+	</body>
+	<script type="text/javascript">
+		var PcBool=localStorage.getItem("PcWorkerBool");
+		var personId=localStorage.getItem("personId");
+		var url_header=localStorage.getItem("url_header");
+		var record_url=url_header+"/Interface/PC/GetPCStaffAlreadyOrderMeal.ashx?pcid="+personId;
+	
+		//发送请求post，拿取record数据
+		$.ajax({
+                    url:record_url,
+                    data:{'name':'ssss'},
+                    dataType:'json',  //【这里要小心啊，不要用jsonp，一定是json】
+                    type:'post',
+					async:false,
+                    crossDomain: true,  //【这个很重要，一定要加】
+                    success:function(result){
+							var cookBool;
+							for (var i=0;i<result.pccsidList.length;i++) {
+								//区别早午晚餐
+								var cookenum=result.pccsidList[i].CookbookEnum;
+								switch (cookenum){
+									case 1:
+										cookBool="早餐";
+										break;
+									case 2:
+										cookBool="午餐";
+										break;
+									case 3:
+										cookBool="晚餐";
+										break;
+									case 4:
+										cookBool="夜宵";
+										break;
+								}
+								//区别警员和职员
+								var boolPC=localStorage.getItem("PcWorkerBool");
+								var realPrice;
+								switch (boolPC){
+									case "1":
+										realPrice=result.pccsidList[i].PcPrice;
+										break;
+									case "2":
+										realPrice=result.pccsidList[i].WorkerPrice;
+										break;
+								}
+								var wholeString = result.pccsidList[i].CafeteriaName;
+								var fourString= wholeString.substring(0,5);
+								var lastString= wholeString.substring(5,wholeString.length);
+								var payday=result.pccsidList[i].ChooseDate;
+								var paydayDate=payday.split("T");
+								$("#tbody1").append("<tr style='font-size: 12px;'><td style='width:120px ;'>"+wholeString+"</td><td>"+cookBool+"</td><td style='width: 60px;'>"+result.pccsidList[i].Price+"</td><td style='width: 110px;'>"+paydayDate[0]+"</td></tr>");
+							}
+							
+						}					
+						});
+			
+		
+		var getFamilyUrl= url_header+"/Interface/Familay/GetPcFamily.ashx?pcid="+personId;
+		$.ajax({
+                    url:getFamilyUrl,
+                    data:{'name':'ssss'},
+                    dataType:'json',  //【这里要小心啊，不要用jsonp，一定是json】
+                    type:'post',
+					async:false,
+                    crossDomain: true,  //【这个很重要，一定要加】
+                    success:function(result){
+						//添加每个人的记录
+						for(var i=0;i<result.pcFas.length;i++)
+						{
+							var everyoneUrl=url_header+"/Interface/Familay/GetPcFamilyAlreadyOrderMeal.ashx?familyId="+result.pcFas[i].Id;
+							$("#tbody1").append("<tr ><th>"+result.pcFas[i].Name +"记录</th><th></th><th></th><th></th></tr>");
+						   var result_temp=	addRecordFunction(everyoneUrl);
+						}
+						
+						
+						
+											}
+		});
+		
+		function addRecordFunction ( url) {
+			var result_temp;
+							$.ajax({
+		                    url:url,
+		                    data:{'nnn':'ssss'},
+		                    dataType:'json',  //【这里要小心啊，不要用jsonp，一定是json】
+		                    type:'post',
+							async:false,
+		                    crossDomain: true,  //【这个很重要，一定要加】
+		                    success:function(result){
+			for (var i=0;i<result.pccsidList.length;i++) {
+							
+								//区别早午晚餐
+								var cookenum=result.pccsidList[i].CookbookEnum;
+								switch (cookenum){
+									case 1:
+										cookBool="早餐";
+										break;
+									case 2:
+										cookBool="午餐";
+										break;
+									case 3:
+										cookBool="晚餐";
+										break;
+									case 4:
+										cookBool="夜宵";
+										break;
+								}
+								//区别警员和职员
+								var boolPC=localStorage.getItem("PcWorkerBool");
+
+
+								var wholeString = result.pccsidList[i].CafeteriaName;
+								var fourString= wholeString.substring(0,5);
+								var lastString= wholeString.substring(5,wholeString.length);
+								var payday=result.pccsidList[i].ChooseDate;
+								var paydayDate=payday.split("T");
+								$("#tbody1").append("<tr style='font-size: 12px;'><td style='width:120px ;'>"+wholeString+"</td><td>"+cookBool+"</td><td style='width: 60px;'>"+result.pccsidList[i].Price+"</td><td style='width: 110px;'>"+paydayDate[0]+"</td></tr>");
+							}
+						}});
+						return result_temp;
+		}
+		
+	</script>
+</html>

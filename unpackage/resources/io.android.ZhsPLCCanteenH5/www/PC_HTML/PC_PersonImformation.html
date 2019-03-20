@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>个人中心</title>
+	<link rel="stylesheet" type="text/css" href="../css/person.css">
+	<link href="favicon.ico" type="../image/x-icon" rel="icon">
+	<link href="iTunesArtwork@2x.png" sizes="114x114" rel="apple-touch-icon-precomposed">
+	<link rel="stylesheet" type="text/css" href="../css/boostrap/bootstrap.css"/>
+	<script src="../js/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body >
+	<div class="aui-container">
+		<div class="aui-page">
+			<div class="aui-page-my" style="background-image: url(../img/login-bg.png);">
+				<div class="aui-my-info" style="height: 200px;">
+							<div style="margin-top: 10px;margin-left: 15px;" >
+								<a href="Pc_menuPage.html" style="color: white;">
+								<span class="glyphicon glyphicon-chevron-left" style="font-size: 15px;"></span><h4 style="display: inline;" onclick="Back()">返回</h4>
+								</a>
+					        </div>
+					
+					<div class="aui-my-info-back">
+
+					</div>
+					<a href="javascript:;" class="">
+						<img  class="aui-my-avatar">
+					</a>
+				</div>
+				<div class="aui-l-content">
+					<div class="aui-menu-list aui-menu-list-clear" >
+						<ul>
+							<li class="b-line" style="height: 80px;">
+									<h3 style="display: inline;">个人信息</h3>
+									<div style="  display: flex;align-items: center;width: 60px;"><h3 id="personName" >15元</h3></div>
+							</li>
+							<li class="b-line" style="height: 80px;">
+									<h3 style="display: inline;">余额</h3>
+									<div style="  display: flex;align-items: center;width: 60px;"><h3 id="money" >15元</h3></div>
+								
+							</li>
+
+							<!--<li class="b-line" style="height: 80px;">
+								<a href="PC_Record.html">
+									<h3>个人消费记录</h3>
+									<div class="aui-time"><i class="aui-jump"></i></div>
+								</a>
+							</li >-->
+							<li class="b-line" style="height: 80px;background-color: lightgrey;" >
+								
+									<h3>充值</h3>
+									<div class="aui-time"><i class="aui-jump"></i></div>
+								
+							</li>
+							<li class="b-line" style="height: 80px;background-color: lightgrey;">
+									<h3>退款申请</h3>
+									<div class="aui-time"><i class="aui-jump"></i></div>
+							</li>
+							<li class="b-line" style="height: 80px;">
+								<a href="#">
+									<h3>意见反馈</h3>
+									<div class="aui-time"><i class="aui-jump"></i></div>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+	var name=localStorage.getItem("Name");
+	$("#personName").html(name);
+	var money=localStorage.getItem("money")+"元";
+	$("#money").html(money);
+	
+	function Back () {
+		var webview = plus.webview.currentWebview();
+	}
+</script>
+</html>

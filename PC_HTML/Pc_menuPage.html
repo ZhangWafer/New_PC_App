@@ -8,14 +8,28 @@
 	<script src="../js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
 	<link rel="stylesheet" type="text/css" href="../css/boostrap/bootstrap.css"/>
 	<link rel="stylesheet" type="text/css" href="../css/button.css"/>
+	
+	<script src="../js/bingotouch.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/cordova.js" type="text/javascript" charset="utf-8"></script>
 </head>
 	<body background="../img/login-bg.png">   
-		<div  style="margin-top:10px ;">
+<!-- 		<div  style="margin-top:10px ;">
 			<a href="../device.html" style="color: white;">
 			<span class="glyphicon glyphicon-chevron-left" style="font-size: 15px;"></span><h4 style="display: inline;">退出登录</h4>
 			</a>
-        </div>
-	<form class="text-center" style="margin-top: 60px;">
+        </div> -->
+	<div class="text-center" style="margin-top: 60px;">	
+    	<div style="display: inline-block;padding-right: 20px;">
+    	<img id="img1"  style="border-radius: 5px;height: 127px;width: 96px;"/>
+    	</div>
+    	<div style="display: inline-block;padding-top: 10px;">
+    	<p style="color: white;font-size: 25px;" id="nameBox"></p>
+    	<p style="color: white;font-size: 25px;padding-right: 40px;" id="moneyBox"></p>
+    	</div>
+    	
+
+	</div>
+	<form class="text-center" style="margin-top: 10px;">
 		<!--style="margin-left:10px;margin-top:80px;"-->
     	
     	<!--<h1 id="h2" class="text-center"style="margin-bottom: 40px; color: white;" ></h1>-->
@@ -25,29 +39,31 @@
         <div class="text-center" style="margin-top:15px ;">
         <input type="button" class="btn btn-primary button-pill " value="取餐" style="width:200px;font-size: 25px;"  onclick="JumpBookPage()"></input>
         </div> -->
-
         <div class="text-center" style="margin-top:15px ;">
         <input type="button" class="btn btn-primary  button-pill" value="个人账户" style="width: 200px;font-size: 25px;" onclick="jumpImformation()"></input>
         </div>
         <div class="text-center" style="margin-top:15px ;">
         <input type="button" class="btn btn-primary button-pill "  value="我的二维码" style="width: 200px;font-size: 25px;"  onclick="jumpQrcode()"></input>
         </div>
-        <div class="text-center" style="margin-top:15px ;">
+       <div class="text-center" style="margin-top:15px ;">
         <input type="button" class="btn btn-primary  button-pill" value="家属" style="width: 200px;font-size: 25px;"  onclick="MemberPage()"></input>
         </div>
         <div class="text-center" style="margin-top:15px ;">
         <input type="button" class="btn btn-primary  button-pill"  value="修改密码" style="width: 200px;font-size: 25px;"  onclick="jumpChangePwd()"></input>
         </div>
-        <div class="text-center" style="margin-top:15px ;">
+     	<div class="text-center" style="margin-top:15px ;">
         <input type="button" class="btn btn-primary  button-pill"  value="工作餐" style="width: 200px;font-size: 25px;"  onclick="jumpAcceptMeal()"></input>
         </div>
-<!--        <div class="text-center" style="margin-top:15px ;">
-        <input type="button" class="btn btn-primary  button-pill"  value="我的评价" style="width: 200px;font-size: 25px;"  onclick=""></input>
-        </div> -->
-
+        <div class="text-center" style="margin-top:15px ;">
+        <input type="button" class="btn btn-primary  button-pill"  value="退出" style="width: 200px;font-size: 25px;"  onclick="quit()"></input>
+        </div>
     </form>
 	</body>
 	<script type="text/javascript">
+		function quit () {
+			app.exit();
+		}
+		
 		//取index传的值,Name,id
 		var url=decodeURI(location.search);
 		var Request = new Object();
@@ -62,6 +78,13 @@
 		}
 		var personId=localStorage.getItem("personId");
 		var PcBool=localStorage.getItem("PcWorkerBool");
+		var photoUrl=localStorage.getItem("photoUrl");
+		var money=localStorage.getItem("money");
+		var Name=localStorage.getItem("Name");
+		//将照片src添加上去
+		 $("#img1").attr("src",photoUrl);
+		 $("#nameBox").html("姓名："+Name);
+		 $("#moneyBox").html("余额："+money);
 		//接待餐
 		function jumpAcceptMeal () {
 			window.location.href="Pc_AcceptChoose.html";

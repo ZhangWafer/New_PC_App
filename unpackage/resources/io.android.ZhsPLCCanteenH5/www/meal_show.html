@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <script src="js/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/bootstrap-select.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" type="text/css" href="css/boostrap/bootstrap.css"/>
+	<link rel="stylesheet" type="text/css" href="css/select/bootstrap-select.css"/>
+		
+</head>
+	<body background="img/login-bg.png">
+		<div  style="margin-top:10px ;">
+			<a href="Pc_menuPage.html" style="color: white;">
+			<span class="glyphicon glyphicon-chevron-left" style="font-size: 15px;"></span><h4 style="display: inline;">返回</h4>
+			</a>
+        </div>
+    	<h1 id="h1" class="text-center"style="margin-bottom: 50px; color: white;" >选择订餐类别 </h1>
+		<div class="text-center">
+		<div class="btn-group">
+	    	<select id="select1" class="selectpicker" >
+			</select>
+		</div>
+		</div>
+		<div class="text-center" style="margin-top:20px ;">
+        <input type="button" class="btn btn-primary " onclick="getInformation()" value="用餐详细" style="width: 220px;font-size: 15px;"></input>
+        </div>
+        <div id="block" class="text-center" style="margin-top:20px ;">
+        	
+        </div>
+		
+	</body>
+	<script type="text/javascript">
+		var url_header=localStorage.getItem("url_header");
+		//读取出日期还有对应号
+		var url=location.search;
+		var Request = new Object();
+		if(url.indexOf("?")!=-1)
+		{
+		　　var str = url.substr(1)　//去掉?号
+		　　strs = str.split("&");
+		　　for(var i=0;i<strs.length;i++)
+		　　{
+		 　　　 Request[strs[i ].split("=")[0]]=unescape(strs[ i].split("=")[1]);
+		　　}
+		}
+		//拿取str
+		var str_date_num = Request["val"].split("*");
+		var Pcid = str_date_num[str_date_num.length-1];
+		str_date_num.pop(-1);
+		var dateSelected = str_date_num[str_date_num.length-1];
+		str_date_num.pop(-1);
+		
+		//ajax拿取Msg数据
+		var priceArray=[];//警察价格
+		var workerPriceArray=[];//职工价格
+		var catArray=[];
+		var idValueArray=[];
+		//拿取cookie，看是警员还是职工
+		var PcBool=localStorage.getItem("PcWorkerBool");
+		if(PcBool==1)
+		{
+			var menu_url=url_header+"/Interface/PC/GetPcCookbookSetInDate.ashx?pcid="+Pcid;
+		}
+		else
+		{
+			var menu_url=url_header+"/Interface/Worker/GetWorkerCookbookSetInDate.ashx?WorkerId="+Pcid;
+		}
+		
+		function getMenu () {
+			$.ajax({
+                    url:menu_url,
+                    data:{'new':'ssss'},
+                    dataType:'json', 
+                    type:'post',
+					async:false,
+                    crossDomain: true, 
+                    success:function(result){
+							$("#select1").empty();
+							str_date_num.forEach(function  (val,index) {
+							var numberdd= str_date_num[index];//Msg的id
+							var LB_num=result.pccsidList[numberdd].CookbookEnum;//类别id
+							var LB_name="";
+							switch(LB_num)
+								{
+								case 1:
+								 LB_name="早餐";
+								  break;
+								case 2:
+								  LB_name="午餐";
+								  break;
+								 case 3:
+								 LB_name="晚餐";
+								 break;
+								case 4:
+								LB_name="夜宵";
+								}
+							idValueArray[index]= result.pccsidList[numberdd].Id;
+							$("#select1").append("<option value='"+result.pccsidList[numberdd].Id+"'>"+LB_name+"-"+result.pccsidList[numberdd].CookbookStandardName+"</option>");
+						})
+						
+						//餐厅名字和价格存到数组
+						for(var i=0;i<result.pccsidList.length;i++)
+						{
+							catArray[i]=result.pccsidList[i].CafeteriaName;
+							priceArray[i]=result.pccsidList[i].PcPrice;
+							workerPriceArray[i]=result.pccsidList[i].WorkerPrice;
+						}
+                    },
+                    error:function(result){
+                        console.log(result);
+                    }
+                });
+		}
+		getMenu();
+		
+		//显示详细信息
+		var decideNum;
+		function getInformation () {
+			if	(PcBool==1)
+			{
+				var Detial_url=url_header+"/Interface/PC/GetPcCookbookSetInDateDetail.ashx?csdId="+$("#select1").val();
+			}
+			else
+			{
+				var Detial_url=url_header+"/Interface/Worker/GetWorkerCookbookSetInDateDetail.ashx?csdId="+$("#select1").val();
+			}
+			$.ajax({
+                    url: Detial_url,
+                    data:{'new':'ssss'},
+                    dataType:'json', 
+                    type:'post',
+					async:false,
+                    crossDomain: true, 
+                    success:function(result){
+					decideNum=idValueArray.indexVf($("#select1").val());
+					var pcprice=priceArray[decideNum];
+					var catname=catArray[decideNum];
+					//将菜单添加到屏幕上显示
+					$("#block").empty();
+					//区分警察和职工的不同价格
+					if(PcBool==1)
+					{
+						$("#block").append("<h5  class='text-center' style='margin-bottom: 15px; color: white;' >价格："+pcprice+"元 </h5>");
+					}
+					else
+					{
+						$("#block").append("<h5  class='text-center' style='margin-bottom: 15px; color: white;' >价格："+workerPriceArray[decideNum]+"元 </h5>");
+					}
+					$("#block").append("<h5  class='text-center' style='margin-bottom: 15px; color: white;' >地点："+catname+"</h5>");
+					$("#block").append("<h5 class='text-center' style='margin-bottom: 15px; color: white;' >菜品如下 </h5>");
+					for(var i=0;i<result.detaliList.length;i++)
+					{
+						var food=result.detaliList[i].CookbookName;
+						$("#block").append("<h5  class='text-center' style='margin-bottom: 1px; color: white;' > "+food+ "</h5>");
+					}
+				},
+                    error:function(result){
+                        console.log(result);
+                    }
+				});
+		}
+		//发送订单请求并跳转到成功页面
+		var decideNum2=$("#select1").val();
+		function putOrder () {
+			if	(PcBool==1)
+			{
+				var success_url=url_header+"/Interface/PC/PCStaffOrderMeal.ashx?pcid="+Pcid+"&cookbookSetInDateId="+decideNum2;
+			}
+			else
+			{
+				var success_url=url_header+"/Interface/Worker/WorkerStaffOrderMeal.ashx?workerId="+Pcid+"&cookbookSetInDateId="+decideNum2;
+			}
+			
+			$.ajax({
+                    url: success_url,
+                    data:{'new':'ssss'},
+                    dataType:'json', 
+                    type:'post',
+					async:false,
+                    crossDomain: true, 
+                    success:function(result){
+					if(result.Msg=="普通订餐成功"||result.Msg=="成功")
+					{
+						window.location.href="success.html";
+					}
+					else{
+							alert("订餐失败");
+					}
+
+				}});
+		}
+		
+		    //查找制定元素在数组中的索引值
+	        Array.prototype.indexVf=function(arr){
+	            for(var i=0;i<this.length;i++){
+	                if(this[i]==arr){
+	                    return i;
+	                }
+	            }
+	        }
+    
+	</script>
+</html>

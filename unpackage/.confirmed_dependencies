@@ -382,7 +382,8 @@
       "PC_HTML/PC_FamilySign.html",
       "PC_HTML/PC_Family_Member.html",
       "PC_HTML/Pc_menuPage.html",
-      "PC_HTML/PC_Family_Order_Member.html"
+      "PC_HTML/PC_Family_Order_Member.html",
+      "PC_HTML/PC_Family_Qrcode.html"
     ],
     "priority": 0
   },
@@ -405,7 +406,8 @@
       "PC_HTML/Pc_FamilyPage.html",
       "device.html",
       "PC_HTML/Pc_Choose_FamilyOrPCPage.html",
-      "PC_HTML/Pc_AcceptMeal.html"
+      "PC_HTML/Pc_AcceptMeal.html",
+      "PC_HTML/Pc_AcceptChoose.html"
     ],
     "priority": 0
   },
@@ -439,7 +441,9 @@
       "Worker/Worker_OrderPage.html",
       "ChangePwd.html",
       "MyQrcode.html",
-      "device.html"
+      "device.html",
+      "Worker/Worker_MyQrcode.html",
+      "Worker/Worker_ChangePwd.html"
     ],
     "priority": 0
   },
@@ -587,6 +591,118 @@
       "css/button.css"
     ],
     "refer": [
+      "PC_HTML/Pc_menuPage.html",
+      "PC_HTML/Pc_AcceptChoose.html"
+    ],
+    "priority": 0
+  },
+  "Worker/Worker_MyQrcode.html": {
+    "href": "Worker/Worker_MyQrcode.html",
+    "resources": [
+      "img/login-bg.png",
+      "js/jquery-3.3.1.js",
+      "js/bootstrap.js",
+      "css/boostrap/bootstrap.css",
+      "js/bootstrap-select.js",
+      "css/select/bootstrap-select.css"
+    ],
+    "refer": [
+      "Worker/Worker_menuPage.html"
+    ],
+    "priority": 0
+  },
+  "Worker/Worker_ChangePwd.html": {
+    "href": "Worker/Worker_ChangePwd.html",
+    "resources": [
+      "img/login-bg.png",
+      "js/jquery-3.3.1.js",
+      "js/bootstrap.js",
+      "css/boostrap/bootstrap.css",
+      "js/bootstrap-select.js",
+      "css/select/bootstrap-select.css",
+      "js/common.js"
+    ],
+    "refer": [
+      "Worker/Worker_menuPage.html"
+    ],
+    "priority": 0
+  },
+  "PC_HTML/PC_Family_Qrcode.html": {
+    "href": "PC_HTML/PC_Family_Qrcode.html",
+    "resources": [
+      "img/login-bg.png",
+      "js/jquery-3.3.1.js",
+      "js/bootstrap.js",
+      "css/boostrap/bootstrap.css",
+      "js/bootstrap-select.js",
+      "css/select/bootstrap-select.css"
+    ],
+    "refer": [
+      "PC_HTML/Pc_FamilyPage.html"
+    ],
+    "priority": 0
+  },
+  "PC_HTML/Pc_AcceptCancel.html": {
+    "href": "PC_HTML/Pc_AcceptCancel.html",
+    "resources": [
+      "img/login-bg.png",
+      "js/jquery-3.3.1.js",
+      "js/bootstrap.js",
+      "js/bootstrap-select.js",
+      "css/boostrap/bootstrap.css",
+      "css/select/bootstrap-select.css",
+      "css/button.css"
+    ],
+    "refer": [
+      "PC_HTML/Pc_AcceptChoose.html"
+    ],
+    "priority": 0
+  },
+  "PC_HTML/Pc_AcceptQrcode.html": {
+    "href": "PC_HTML/Pc_AcceptQrcode.html",
+    "resources": [
+      "img/login-bg.png",
+      "js/jquery-3.3.1.js",
+      "js/bootstrap.js",
+      "js/bootstrap-select.js",
+      "css/boostrap/bootstrap.css",
+      "css/select/bootstrap-select.css",
+      "css/button.css"
+    ],
+    "refer": [
+      "PC_HTML/Pc_AcceptChoose.html"
+    ],
+    "priority": 0
+  },
+  "PC_HTML/Pc_AcceptMealRecord.html": {
+    "href": "PC_HTML/Pc_AcceptMealRecord.html",
+    "resources": [
+      "img/login-bg.png",
+      "js/jquery-3.3.1.js",
+      "js/bootstrap.js",
+      "css/boostrap/bootstrap.css",
+      "js/bootstrap-select.js",
+      "css/select/bootstrap-select.css"
+    ],
+    "refer": [
+      "PC_HTML/Pc_AcceptChoose.html"
+    ],
+    "priority": 0
+  },
+  "PC_HTML/Pc_AcceptChoose.html": {
+    "href": "PC_HTML/Pc_AcceptChoose.html",
+    "resources": [
+      "img/login-bg.png",
+      "js/jquery-3.3.1.js",
+      "js/bootstrap.js",
+      "css/boostrap/bootstrap.css",
+      "css/button.css"
+    ],
+    "refer": [
+      "PC_HTML/Pc_AcceptCancel.html",
+      "PC_HTML/Pc_AcceptQrcode.html",
+      "PC_HTML/Pc_AcceptMealRecord.html",
+      "PC_HTML/Pc_AcceptMeal.html",
       "PC_HTML/Pc_menuPage.html"
     ],
     "priority": 0

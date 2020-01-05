@@ -52,7 +52,7 @@
     	<div class="row" style="margin-top: 30px;padding: 0 45px 0 45px;">
     		<div class="col-xs-4" >
     			<div style="text-align: center;" >
-					<img src="../img/_caidan.svg" class="imgStyle"/>
+    				<img src="../img/_caidan.svg" class="imgStyle" onclick="queryMenu()"/>
 					<h2>菜品</h2	>
 				</div>	
     		</div>
@@ -140,6 +140,11 @@
 		 $("#img1").attr("src",photoUrl);
 		 $("#nameBox").html("姓名："+Name);
 		 $("#moneyBox").html("余额："+money);
+		 
+		//菜品
+		function queryMenu () {
+			window.location.href="second/queryMenu.html";
+		}
 		//接待餐
 		function jumpAcceptMeal () {
 			window.location.href="Pc_AcceptChoose.html";

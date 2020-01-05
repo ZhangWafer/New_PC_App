@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+	<header class="mui-bar mui-bar-nav">
+	    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+	    <h1 class="mui-title">人气榜</h1>
+	</header>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<script src="../../js/echarts.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/mui.min.js"></script>
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+	</head>
+
+	<body background="../../img/login-bg.png"> 
+		<h2 style="margin-top: 70px;color: white;text-align: center;">得票率最高的5道菜品</h2>
+		<div id="" style="text-align: center;">
+			<div style="margin-top: 30px;width: 370px;height: 540px;border-radius: 20px;box-shadow:10px 10px 20px black ;background: white;display: inline-block;" >
+			<div id="chart" style="width: 340px;height: 550px;margin: 0px 40px 20px 30px ;font-size: 4px!important;"></div>
+		</div>
+		</div>
+<script type="text/javascript">
+	// 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById("chart"));
+    var img1= "../../img/_caidan.svg";
+    // 指定图表的配置项和数据
+    var option = {
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+            type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+        }
+    },
+    legend: {
+        data: ["香葱炒蛋", "椰子鸡", "卤鸡腿", "小炒牛肉", "菜心", "水煮牛蛙"]
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    xAxis: {
+        type: 'value',
+        axisLabel: {
+                fontSize:'15',
+                fontFamily:'微软雅黑',
+                color:'black'
+            },
+    },
+    yAxis: {
+        type: 'category',
+       data: ["香葱炒蛋", "椰子鸡", "卤鸡腿", "小炒牛肉", "菜心", "水煮牛蛙"],
+       axisLabel: {
+                fontSize:'15',
+                fontFamily:'微软雅黑',
+                color:'black',
+                rich: {
+                    Bar: {
+                        height: 20,
+                        align: 'center',
+                        backgroundColor: {
+                            image: ""
+                        }
+                    }
+                   }
+            },
+            
+    },
+    series: [
+        {
+            name: '直接访问',
+            type: 'bar',
+            stack: '总量',
+            label: {
+                show: true,
+                position: 'insideRight'
+            },
+            data: [320,200,100,280,220,134],
+            itemStyle: {
+            normal: {
+                color: function(params) {
+                	//注意，如果颜色太少的话，后面颜色不会自动循环，最好多定义几个颜色
+                    var colorList = ['#66CCCC','#CCFF66', '#FF99CC', '#FF6666', '#FFFF66','#99CC66', '#ca8622'];
+                    return colorList[params.dataIndex]
+                }
+            }
+        }
+        }
+    ]
+};
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+
+		</script>
+	</body>
+
+</html>

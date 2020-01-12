@@ -54,13 +54,13 @@
 		<div class="row center_item" style="margin-bottom: 25px;">
 			<div class="btn-group center_item">
 		    	<select id="select2" class="selectpicker center_item" >
-				    <option value="1">选择饭堂</option>
+				   
 				</select>
 			</div>
 		</div>
 		<div class="row center_item" >
 			<div class="btn-group center_item">
-		    	<select id="select2" class="selectpicker center_item" >
+		    	<select id="select3" class="selectpicker center_item" >
 				    <option value="1">早餐</option>
 				    <option value="2">午餐</option>
 				    <option value="3">晚餐</option>
@@ -68,7 +68,32 @@
 				</select>
 			</div>
 		</div>
+		<div class="row">
+			<button onclick="aaa()" type="button" class="btn btn-info mui-btn-block" style="display:block;margin: 0 auto;width: 200px;border-radius: 10px;margin-top: 20px;">选择</button>
+		</div>
+		<script type="text/javascript">
+			var post_url_all_header=localStorage.getItem("url_header");
+			var targetUrl=post_url_all_header+"/Interface/Common/GetCafeterias.ashx";
+			$.ajax({
+                    url:targetUrl,
+                    data:{},
+                    dataType:'json',  //【这里要小心啊，不要用jsonp，一定是json】
+                    type:'get',
+					async:false,
+                    crossDomain: true,  //【这个很重要，一定要加】
+                    success:function(result){
+						console.log(result)
+									
+						result.list.forEach(function (currentValue, currentIndex, currentArray) {
+						          	console.log(currentValue.Name);
+									$("#select2").append("<option value="+currentValue.Id+">"+currentValue.Name+"</option>");
+						     });
+		}});
 		
+		function aaa(){
+			console.log($("#select2").val())
+		}
+		</script>
 	</body>
 
 </html>

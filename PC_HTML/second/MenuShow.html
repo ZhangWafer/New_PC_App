@@ -51,7 +51,7 @@
 			}
 
 			body {
-				background: -webkit-gradient(linear, 0 0, 0 100%, from(#67c8b8), to(#3e87c8));
+				background: linear-gradient(to right,  #67c8b8, #3e87c8);
 			}
 		</style>
 	</head>
@@ -62,7 +62,7 @@
 			mui.init()
 		</script>
 		<div class="row" style="margin-top: 70px;margin-bottom:25px;color: white;text-align: center;">
-			<h3 style="display: inline-block; ">早餐评选</h3>
+			<h3 style="display: inline-block; " id="title-text">菜品展示</h3>
 		</div>
 		<div class="row row-item" id="menuBox">
 
@@ -71,6 +71,7 @@
 
 	</body>
 	<script type="text/javascript">
+		
 		var post_url_all_header = localStorage.getItem("url_header");
 		var urlGet = post_url_all_header + "/Interface/Common/GetCookbookSetInDate.ashx";
 		var dataSend = localStorage.getItem("dataSend");
@@ -88,7 +89,7 @@
 					function(currentValue, currentIndex, currentArray) {
 						console.log(currentValue.Name);
 						var appendItem =
-							'<div class="col-xs-6"><div class="white-block"><div class="inside-block"><div class="row"><img src="../../img/猪脚.jpg" class="pic-style" /></div><div class="row"><h4>' +
+							'<div class="col-xs-6"><div class="white-block"><div class="inside-block"><div class="row"><img src="'+currentValue.Icon+'" class="pic-style" /></div><div class="row"><h4>' +
 							currentValue.Name + '</h4></div></div></div></div>'
 						$("#menuBox").append(appendItem);
 					}

@@ -59,7 +59,7 @@
     		</div>
     		<div class="col-xs-4" >
     			<div style="text-align: center;">
-					<img src="../img/dianzan.svg" class="imgStyle"/>
+					<img src="../img/dianzan.svg" class="imgStyle" onclick="jumpVoteMenu()"/>
 					<h2 style="width: 96px;">人气菜品评选</h2>
 				</div>	
     		</div>
@@ -140,6 +140,10 @@
 		 $("#nameBox").html("姓名："+Name);
 		 $("#moneyBox").html("余额："+money);
 		 
+		//投票菜品页面
+		function jumpVoteMenu () {
+			window.location.href="second/HotFoodChoose.html"
+		}
 		//菜品
 		function queryMenu () {
 			window.location.href="second/queryMenu.html";

@@ -1,132 +1,272 @@
 <!doctype html>
 <html>
 	<header class="mui-bar mui-bar-nav">
-	    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-	    <h1 class="mui-title">人气菜品评选</h1>
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		<h1 class="mui-title">人气菜品评选</h1>
 	</header>
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../../css/mui.min.css" rel="stylesheet" />
-		<link rel="stylesheet" type="text/css" href="../../css/boostrap/bootstrap.css"/>
+		<link rel="stylesheet" type="text/css" href="../../css/boostrap/bootstrap.css" />
 		<script src="../../js/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
 		<style type="text/css">
-			.mui-input-group .mui-input-row{
+			.mui-input-group .mui-input-row {
 				height: 80px;
 			}
-			.white-block{
-				background: white;border-radius: 10px;height: 240px;width: 180px;display: block;margin: 0 auto;box-shadow: 5px 5px 5px rgb(0,0,0,.4);
+
+			.white-block {
+				background: white;
+				border-radius: 10px;
+				height: 240px;
+				width: 180px;
+				display: block;
+				margin: 0 auto;
+				box-shadow: 5px 5px 5px rgb(0, 0, 0, .4);
 			}
-			.inside-block{
-				padding:10px 10px 10px 10px;text-align: center;
+
+			.inside-block {
+				padding: 10px 10px 10px 10px;
+				text-align: center;
 			}
-			.pic-style{
-				height: 120px;width: 160px;border-radius: 20px;
+
+			.pic-style {
+				height: 120px;
+				width: 160px;
+				border-radius: 20px;
 			}
-			.col-xs-6{
-				padding: 0 0 0 0;
-			}
-			.row-item{
+
+			.col-xs-6 {
 				margin-bottom: 20px;
+			}
+
+			.row-item {
+				margin-bottom: 20px;
+			}
+
+			body {
+				background: linear-gradient(to right, #67c8b8, #3e87c8);
 			}
 		</style>
 	</head>
 
-	<body background="../../img/login-bg.png">
+	<body>
 		<script src="../../js/mui.min.js"></script>
-		<script type="text/javascript">
-			mui.init()
-		</script>
 		<div class="row" style="margin-top: 70px;margin-bottom:25px;color: white;text-align: center;">
-			<h3 style="display: inline-block; ">早餐评选</h3>
+			<h3 style="display: inline-block; " id="title-text">早餐</h3>
 		</div>
-		<div class="row row-item">
-			<div class="col-xs-6" >
-				<div class="white-block">
-					<div class="inside-block">
-						<div class="row">
-						<img src="../../img/猪脚.jpg" class="pic-style"/>
-						</div>
-						<div class="row">
-							<h4>焖猪脚</h4>
-						</div>
-						<div class="row">
-							<p>投票:222票</p>
-						</div>
-						<div class="row">
-							<button class="btn btn-default">提交投票</button>
-						</div>
-					</div>
-					
-				</div>
-			</div>
-			<div class="col-xs-6" >
-				<div class="white-block">
-					<div class="inside-block">
-						<div class="row">
-						<img src="../../img/猪脚.jpg" class="pic-style"/>
-						</div>
-						<div class="row">
-							<h4>焖猪脚</h4>
-						</div>
-						<div class="row">
-							<p>投票:222票</p>
-						</div>
-						<div class="row">
-							<button class="btn btn-default">提交投票</button>
-						</div>
-					</div>
-					
-				</div>
-			</div>
+
+		<div class="row row-item" id="menuBox-Bf">
+
 		</div>
-		<div class="row row-item">
-			<div class="col-xs-6" >
-				<div class="white-block">
-					<div class="inside-block">
-						<div class="row">
-						<img src="../../img/猪脚.jpg" class="pic-style"/>
-						</div>
-						<div class="row">
-							<h4>焖猪脚</h4>
-						</div>
-						<div class="row">
-							<p>投票:222票</p>
-						</div>
-						<div class="row">
-							<button class="btn btn-default">提交投票</button>
-						</div>
-					</div>
-					
-				</div>
-			</div>
-			<div class="col-xs-6" >
-				<div class="white-block">
-					<div class="inside-block">
-						<div class="row">
-						<img src="../../img/猪脚.jpg" class="pic-style"/>
-						</div>
-						<div class="row">
-							<h4>焖猪脚</h4>
-						</div>
-						<div class="row">
-							<p>投票:222票</p>
-						</div>
-						<div class="row">
-							<button class="btn btn-default">提交投票</button>
-						</div>
-					</div>
-					
-				</div>
-			</div>
+		<div class="row" style="margin-top: 10px;margin-bottom:25px;color: white;text-align: center;">
+			<h3 style="display: inline-block; " id="title-text">午餐</h3>
 		</div>
-      
-		
-		
-		
+		<div class="row row-item" id="menuBox-lunch">
+
+		</div>
+		<div class="row" style="margin-top: 10px;margin-bottom:25px;color: white;text-align: center;">
+			<h3 style="display: inline-block; " id="title-text">晚餐</h3>
+		</div>
+		<div class="row row-item" id="menuBox-supper">
+			
+		</div>
+		<div class="row">
+			<button type="button" class="btn btn-default" onclick="refresh()" style="display: block;margin: 0 auto;width: 200px;height: 40px;  margin-bottom: 30px;">重置投票</button>
+			<button type="button" class="btn btn-default" onclick="VoteAll()" style="display: block;margin: 0 auto;width: 200px;height: 40px;  margin-bottom: 30px;">投票</button>
+		</div>
 		
 	</body>
+	<script type="text/javascript">
+		function refresh () {
+			history.go(0);
+		}
+		
+		var post_url_all_header = localStorage.getItem("url_header");
+		var urlGet = post_url_all_header + "/Interface/Common/GetCookbookSetInDateByDate.ashx";
+		$.ajax({
+			url: urlGet,
+			data: {
+				'Datetime': getNowFormatDate()
+			},
+			dataType: 'json',
+			type: 'get',
+			async: false,
+			crossDomain: true, //【这个很重要，一定要加】
+			success: function(result) {
+				console.log(result);
+				result.cookbooks.forEach(
+					function(currentValue, currentIndex, currentArray) {
+						console.log(currentValue.CookbookEnum);
 
+						switch (currentValue.CookbookEnum) {
+							case 'Breakfast':
+								var appendItem =
+									'<div class="col-xs-6"><div class="white-block"><div class="inside-block"><div class="row"><img src="' +
+									currentValue.Icon + '" class="pic-style" /></div><div class="row"><h4>' +
+									currentValue.Name +
+									'</h4></div><div class="row"><p>投票:222票</p></div><div class="row"><button class="bf" id="' + currentValue.Id +
+									'" value="' + 'true' +
+									'" class="btn btn-default" >投票</button></div></div></div></div>';
+								$("#menuBox-Bf").append(appendItem);
+								break;
+							case 'Lunch':
+								var appendItem =
+									'<div class="col-xs-6"><div class="white-block"><div class="inside-block"><div class="row"><img src="' +
+									currentValue.Icon + '" class="pic-style" /></div><div class="row"><h4>' +
+									currentValue.Name +
+									'</h4></div><div class="row"><p>投票:222票</p></div><div class="row"><button class="lunch" id="' +
+									currentValue.Id +
+									'" value="' + 'true' +
+									'" class="btn btn-default" >投票</button></div></div></div></div>';
+								$("#menuBox-lunch").append(appendItem);
+								break;
+							case 'Supper':
+								var appendItem =
+									'<div class="col-xs-6"><div class="white-block"><div class="inside-block"><div class="row"><img src="' +
+									currentValue.Icon + '" class="pic-style" /></div><div class="row"><h4>' +
+									currentValue.Name +
+									'</h4></div><div class="row"><p>投票:222票</p></div><div class="row"><button class="supper" id="' +
+									currentValue.Id +
+									'" value="' + 'true' +
+									'" class="btn btn-default" >投票</button></div></div></div></div>';
+								$("#menuBox-supper").append(appendItem);
+								break;
+						}
+
+					}
+				)
+			}
+		});
+		var bfList = [];
+		var lunchList = [];
+		$("button").click(function() {
+			var val = $(this).val();
+			var itemId =$(this).attr('id');
+			var menuType = $(this).attr('class');
+			if(val=='true'){
+				switch (menuType) {
+					case 'bf':
+					if(bfList.length<2){
+						bfList.push(itemId);
+					}
+					else{
+						mui.alert("不可选择超过两个早餐菜品")
+						return;
+					}
+						break;
+					case 'lunch':
+					if(lunchList.length<3){
+						lunchList.push(itemId);
+					}
+					else{
+						mui.alert("不可选择超过三个午餐和晚餐菜品")
+						return;
+					}
+						break;
+					case 'supper':
+					if(lunchList.length<3){
+						lunchList.push(itemId);
+					}
+					else{
+						mui.alert("不可选择超过三个午餐和晚餐菜品")
+						return;
+					}
+						break;
+				}
+			}
+			else{
+				if(menuType=='bf'){
+					bfList.pop(itemId);
+				}
+				else{
+					lunchList.pop(itemId);
+				}
+				
+			}
+			
+			if ($(this).val() == 'true') {
+				$(this).css("background", "#61ff61");
+				$(this).val(false);
+			} else {
+				$(this).css("background", "white");
+				$(this).val(true);
+			}
+			
+		})
+		
+		
+		//投票！！
+		function VoteAll () {
+			for(var i in bfList){
+			  lunchList.push(bfList[i]);
+			}
+			var bigList="";
+			lunchList.forEach(function (currentValue, currentIndex, currentArray) {
+				bigList=bigList+currentValue+',';
+			})
+			bigList=bigList.substr(0,bigList.length-1);
+			alert(bigList)
+			var newtime=getNowFormatDate2();
+			alert(newtime);
+			$.ajax({
+				url: post_url_all_header+'/Interface/Common/CoookbookVote.ashx',
+				data: {
+					"DateTime": newtime,
+					"CookbookIds": "1,2,3",
+					"StaffId": localStorage.getItem('personId'),//localStorage.getItem('personId')
+					"StaffType": localStorage.getItem('PcWorkerBool'), //Worker  localStorage.getItem('PcWorkerBool')
+					"Suggest": "1,2,3"
+				},
+				dataType: 'json',
+				type: 'post',
+				async: false,
+				crossDomain: true, //【这个很重要，一定要加】
+				success: function(result) {
+					console.log(result);
+			// 		result.cookbooks.forEach(
+			// 			function(currentValue, currentIndex, currentArray) {
+			
+			
+			// 			}
+			// 		)
+				}
+			});
+		}
+		//时间获取
+		function getNowFormatDate() {
+			var date = new Date();
+			var seperator1 = "-";
+			var year = date.getFullYear();
+			var month = date.getMonth() + 1;
+			var strDate = date.getDate();
+			if (month >= 1 && month <= 9) {
+				month = "0" + month;
+			}
+			if (strDate >= 0 && strDate <= 9) {
+				strDate = "0" + strDate;
+			}
+			var currentdate = year + seperator1 + month + seperator1 + strDate;
+			return currentdate;
+		}
+		// /时间获取2
+		function getNowFormatDate2() {
+			var date = new Date();
+			var seperator1 = "-";
+			var year = date.getFullYear();
+			var month = date.getMonth() + 1;
+			var strDate = date.getDate();
+			if (month >= 1 && month <= 9) {
+				month = "0" + month;
+			}
+			if (strDate >= 0 && strDate <= 9) {
+				strDate = "0" + strDate;
+			}
+			var currentdate = year + seperator1 + month + seperator1 + strDate + ' ' + date.getHours() + ':' + date.getMinutes() +
+				':' + date.getSeconds() + ':' + date.getMilliseconds();
+			return currentdate;
+		}
+	</script>
 </html>

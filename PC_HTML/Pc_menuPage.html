@@ -65,7 +65,7 @@
     		</div>
     		<div class="col-xs-4" >
     			<div style="text-align: center;">
-					<img src="../img/champion.svg"  class="imgStyle"/>
+					<img src="../img/champion.svg"  class="imgStyle" onclick="jumpHotFoodList()"/>
 					<h2>人气榜</h2>
 				</div>	
     		</div>
@@ -73,19 +73,19 @@
   		<div class="row" style="margin-top: 30px;padding: 0 45px 0 45px;">
     		<div class="col-xs-4" >
     			<div style="text-align: center;">
-					<img src="../img/dingcan.svg" class="imgStyle"/>
+					<img src="../img/dingcan.svg" class="imgStyle" onclick="jumpOrderPage()"/>
 					<h2>订餐</h2>
 				</div>	
     		</div>
     		<div class="col-xs-4" >
     			<div style="text-align: center;">
-					<img src="../img/jilu.svg" class="imgStyle"/>
+					<img src="../img/jilu.svg" class="imgStyle" onclick="jumpRecord()"/>
 					<h2>消费记录</h2>
 				</div>	
     		</div>
     		<div class="col-xs-4" >
     			<div style="text-align: center;">
-					<img src="../img/erweima1.svg" class="imgStyle" />
+					<img src="../img/erweima1.svg" class="imgStyle" onclick="jumpQrcode()" />
 					<h2>二维码</h2>
 				</div>	
     		</div>
@@ -93,13 +93,13 @@
   		<div class="row" style="margin-top: 30px;padding: 0 45px 0 45px;">
     		<div class="col-xs-4" >
     			<div style="text-align: center;">
-					<img src="../img/paiming.svg"class="imgStyle" />
+					<img src="../img/paiming.svg"class="imgStyle" onclick="jumpTop10()"/>
 					<h2>互动排名</h2>
 				</div>	
     		</div>
     		<div class="col-xs-4" >
     			<div style="text-align: center;">
-					<img src="../img/xiaoxi.svg" class="imgStyle"/>
+					<img src="../img/xiaoxi.svg" class="imgStyle" onclick="jumpNotice()"/>
 					<h2>消息</h2>
 				</div>	
     		</div>
@@ -140,6 +140,23 @@
 		 $("#nameBox").html("姓名："+Name);
 		 $("#moneyBox").html("余额："+money);
 		 
+		 //订餐页面
+		 function jumpTop10() {
+		 	window.location.href="second/newtop10.html"
+		 }
+		 //订餐页面
+		 function jumpNotice () {
+		 	window.location.href="second/Notice.html"
+		 }
+		 
+		//订餐页面
+		function jumpOrderPage () {
+			window.location.href="second/orderPage.html"
+		}
+		//人气榜页面
+		function jumpHotFoodList () {
+			window.location.href="second/newtop5.html"
+		}
 		//投票菜品页面
 		function jumpVoteMenu () {
 			window.location.href="second/HotFoodChoose.html"

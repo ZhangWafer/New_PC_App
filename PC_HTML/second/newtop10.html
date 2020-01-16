@@ -2,7 +2,7 @@
 <html>
 	<header class="mui-bar mui-bar-nav">
 		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-		<h1 class="mui-title">人气榜</h1>
+		<h1 class="mui-title">互动排名</h1>
 	</header>
 	<head>
 		<meta charset="UTF-8">
@@ -55,18 +55,18 @@
 					</div>
 				</div>
 			</div> -->
-			
+
 		</div>
 	</body>
 	<script type="text/javascript">
 		var post_url_all_header = localStorage.getItem("url_header");
-		var targetUrl = post_url_all_header + "/Interface/Common/GetCookbookVotes.ashx";
+		var targetUrl = post_url_all_header + "/Interface/Common/GetStaffVotes.ashx";
 		$.ajax({
 			url: targetUrl,
 			data: {
 				'BeginDate': '2020-01-01',
 				'EndDate': '2020-01-30',
-				'top': '5'
+				'top': '10'
 			},
 			dataType: 'json', //【这里要小心啊，不要用jsonp，一定是json】
 			type: 'get',
@@ -87,17 +87,40 @@
 							var img = '<img src="../../img/jijun.svg" style="display: inline-block;width: 40px;height: 40px;"/>'
 							break;
 						case 3:
-							var img = '<img src="../../img/icon-test.svg" style="display: inline-block;width: 30px;height: 30px;margin-bottom:10px;margin-right:5px;"/>'
+							var img =
+								'<img src="../../img/icon-test.svg" style="display: inline-block;width: 30px;height: 30px;margin-bottom:10px;margin-right:5px;"/>'
 							break;
 						case 4:
-							var img = '<img src="../../img/icon-test_1.svg" style="display: inline-block;width: 30px;height: 30px;margin-bottom:10px;margin-right:5px;"/>'
+							var img =
+								'<img src="../../img/icon-test_1.svg" style="display: inline-block;width: 30px;height: 30px;margin-bottom:10px;margin-right:5px;"/>'
+							break;
+						case 5:
+							var img = '<img src="../../img/6.svg" style="display: inline-block;width: 30px;height: 30px;"/>'
+							break;
+						case 6:
+							var img = '<img src="../../img/8.svg" style="display: inline-block;width: 30px;height: 30px;"/>'
+							break;
+						case 7:
+							var img = '<img src="../../img/7.svg" style="display: inline-block;width: 30px;height: 30px;"/>'
+							break;
+						case 8:
+							var img =
+								'<img src="../../img/9.svg" style="display: inline-block;width: 30px;height: 30px;margin-bottom:10px;margin-right:5px;"/>'
+							break;
+						case 9:
+							var img =
+								'<img src="../../img/10.svg" style="display: inline-block;width: 30px;height: 30px;margin-bottom:10px;margin-right:5px;"/>'
 							break;
 					}
 
 					var appendThing =
-						'<div class="white-block" style="margin-top: 10px;"><div class="row"><div class="col-xs-6"><img src="'+post_url_all_header+'/Files/Cookbook/'+currentValue.Icon+'" style="width: 210px;height: 185px;border-radius: 20px;padding: 15px 10px 10px 10px;"/></div><div class="col-xs-6"><div class="row">' +
+						'<div class="white-block" style="margin-top: 10px;"><div class="row"><div class="col-xs-6"><img src="' +
+						post_url_all_header + '/Files/Cookbook/' + currentValue.Icon +
+						'" style="width: 210px;height: 185px;border-radius: 20px;padding: 15px 10px 10px 10px;"/></div><div class="col-xs-6"><div class="row">' +
 						img +
-						'<h4 style="display: inline-block;">'+currentValue.Name+'</h4></div><div class="row" style="padding-left:20px ;"><p style="margin-top:10px;">获得票数：'+currentValue.Votes +'票</p></div></div></div></div>'
+						'<h4 style="display: inline-block;">' + currentValue.StaffName +
+						'</h4></div><div class="row" style="padding-left:20px ;"><p style="margin-top:10px;">投出票数：' + currentValue.Votes +
+						'票</p></div></div></div></div>'
 					$("#contentBox").append(appendThing);
 				});
 			}

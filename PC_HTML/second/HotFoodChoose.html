@@ -198,8 +198,10 @@
 		})
 		
 		
+		
 		//投票！！
 		function VoteAll () {
+			
 			for(var i in bfList){
 			  lunchList.push(bfList[i]);
 			}
@@ -211,27 +213,23 @@
 			alert(bigList)
 			var newtime=getNowFormatDate2();
 			alert(newtime);
+			
+			
+			var sendData=JSON.stringify({
+						"DateTime": newtime,
+						"CookbookIds": bigList,
+						"StaffId": localStorage.getItem('personId'),//localStorage.getItem('personId')
+						"StaffType": localStorage.getItem('PcWorkerBool'), //Worker  localStorage.getItem('PcWorkerBool')
+						"Suggest": "1"});
 			$.ajax({
 				url: post_url_all_header+'/Interface/Common/CoookbookVote.ashx',
-				data: {
-					"DateTime": newtime,
-					"CookbookIds": "1,2,3",
-					"StaffId": localStorage.getItem('personId'),//localStorage.getItem('personId')
-					"StaffType": localStorage.getItem('PcWorkerBool'), //Worker  localStorage.getItem('PcWorkerBool')
-					"Suggest": "1,2,3"
-				},
+				data: sendData,
 				dataType: 'json',
 				type: 'post',
 				async: false,
 				crossDomain: true, //【这个很重要，一定要加】
 				success: function(result) {
-					console.log(result);
-			// 		result.cookbooks.forEach(
-			// 			function(currentValue, currentIndex, currentArray) {
-			
-			
-			// 			}
-			// 		)
+					mui.alert(result.Msg);
 				}
 			});
 		}
@@ -265,7 +263,7 @@
 				strDate = "0" + strDate;
 			}
 			var currentdate = year + seperator1 + month + seperator1 + strDate + ' ' + date.getHours() + ':' + date.getMinutes() +
-				':' + date.getSeconds() + ':' + date.getMilliseconds();
+				':' + date.getSeconds() + '.' + date.getMilliseconds();
 			return currentdate;
 		}
 	</script>

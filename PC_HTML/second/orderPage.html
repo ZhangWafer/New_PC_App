@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+	<header class="mui-bar mui-bar-nav">
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		<h1 class="mui-title">订餐</h1>
+	</header>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../../js/mui.js"></script>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../css/boostrap/bootstrap.css" />
+		<script src="../../js/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			body {
+				background: linear-gradient(to right, #67c8b8, #3e87c8);
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="row" style="margin-top: 100px;">
+			<button type="button" onclick="JumpFamily()" class="btn btn-primary" style="border-radius: 10px;width: 200px;height: 60px;font-size: 18px;font-weight: 500;  margin: 0 auto;display: block;">家属餐</button>
+		</div>
+		<div class="row" style="margin-top: 30px;">
+			<button type="button" onclick="jumpAcceptMeal()" class="btn btn-primary" style="border-radius: 10px;width: 200px;height: 60px; font-size: 18px;font-weight: 500;  margin: 0 auto;display: block;">接待餐</button>
+		</div>
+	</body>
+	<script type="text/javascript">
+		//家属餐
+		function JumpFamily () {
+			window.location.href="../Pc_FamilyPage.html";
+		}
+		//接待餐
+		function jumpAcceptMeal () {
+			window.location.href="../Pc_AcceptChoose.html";
+		}
+	</script>
+</html>

@@ -5,9 +5,10 @@
 		<h1 class="mui-title">互动排名</h1>
 	</header>
 	<head>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 		<meta charset="UTF-8">
 		<title></title>
-		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<!-- <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" /> -->
 		<link href="../../css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" type="text/css" href="../../css/boostrap/bootstrap.css" />
 		<script src="../../js/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
@@ -16,7 +17,7 @@
 	<style type="text/css">
 		.white-block {
 			margin-bottom: 20px;
-			width: 370px;
+			width: 320px;
 			height: 200px;
 			border-radius: 20px;
 			box-shadow: 10px 10px 10px rgb(0, 0, 0, 0.4);
@@ -114,9 +115,8 @@
 					}
 
 					var appendThing =
-						'<div class="white-block" style="margin-top: 10px;"><div class="row"><div class="col-xs-6"><img src="' +
-						post_url_all_header + '/Files/Cookbook/' + currentValue.Icon +
-						'" style="width: 210px;height: 185px;border-radius: 20px;padding: 15px 10px 10px 10px;"/></div><div class="col-xs-6"><div class="row">' +
+						'<div class="white-block" style="margin-top: 10px;"><div class="row"><div class="col-xs-6"><img src="'  + currentValue.Icon +
+						'" style="width: 190px;height: 170px;border-radius: 20px;padding: 15px 10px 10px 10px;"/></div><div class="col-xs-6"><div class="row">' +
 						img +
 						'<h4 style="display: inline-block;">' + currentValue.StaffName +
 						'</h4></div><div class="row" style="padding-left:20px ;"><p style="margin-top:10px;">投出票数：' + currentValue.Votes +

@@ -5,9 +5,11 @@
 		<h1 class="mui-title">人气菜品评选</h1>
 	</header>
 	<head>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+		
 		<meta charset="UTF-8">
 		<title></title>
-		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<!-- <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" /> -->
 		<link href="../../css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" type="text/css" href="../../css/boostrap/bootstrap.css" />
 		<script src="../../js/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
@@ -20,8 +22,8 @@
 			.white-block {
 				background: white;
 				border-radius: 10px;
-				height: 240px;
-				width: 180px;
+				height: 220px;
+				width: 140px;
 				display: block;
 				margin: 0 auto;
 				box-shadow: 5px 5px 5px rgb(0, 0, 0, .4);
@@ -33,8 +35,8 @@
 			}
 
 			.pic-style {
-				height: 120px;
-				width: 160px;
+				height: 90px;
+				width: 120px;
 				border-radius: 20px;
 			}
 
@@ -56,19 +58,18 @@
 		<script src="../../js/mui.min.js"></script>
 		<div class="row" style="margin-top: 70px;margin-bottom:25px;color: white;text-align: center;">
 			<h3 style="display: inline-block; " id="title-text">早餐</h3>
+			<p style="color: white;">可选择两个菜品</p>
 		</div>
 
 		<div class="row row-item" id="menuBox-Bf">
 
 		</div>
 		<div class="row" style="margin-top: 10px;margin-bottom:25px;color: white;text-align: center;">
-			<h3 style="display: inline-block; " id="title-text">午餐</h3>
+			<h3 style="display: inline-block; " id="title-text">午餐和晚餐</h3>
+			<p style="color: white;">可选择三个菜品</p>
 		</div>
 		<div class="row row-item" id="menuBox-lunch">
 
-		</div>
-		<div class="row" style="margin-top: 10px;margin-bottom:25px;color: white;text-align: center;">
-			<h3 style="display: inline-block; " id="title-text">晚餐</h3>
 		</div>
 		<div class="row row-item" id="menuBox-supper">
 			
@@ -79,6 +80,9 @@
 		</div>
 		
 	</body>
+	<script type="text/javascript">
+		mui.init()
+	</script>
 	<script type="text/javascript">
 		function refresh () {
 			history.go(0);
@@ -97,7 +101,7 @@
 			crossDomain: true, //【这个很重要，一定要加】
 			success: function(result) {
 				console.log(result);
-				result.cookbooks.forEach(
+				result.breakfasts.forEach(
 					function(currentValue, currentIndex, currentArray) {
 						console.log(currentValue.CookbookEnum);
 
@@ -137,7 +141,48 @@
 						}
 
 					}
-				)
+				);
+				result.LunchAndSuppers.forEach(
+					function(currentValue, currentIndex, currentArray) {
+						console.log(currentValue.CookbookEnum);
+
+						switch (currentValue.CookbookEnum) {
+							case 'Breakfast':
+								var appendItem =
+									'<div class="col-xs-6"><div class="white-block"><div class="inside-block"><div class="row"><img src="' +
+									currentValue.Icon + '" class="pic-style" /></div><div class="row"><h4>' +
+									currentValue.Name +
+									'</h4></div><div class="row"><p>投票:222票</p></div><div class="row"><button class="bf" id="' + currentValue.Id +
+									'" value="' + 'true' +
+									'" class="btn btn-default" >投票</button></div></div></div></div>';
+								$("#menuBox-Bf").append(appendItem);
+								break;
+							case 'Lunch':
+								var appendItem =
+									'<div class="col-xs-6"><div class="white-block"><div class="inside-block"><div class="row"><img src="' +
+									currentValue.Icon + '" class="pic-style" /></div><div class="row"><h4>' +
+									currentValue.Name +
+									'</h4></div><div class="row"><p>投票:222票</p></div><div class="row"><button class="lunch" id="' +
+									currentValue.Id +
+									'" value="' + 'true' +
+									'" class="btn btn-default" >投票</button></div></div></div></div>';
+								$("#menuBox-lunch").append(appendItem);
+								break;
+							case 'Supper':
+								var appendItem =
+									'<div class="col-xs-6"><div class="white-block"><div class="inside-block"><div class="row"><img src="' +
+									currentValue.Icon + '" class="pic-style" /></div><div class="row"><h4>' +
+									currentValue.Name +
+									'</h4></div><div class="row"><p>投票:222票</p></div><div class="row"><button class="supper" id="' +
+									currentValue.Id +
+									'" value="' + 'true' +
+									'" class="btn btn-default" >投票</button></div></div></div></div>';
+								$("#menuBox-lunch").append(appendItem);
+								break;
+						}
+
+					}
+				);
 			}
 		});
 		var bfList = [];
@@ -210,9 +255,7 @@
 				bigList=bigList+currentValue+',';
 			})
 			bigList=bigList.substr(0,bigList.length-1);
-			alert(bigList)
 			var newtime=getNowFormatDate2();
-			alert(newtime);
 			
 			
 			var sendData=JSON.stringify({

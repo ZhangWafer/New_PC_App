@@ -60,7 +60,7 @@
     		<div class="col-xs-4" >
     			<div style="text-align: center;">
 					<img src="../img/dianzan.svg" class="imgStyle" onclick="jumpVoteMenu()"/>
-					<h2 style="width: 96px;">人气菜品评选</h2>
+					<h2 >人气菜品评选</h2>
 				</div>	
     		</div>
     		<div class="col-xs-4" >
@@ -105,7 +105,7 @@
     		</div>
     		<div class="col-xs-4" >
     			<div style="text-align: center;">
-					<img src="../img/ziyuan.svg" class="imgStyle"/>
+					<img src="../img/ziyuan.svg" class="imgStyle" onclick="junpQueryPaper()"/>
 					<h2>问卷</h2>
 				</div>	
     		</div>
@@ -140,6 +140,11 @@
 		 $("#nameBox").html("姓名："+Name);
 		 $("#moneyBox").html("余额："+money);
 		 
+		 
+		 //问卷
+		 function junpQueryPaper () {
+		 	mui.alert("暂未开放")
+		 }
 		 //订餐页面
 		 function jumpTop10() {
 		 	window.location.href="second/newtop10.html"

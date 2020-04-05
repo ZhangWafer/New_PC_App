@@ -46,19 +46,24 @@
     	//$("#user").html(shenFenZheng);
     	//var shenFenZheng="610124197210163919";
     	//$("#select1").val(bbool);
-
+    	
+    	
+    	
+    	
+		var replace_url='68.89.24.77:7029';//替换地址url
+		localStorage.setItem("replace_url",replace_url);
 		//一打开app就显示账号
     	//var accountValue= localStorage.getItem("account");
     	//$("#user").val(accountValue);
     	//分割线
-    	//var post_url_all_header="http://68.89.24.77:7034";//
-		var post_url_all_header="http://20.97.10.67:7034";//公安局内网网址 正式环境
+    	//var post_url_all_header="http://68.89.24.77:7034";//公安局内网网址 正式环境
+		var post_url_all_header="http://20.97.10.67:7034";// 正式环境 公安局手机访问网址
 		//var post_url_all_header="http://192.168.6.46:7030";
     	//var post_url_all_header="http://120.236.239.118:7030";//新域网址 测试环境
         //var post_url_all_header="https://219.131.222.91:7029";//公安局外网网址 正式环境
          //var post_url_all_header="https://www.zhgaft.top:7029";//公安局外网网址 正式环境
         //var post_url_all_header="http://localhost:7029";
-    
+  	 	
     	localStorage.setItem("url_header",post_url_all_header);
     	var pwd="";
     	var BoolValue=0;
@@ -72,7 +77,6 @@
 					async:false,
                     crossDomain: true,  //【这个很重要，一定要加】
                     success:function(result){
-	alert(result);
 						if(result.Type=="PC")
 						{
 							BoolValue=1;

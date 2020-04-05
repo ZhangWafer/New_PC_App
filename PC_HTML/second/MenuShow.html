@@ -74,8 +74,8 @@
 		
 	</body>
 	<script type="text/javascript">
-		
 		var post_url_all_header = localStorage.getItem("url_header");
+		var replace_url= localStorage.getItem("replace_url");
 		var urlGet = post_url_all_header + "/Interface/Common/GetCookbookSetInDate.ashx";
 		var dataSend = localStorage.getItem("dataSend");
 		localStorage.removeItem('dataSend');
@@ -92,7 +92,7 @@
 					function(currentValue, currentIndex, currentArray) {
 						console.log(currentValue.Name);
 						var appendItem =
-							'<div class="col-xs-6"><div class="white-block"><div class="inside-block"><div class="row"><img src="'+currentValue.Icon+'" class="pic-style" /></div><div class="row"><h4>' +
+							'<div class="col-xs-6"><div class="white-block"><div class="inside-block"><div class="row"><img src="'+currentValue.Icon.replace(replace_url,'20.97.10.67:7034')+'" class="pic-style" /></div><div class="row"><h4>' +
 							currentValue.Name + '</h4></div></div></div></div>'
 						$("#menuBox").append(appendItem);
 					}

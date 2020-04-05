@@ -88,6 +88,7 @@
 			history.go(0);
 		}
 		
+		var replace_url= localStorage.getItem("replace_url");
 		var post_url_all_header = localStorage.getItem("url_header");
 		var urlGet = post_url_all_header + "/Interface/Common/GetCookbookSetInDateByDate.ashx";
 		$.ajax({
@@ -104,14 +105,18 @@
 				result.breakfasts.forEach(
 					function(currentValue, currentIndex, currentArray) {
 						console.log(currentValue.CookbookEnum);
-
+						var nhBool= currentValue.Name.indexOf("家属")!=-1;
+						console.log(nhBool);
+						if(!nhBool)
+						{		
+						
 						switch (currentValue.CookbookEnum) {
 							case 'Breakfast':
 								var appendItem =
 									'<div class="col-xs-6"><div class="white-block"><div class="inside-block"><div class="row"><img src="' +
-									currentValue.Icon + '" class="pic-style" /></div><div class="row"><h4>' +
+									currentValue.Icon.replace(replace_url,'20.97.10.67:7034') + '" class="pic-style" /></div><div class="row"><h4>' +
 									currentValue.Name +
-									'</h4></div><div class="row"><p>投票:222票</p></div><div class="row"><button class="bf" id="' + currentValue.Id +
+									'</h4></div><div class="row"><p>投票:'+currentValue.Votes+'票</p></div><div class="row"><button class="bf" id="' + currentValue.Id +
 									'" value="' + 'true' +
 									'" class="btn btn-default" >投票</button></div></div></div></div>';
 								$("#menuBox-Bf").append(appendItem);
@@ -119,9 +124,9 @@
 							case 'Lunch':
 								var appendItem =
 									'<div class="col-xs-6"><div class="white-block"><div class="inside-block"><div class="row"><img src="' +
-									currentValue.Icon + '" class="pic-style" /></div><div class="row"><h4>' +
+									currentValue.Icon.replace(replace_url,'20.97.10.67:7034')+ '" class="pic-style" /></div><div class="row"><h4>' +
 									currentValue.Name +
-									'</h4></div><div class="row"><p>投票:222票</p></div><div class="row"><button class="lunch" id="' +
+									'</h4></div><div class="row"><p>投票:'+currentValue.Votes+'票</p></div><div class="row"><button class="lunch" id="' +
 									currentValue.Id +
 									'" value="' + 'true' +
 									'" class="btn btn-default" >投票</button></div></div></div></div>';
@@ -130,29 +135,31 @@
 							case 'Supper':
 								var appendItem =
 									'<div class="col-xs-6"><div class="white-block"><div class="inside-block"><div class="row"><img src="' +
-									currentValue.Icon + '" class="pic-style" /></div><div class="row"><h4>' +
+									currentValue.Icon.replace(replace_url,'20.97.10.67:7034')+ '" class="pic-style" /></div><div class="row"><h4>' +
 									currentValue.Name +
-									'</h4></div><div class="row"><p>投票:222票</p></div><div class="row"><button class="supper" id="' +
+									'</h4></div><div class="row"><p>投票:'+currentValue.Votes+'票</p></div><div class="row"><button class="supper" id="' +
 									currentValue.Id +
 									'" value="' + 'true' +
 									'" class="btn btn-default" >投票</button></div></div></div></div>';
 								$("#menuBox-supper").append(appendItem);
 								break;
 						}
-
+					}
 					}
 				);
 				result.LunchAndSuppers.forEach(
 					function(currentValue, currentIndex, currentArray) {
 						console.log(currentValue.CookbookEnum);
-
+						var nhBool= currentValue.Name.indexOf("家属")!=-1;
+						if(!nhBool)
+						{
 						switch (currentValue.CookbookEnum) {
 							case 'Breakfast':
 								var appendItem =
 									'<div class="col-xs-6"><div class="white-block"><div class="inside-block"><div class="row"><img src="' +
-									currentValue.Icon + '" class="pic-style" /></div><div class="row"><h4>' +
+									currentValue.Icon.replace(replace_url,'20.97.10.67:7034') + '" class="pic-style" /></div><div class="row"><h4>' +
 									currentValue.Name +
-									'</h4></div><div class="row"><p>投票:222票</p></div><div class="row"><button class="bf" id="' + currentValue.Id +
+									'</h4></div><div class="row"><p>投票:'+currentValue.Votes+'票</p></div><div class="row"><button class="bf" id="' + currentValue.Id +
 									'" value="' + 'true' +
 									'" class="btn btn-default" >投票</button></div></div></div></div>';
 								$("#menuBox-Bf").append(appendItem);
@@ -160,9 +167,9 @@
 							case 'Lunch':
 								var appendItem =
 									'<div class="col-xs-6"><div class="white-block"><div class="inside-block"><div class="row"><img src="' +
-									currentValue.Icon + '" class="pic-style" /></div><div class="row"><h4>' +
+									currentValue.Icon.replace(replace_url,'20.97.10.67:7034') + '" class="pic-style" /></div><div class="row"><h4>' +
 									currentValue.Name +
-									'</h4></div><div class="row"><p>投票:222票</p></div><div class="row"><button class="lunch" id="' +
+									'</h4></div><div class="row"><p>投票:'+currentValue.Votes+'票</p></div><div class="row"><button class="lunch" id="' +
 									currentValue.Id +
 									'" value="' + 'true' +
 									'" class="btn btn-default" >投票</button></div></div></div></div>';
@@ -171,18 +178,19 @@
 							case 'Supper':
 								var appendItem =
 									'<div class="col-xs-6"><div class="white-block"><div class="inside-block"><div class="row"><img src="' +
-									currentValue.Icon + '" class="pic-style" /></div><div class="row"><h4>' +
+									currentValue.Icon.replace(replace_url,'20.97.10.67:7034')+ '" class="pic-style" /></div><div class="row"><h4>' +
 									currentValue.Name +
-									'</h4></div><div class="row"><p>投票:222票</p></div><div class="row"><button class="supper" id="' +
+									'</h4></div><div class="row"><p>投票:'+currentValue.Votes+'票</p></div><div class="row"><button class="supper" id="' +
 									currentValue.Id +
 									'" value="' + 'true' +
 									'" class="btn btn-default" >投票</button></div></div></div></div>';
 								$("#menuBox-lunch").append(appendItem);
 								break;
 						}
-
+					}
 					}
 				);
+				
 			}
 		});
 		var bfList = [];
@@ -194,7 +202,7 @@
 			if(val=='true'){
 				switch (menuType) {
 					case 'bf':
-					if(bfList.length<2){
+					if(bfList.length<99){
 						bfList.push(itemId);
 					}
 					else{
@@ -203,7 +211,7 @@
 					}
 						break;
 					case 'lunch':
-					if(lunchList.length<3){
+					if(lunchList.length<99){
 						lunchList.push(itemId);
 					}
 					else{
@@ -212,7 +220,7 @@
 					}
 						break;
 					case 'supper':
-					if(lunchList.length<3){
+					if(lunchList.length<99){
 						lunchList.push(itemId);
 					}
 					else{
@@ -273,6 +281,7 @@
 				crossDomain: true, //【这个很重要，一定要加】
 				success: function(result) {
 					mui.alert(result.Msg);
+					history.go(0) ;
 				}
 			});
 		}

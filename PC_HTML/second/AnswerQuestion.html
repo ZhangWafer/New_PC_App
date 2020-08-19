@@ -20,56 +20,7 @@
 			background: white;
 			display: inline-block;
 		}
-		label{
-		    line-height: 20px;
-		    display: inline-block;
-		    margin-left: 5px;
-		    margin-right:15px;
-		    color: #777;
-		}
-		.radio_type{
-		    width: 20px;
-		    height: 20px;
-		    appearance: none;
-		    margin-right: 5px;
-		    position: relative;
-		}
-		.radio_type:before{
-		    content: '';
-		    width: 20px;
-		    height: 20px;
-		    display: inline-block;
-		    border-radius: 50%;
-		    vertical-align: middle;
-		}
-		.radio_type:checked:before{
-		    content: '';
-		    width: 20px;
-		    height: 20px;
-		    border: 1px solid #007AFF;
-		    background:#007AFF;
-		    display: inline-block;
-		    border-radius: 50%;
-		    vertical-align: middle;
-		}
-		.radio_type:checked:after{
-		    content: '';
-		    width: 10px;
-		    height:5px;
-		    border: 2px solid white;
-		    border-top: transparent;
-		    border-right: transparent;
-		    text-align: center;
-		    display: block;
-		    position: absolute;
-		    top: 6px;
-		    left:5px;
-		    vertical-align: middle;
-		    transform: rotate(-45deg);
-		}
-		.radio_type:checked+label{
-		    color: #c59c5a;
-		}
+
 		h5 {
 			padding-left: 0px;
 			padding-top: 30px;
@@ -80,9 +31,7 @@
 		}
 		
 		.quesRow{
-			margin-top: 14px;
-			text-align: left;
-			margin-left:30px ;
+			margin-top: 20px;
 		}
 	</style>
 	</head>
@@ -92,9 +41,7 @@
 		<script type="text/javascript">
 			mui.init()
 		</script>
-		
-		
-		<div class="row" style="text-align: center;margin-top: 60px;">
+		<div class="row" style="text-align: center;margin-top: 120px;">
 			<img style="height: 120px;padding-top:30px;display: inline-block;" src="../../img/tiaochawenjuan.svg" />
 			<h3 style="margin-bottom: 20px;color: white;display: inline-block">问卷调查</h3>
 		</div>
@@ -117,7 +64,6 @@
 		var targetUrl = post_url_all_header + "/Interface/Common/GetQuest.ashx";
 		var questionNum=0;
 		var quesPackId=0;
-		var AnswserPaperIndex=localStorage.getItem("AnswserPaperIndex");
 		$.ajax({
                     url:targetUrl,
                     data:{'name':'ssss'},
@@ -126,13 +72,12 @@
 					async:false,
                     crossDomain: true,  //【这个很重要，一定要加】
                     success:function(result){
-						console.log(result)
-						questionNum=result.Info[AnswserPaperIndex].Item2.length;
-						quesPackId=result.Info[AnswserPaperIndex].Item1.Id;
-						result.Info[AnswserPaperIndex].Item2.forEach(function(currentValue, currentIndex, currentArray) {
+						questionNum=result.Items.length;
+						quesPackId=result.Info.Id;
+						result.Items.forEach(function(currentValue, currentIndex, currentArray) {
 							var answer=currentValue.Items.split(',');
-							var appendThing ='<div class="white-block" style="margin-top: 20px;"><div class="row"><div class="col-xs-6"><h1></h1></div><div class="col-xs-6" ><div class="row"><h4 style="margin-top: 20px;display: inline-block;">'+(currentIndex+1)+'.'+currentValue.ItemsTitle
-							+'</h4></div><div class="row quesRow"><input type="radio" class="radio_type" name="ques'+currentIndex+'" value="1" checked="true" >'+answer[0]+'</input></div><div class="row quesRow"><input type="radio" class="radio_type" name="ques'+currentIndex+'" value="2" >'+answer[1]+'</input></div><div class="row quesRow"><input type="radio" class="radio_type" name="ques'+currentIndex+'" value="3"  >'+answer[2]+'</input></div><div class="row quesRow"><input type="radio" class="radio_type" name="ques'+currentIndex+'" value="4"  >'+answer[3]+'</input></div></div></div></div>';
+							var appendThing ='<div class="white-block" style="margin-top: 20px;"><div class="row"><div class="col-xs-6"><h1></h1></div><div class="col-xs-6" ><div class="row"><h4 style="margin-top: 20px;display: inline-block;">'+(currentIndex+1)+'-'+currentValue.ItemsTitle
+							+'</h4></div><div class="row quesRow"><input type="radio" class="radio" name="ques'+currentIndex+'" value="1" checked="true" >'+answer[0]+'</input></div><div class="row quesRow"><input type="radio" name="ques'+currentIndex+'" value="2" >'+answer[1]+'</input></div><div class="row quesRow"><input type="radio" name="ques'+currentIndex+'" value="3"  >'+answer[2]+'</input></div><div class="row quesRow"><input type="radio" name="ques'+currentIndex+'" value="4"  >'+answer[3]+'</input></div></div></div></div>';
 							$("#contentBox").append(appendThing);
 						});
 		}});

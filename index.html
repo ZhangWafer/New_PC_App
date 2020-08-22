@@ -1,82 +1,87 @@
 <!DOCTYPE HTML>
 <html lang="en-US">
+
 <head>
-<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
-<meta name="format-detection" content="telephone=no" />
-<meta name="viewport" content="width=480,user-scalable=no" />
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="viewport" content="width=480,user-scalable=no" />
 
-<!-- 应用样式 -->
-<link rel="stylesheet" href="css/bingotouch.css" /> 
-<link rel="stylesheet" href="css/app.css" />
+  <!-- 应用样式 -->
+  <link rel="stylesheet" href="css/bingotouch.css" />
+  <link rel="stylesheet" href="css/app.css" />
 
-<!-- 函数库 -->
-<script src="js/cordova.js"></script>
-<script src="js/zepto.js"></script>
-<script src="js/iscroll.js"></script>
-<script src="js/bingotouch.js"></script> 
-<script src="js/require.js"></script> 
-<script src="js/linkplugins.js"></script> 
+  <!-- 函数库 -->
+  <script src="js/cordova.js"></script>
+  <script src="js/zepto.js"></script>
+  <script src="js/iscroll.js"></script>
+  <script src="js/bingotouch.js"></script>
+  <script src="js/require.js"></script>
+  <script src="js/linkplugins.js"></script>
 
-<!-- 应用脚本 -->
-<script src="js/app/app.js"></script>
+  <!-- 应用脚本 -->
+  <script src="js/app/app.js"></script>
 
-<title>BingoTouch</title>
+  <title>BingoTouch</title>
 </head>
+
 <body class="desktop">
-<button type="button" id="exit" onclick="exit()" style="margin-left: 60px;">das123das13da13</button>
+  <button type="button" id="exit" onclick="exit()" style="margin-left: 60px;">das123das13da13</button>
 </body>
 <script type="text/javascript">
-	
 
-	
-	//Dom结构加载完成后执行
-	app.page.onReady = function() {
-		//to do
-		app.exit()
-	}
-	//页面所有元素加载完成后执行，deviceRready
-	app.page.onLoad = function() {
-		//app.hint("欢迎使用BingoTouch!");
-		//后退键
-        var flag = 0;
-        document.addEventListener("backbutton", function() {
-            var isIndexPage = ui.Page.history.length <= 1 ? true : false;             
-            //已在首页
-            if (isIndexPage) {
-                if (flag == 0) {
-                    app.hint("再按一次就退出应用了!");
-                    flag = flag + 1;
-                    //5s后重新设置回去
-                    setTimeout(function() {
-                        flag = 0;
-                    }, 5000);
-                } else if (flag == 1) {
-                    app.exit();
-                }
-            } else{
-                //单页后退，多页不处理
-                if(ui.settings.appType == 'single'){
-                    ui.Page.back();
-                } 
-            }
-        }, false);  
-        
-        	app.link.getLoginInfo(function(result){
-				var res1 = result.loginId;     //警号
-				var res2 = result.userName;    //姓名 
-				var res3 = result.orgName;     //组织名称
-				var res4 = result.identityNum; //身份证号
-				var str = "警号："+res1+"\n"+"姓名："+res2+"\n"+"所属单位："+res3+"\n"+"身份证号："+res4;
-				//app.alert(str,null,"当前认证用户信息"); 
-				localStorage.setItem("警号",res1);
-				localStorage.setItem("姓名 ",res2);
-				localStorage.setItem("组织名称",res3);
-				localStorage.setItem("identityNumber",res4);
-				window.location.href="device.html";
-			});
-		
-	}
-	
-			
+
+
+  //Dom结构加载完成后执行
+  app.page.onReady = function () {
+    //to do
+    app.exit()
+  }
+  //页面所有元素加载完成后执行，deviceRready
+  app.page.onLoad = function () {
+    //app.hint("欢迎使用BingoTouch!");
+    //后退键
+    var flag = 0;
+    document.addEventListener("backbutton", function () {
+      var isIndexPage = ui.Page.history.length <= 1 ? true : false;
+      //已在首页
+      if (isIndexPage) {
+        if (flag == 0) {
+          app.hint("再按一次就退出应用了!");
+          flag = flag + 1;
+          //5s后重新设置回去
+          setTimeout(function () {
+            flag = 0;
+          }, 5000);
+        } else if (flag == 1) {
+          app.exit();
+        }
+      } else {
+        //单页后退，多页不处理
+        if (ui.settings.appType == 'single') {
+          ui.Page.back();
+        }
+      }
+    }, false);
+
+    app.link.getLoginInfo(function (result) {
+      var res1 = result.loginId;     //警号
+      var res2 = result.userName;    //姓名 
+      var res3 = result.orgName;     //组织名称
+      var res4 = result.identityNum; //身份证号
+      var res5 = result.orgCode      //组织编号
+      var str = "警号：" + res1 + "\n" + "姓名：" + res2 + "\n" + "所属单位：" + res3 + "\n" + "身份证号：" + res4;
+      //app.alert(str,null,"当前认证用户信息"); 
+      localStorage.setItem("警号", res1);
+      localStorage.setItem("姓名 ", res2);
+      localStorage.setItem("组织名称", res3);
+      localStorage.setItem("identityNumber", res4);
+      localStorage.setItem("organizationCode", res5);
+      window.location.href = "device.html";
+    });
+
+  }
+
+
 </script>
+
 </html>

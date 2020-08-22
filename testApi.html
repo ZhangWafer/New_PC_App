@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="js/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+
+</body>
+<script>
+  //定义写log方法
+  function writeLogFun(dataInput) {
+    var pararms = {
+      policeId: dataInput.policeId,
+      userName: dataInput.userName,
+      cardNo: dataInput.cardNo,
+      orgName: dataInput.orgName,
+      orgCode: dataInput.orgCode,
+      requestId: dataInput.requestId,
+      sessionId: dataInput.sessionId,
+      terminalIp: dataInput.terminalIp,
+      logType: dataInput.logType,
+      module: dataInput.module,
+      params: dataInput.params,
+      formatParam: dataInput.formatParam,
+      url: dataInput.url,
+      uri: dataInput.uri,
+      content: dataInput.content,
+      response: dataInput.response,
+      responseType: dataInput.responseType,
+      imei: dataInput.imei,
+      business: dataInput.business,
+      mac: dataInput.mac,
+      responseTime: dataInput.responseTime,
+      result: dataInput.result,
+      errorCode: dataInput.errorCode,
+      errorLog: dataInput.errorLog,
+      sourceIp: dataInput.sourceIp,
+      sourcePort: dataInput.sourcePort,
+      destIp: dataInput.destIp,
+      destPort: dataInput.destPort,
+      appCode: 'com.bingo.zhjw',
+      source: '505',
+      recordTime: dataInput.recordTime,
+      isSystemLog: dataInput.isSystemLog
+    }
+    var startTime = (new Date()).getTime()
+
+    $.ajax({
+      url: "http://127.0.0.1:5000/api",
+      data: JSON.stringify(pararms),
+      dataType: 'json',
+      type: 'post',
+      async: false,
+      headers: {
+        'Content-Type': 'application/json',
+        'LinkJWTAuth': 'Bearer ' + '{eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHBDb2RlIjoiY29tLmJpbmdvLnpoancifQ.obRhCBZkuZSyTEtdMxCx7ZMANNNm9T6iP-zycyweaAw}'
+      },
+      crossDomain: true,
+      success: function (result) {
+        //响应时间
+        var timeSpan = (new Date()).getTime() - startTime
+        console.log('timeSpan', timeSpan, startTime, result)
+      }
+    });
+  }
+  var dataInput = {
+    policeId: '441811197304104317',
+    userName: '张三',
+    cardNo: '411888888888888',
+    orgName: '科信支队',
+    orgCode: '440400100000',
+    requestId: 'a217fc10-905e-4fa7-8680-465b25496244',
+    sessionId: 'C26D8968A9BE3F434A177933407B0FEB',
+    terminalIp: '20.97.10.20',
+    logType: '1',
+    module: '使用排名>查询个人排名',
+    params: '{\"loginid\":\"0888888\"}',
+    formatParam: '{\"警号\":\"0888888\"}',
+    url: 'http://20.97.10.60:8080/uam',
+    uri: '/api/getContextUser',
+    content: '',
+    response: '[{\"姓名\":\"张三\",\"身份证号\":\"41188888888888\"}]',
+    responseType: '1',
+    responseTime: '50',
+    imei: '86123457856545',
+    business: '已办公文',
+    mac: '7C:76:68:83:4A:A6',
+
+    result: '成功',
+    errorCode: '',
+    errorLog: '',
+    sourceIp: '20.97.10.20',
+    sourcePort: '8080',
+    destIp: '68.89.21.136',
+    destPort: '8080',
+    appCode: 'com.bingo.sypm',
+    source: '505',
+    recordTime: '1519978042',
+    isSystemLog: '0',
+  }
+  writeLogFun(dataInput)
+
+</script>
+
+</html>

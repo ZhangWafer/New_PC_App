@@ -1,159 +1,157 @@
 <!DOCTYPE HTML>
 <html>
-	<head>
-		<meta charset="utf-8"/>
-		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-		<meta name="HandheldFriendly" content="true"/>
-		<meta name="MobileOptimized" content="320"/>
-		<title>Hello H5+</title>
-		<script src="js/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
-		<link rel="stylesheet" type="text/css" href="css/boostrap/bootstrap.css"/>
-		<script src="js/bootstrap-select.js" type="text/javascript" charset="utf-8"></script>
-		<link rel="stylesheet" type="text/css" href="css/select/bootstrap-select.css"/>
-		<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
-		<link rel="stylesheet" type="text/css" href="css/button.css"/>
-	</head>
-	<body background="img/login-bg.png">
-    <!-- 登录表单 -->
-    <form style="margin-left:10px;margin-top:80px;">
-    	<div class="text-center" style="margin-bottom: 20px;">
-    		<img src="img/logo.png"/>
-    	</div>
-    	<!--<h1 class="text-center"style="margin-bottom: 50px; color: white;" > 食堂订餐系统</h1>-->
 
-        <div class="form-group text-center" >
-            <input type="text" placeholder="身份证号" class="form-control" id="user" style="display:inline;width:220px;margin-top: 20px;"autocomplete="off" />
-        </div>
-        <div class="form-group text-center">
-            <input type="password" placeholder="密码" class="form-control inp" id="password" style="display:inline;width:220px;"autocomplete="off" />
-        </div>
-        <div class="text-center">
-        <input type="button" class="btn btn-primary button-pill " value="登录" style="width: 200px;font-size: 20px;" onclick="loginSubmit()"></input>
-        </div>
-    </form>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="HandheldFriendly" content="true" />
+  <meta name="MobileOptimized" content="320" />
+  <title>Hello H5+</title>
+  <script src="js/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+  <script src="js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+  <link rel="stylesheet" type="text/css" href="css/boostrap/bootstrap.css" />
+  <script src="js/bootstrap-select.js" type="text/javascript" charset="utf-8"></script>
+  <link rel="stylesheet" type="text/css" href="css/select/bootstrap-select.css" />
+  <script src="js/common.js" type="text/javascript" charset="utf-8"></script>
+  <link rel="stylesheet" type="text/css" href="css/button.css" />
+</head>
 
-    <script type="text/javascript">
-    	//默认选择选项
-    	//var bbool= localStorage.getItem("PcWorkerBool");
-    	var shenFenZheng=localStorage.getItem("identityNumber");
-    	//var shenFenZheng=;
-//  	if(shenFenZheng==null){
-//  		alert("身份证为null");
-//  		return;
-//  	}
-    	//alert(shenFenZheng);
-    	//$("#user").html(shenFenZheng);
-    	//var shenFenZheng="610124197210163919";
-    	//$("#select1").val(bbool);
-    	
-    	
-    	
-    	
-		var replace_url='68.89.24.77:7029';//替换地址url
-		localStorage.setItem("replace_url",replace_url);
-		//一打开app就显示账号
-    	//var accountValue= localStorage.getItem("account");
-    	//$("#user").val(accountValue);
-    	//分割线
-    	//var post_url_all_header="http://68.89.24.77:7034";//公安局内网网址 正式环境
-		//var post_url_all_header="http://20.97.10.67:7034";// 正式环境 公安局手机访问网址
-		
-		var post_url_all_header = "http://20.96.28.147/zhct"; //手机更换后的地址  2020.5.13
- 		//var post_url_all_header="http://192.168.6.46:7030";
-    	//var post_url_all_header="http://120.236.239.118:7030";//新域网址 测试环境
-        //var post_url_all_header="https://219.131.222.91:7029";//公安局外网网址 正式环境
-         //var post_url_all_header="https://www.zhgaft.top:7029";//公安局外网网址 正式环境
-        //var post_url_all_header="http://localhost:7029";
-  	 	
-    	localStorage.setItem("url_header",post_url_all_header);
-    	var pwd="";
-    	var BoolValue=0;
-    	//alert("123");
-   		//调接口看警察还是职员
-		$.ajax({
-                    url:post_url_all_header+"/Interface/Common/GetStaff.ashx?informationNum="+shenFenZheng,
-                    data:{'name':'ssss'},
-                    dataType:'json',  //【这里要小心啊，不要用jsonp，一定是json】
-                    type:'post',
-					async:false,
-                    crossDomain: true,  //【这个很重要，一定要加】
-                    success:function(result){
-						if(result.Type=="PC")
-						{
-							BoolValue=1;
-							pwd=result.pcInfo.Password;
-							//alert("PC");
-						}
-						else
-						{
-							BoolValue=0;
-							pwd=result.worker.Password;
-							//alert("ELSE");
-						}
-		}});
-		var account=shenFenZheng;
-		
-		if(BoolValue==1)
-		{
-		//440221196011081611
-		var url = post_url_all_header+"/Interface/PC/PcStaffLoginEncrypt.ashx?informationNum="+account+"&password="+pwd;
-		}
-		else
-		{
-			var url = post_url_all_header+"/Interface/Worker/WorkerLoginEncrypt.ashx?InformationNum="+account+"&password="+pwd;
-		}
-		$.ajax({
-                    url:url,
-                    data:{'name':'ssss'},
-                    dataType:'json',  //【这里要小心啊，不要用jsonp，一定是json】
-                    type:'post',
-					async:false,
-                    crossDomain: true,  //【这个很重要，一定要加】
-                    success:function(result){
-                        console.log(result);
-						if (result.Msg=="成功") {
-							if(BoolValue==1)
-							{
-							//警员
-							localStorage.setItem("account",account);
-							localStorage.setItem("Name",result.pcInfo.Name);
-							localStorage.setItem("personId",result.pcInfo.Id);
-							localStorage.setItem("PcWorkerBool",BoolValue);
-							localStorage.setItem("Qrcode_url",result.pcInfo.InformationQrcodeImage);
-							localStorage.setItem("money",result.pcInfo.Amount);
-							localStorage.setItem("photoUrl",result.pcInfo.Icon);
-							window.location.href="PC_HTML/Pc_menuPage.html";
-							
-							}
-							else
-							{								
-								//职员
-							localStorage.setItem("account",account);
-							localStorage.setItem("Name",result.workerInfo.Name);
-							localStorage.setItem("personId",result.workerInfo.Id);
-							localStorage.setItem("PcWorkerBool",BoolValue);
-							localStorage.setItem("Qrcode_url",result.workerInfo.InformationQrcodeImage);
-							localStorage.setItem("money",result.workerInfo.Amount);
-							localStorage.setItem("photoUrl",result.workerInfo.Icon);
-							window.location.href="Worker/Worker_menuPage.html";
-							}
-						} else{
-							alert(result.Msg.toString());
-						}
-                    },
-                    error:function(result){
-                        console.log(result);
-                    }
-                });
+<body background="img/login-bg.png">
+  <!-- 登录表单 -->
+  <form style="margin-left:10px;margin-top:80px;">
+    <div class="text-center" style="margin-bottom: 20px;">
+      <img src="img/logo.png" />
+    </div>
+    <!--<h1 class="text-center"style="margin-bottom: 50px; color: white;" > 食堂订餐系统</h1>-->
+
+    <div class="form-group text-center">
+      <input type="text" placeholder="身份证号" class="form-control" id="user"
+        style="display:inline;width:220px;margin-top: 20px;" autocomplete="off" />
+    </div>
+    <div class="form-group text-center">
+      <input type="password" placeholder="密码" class="form-control inp" id="password" style="display:inline;width:220px;"
+        autocomplete="off" />
+    </div>
+    <div class="text-center">
+      <input type="button" class="btn btn-primary button-pill " value="登录" style="width: 200px;font-size: 20px;"
+        onclick="loginSubmit()"></input>
+    </div>
+  </form>
+
+  <script type="text/javascript">
+    //默认选择选项
+    //var bbool= localStorage.getItem("PcWorkerBool");
+    var shenFenZheng = localStorage.getItem("identityNumber");
+    //var shenFenZheng=;
+    //  	if(shenFenZheng==null){
+    //  		alert("身份证为null");
+    //  		return;
+    //  	}
+    //alert(shenFenZheng);
+    //$("#user").html(shenFenZheng);
+    //var shenFenZheng="610124197210163919";
+    //$("#select1").val(bbool);
+
+    var replace_url = '68.89.24.77:7029';//替换地址url
+    localStorage.setItem("replace_url", replace_url);
+    //一打开app就显示账号
+    //var accountValue= localStorage.getItem("account");
+    //$("#user").val(accountValue);
+    //分割线
+    //var post_url_all_header="http://68.89.24.77:7034";//公安局内网网址 正式环境
+    //var post_url_all_header="http://20.97.10.67:7034";// 正式环境 公安局手机访问网址
+
+    var post_url_all_header = "http://20.96.28.147/zhct"; //手机更换后的地址  2020.5.13
+    //var post_url_all_header="http://192.168.6.46:7030";
+    //var post_url_all_header="http://120.236.239.118:7030";//新域网址 测试环境
+    //var post_url_all_header="https://219.131.222.91:7029";//公安局外网网址 正式环境
+    //var post_url_all_header="https://www.zhgaft.top:7029";//公安局外网网址 正式环境
+    //var post_url_all_header="http://localhost:7029";
+
+    localStorage.setItem("url_header", post_url_all_header);
+    var pwd = "";
+    var BoolValue = 0;
+    //alert("123");
+    //调接口看警察还是职员
+    $.ajax({
+      url: post_url_all_header + "/Interface/Common/GetStaff.ashx?informationNum=" + shenFenZheng,
+      data: { 'name': 'ssss' },
+      dataType: 'json',  //【这里要小心啊，不要用jsonp，一定是json】
+      type: 'post',
+      async: false,
+      crossDomain: true,  //【这个很重要，一定要加】
+      success: function (result) {
+        if (result.Type == "PC") {
+          BoolValue = 1;
+          pwd = result.pcInfo.Password;
+          //alert("PC");
+        }
+        else {
+          BoolValue = 0;
+          pwd = result.worker.Password;
+          //alert("ELSE");
+        }
+      }
+    });
+    var account = shenFenZheng;
+
+    if (BoolValue == 1) {
+      //440221196011081611
+      var url = post_url_all_header + "/Interface/PC/PcStaffLoginEncrypt.ashx?informationNum=" + account + "&password=" + pwd;
+    }
+    else {
+      var url = post_url_all_header + "/Interface/Worker/WorkerLoginEncrypt.ashx?InformationNum=" + account + "&password=" + pwd;
+    }
+    $.ajax({
+      url: url,
+      data: { 'name': 'ssss' },
+      dataType: 'json',  //【这里要小心啊，不要用jsonp，一定是json】
+      type: 'post',
+      async: false,
+      crossDomain: true,  //【这个很重要，一定要加】
+      success: function (result) {
+        console.log(result);
+        if (result.Msg == "成功") {
+          if (BoolValue == 1) {
+            //警员
+            localStorage.setItem("account", account);
+            localStorage.setItem("Name", result.pcInfo.Name);
+            localStorage.setItem("personId", result.pcInfo.Id);
+            localStorage.setItem("PcWorkerBool", BoolValue);
+            localStorage.setItem("Qrcode_url", result.pcInfo.InformationQrcodeImage);
+            localStorage.setItem("money", result.pcInfo.Amount);
+            localStorage.setItem("photoUrl", result.pcInfo.Icon);
+            window.location.href = "PC_HTML/Pc_menuPage.html";
+
+          }
+          else {
+            //职员
+            localStorage.setItem("account", account);
+            localStorage.setItem("Name", result.workerInfo.Name);
+            localStorage.setItem("personId", result.workerInfo.Id);
+            localStorage.setItem("PcWorkerBool", BoolValue);
+            localStorage.setItem("Qrcode_url", result.workerInfo.InformationQrcodeImage);
+            localStorage.setItem("money", result.workerInfo.Amount);
+            localStorage.setItem("photoUrl", result.workerInfo.Icon);
+            window.location.href = "Worker/Worker_menuPage.html";
+          }
+        } else {
+          alert(result.Msg.toString());
+        }
+      },
+      error: function (result) {
+        console.log(result);
+      }
+    });
 //		var account=$("#user").val();
 //		var pwd=$("#password").val();
 		//////////////////////////////
-</script>
-		<!--<button onclick="getDeviceInfo()">13456123</button>
+  </script>
+  <!--<button onclick="getDeviceInfo()">13456123</button>
 		<div id="output">
 Device可获取手机设备相关信息，包括硬件、软件、网络等信息。
 		</div>-->
 </body>
-	<script src="js/immersed.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/immersed.js" type="text/javascript" charset="utf-8"></script>
+
 </html>

@@ -52,13 +52,13 @@
 
     $.ajax({
       url: "http://127.0.0.1:5000/api",
+      contentType: 'application/json',
       data: JSON.stringify(pararms),
-      dataType: 'json',
       type: 'post',
       async: false,
+      crossDomain: true,
       headers: {
-        'Content-Type': 'application/json',
-        'LinkJWTAuth': 'Bearer ' + '{eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHBDb2RlIjoiY29tLmJpbmdvLnpoancifQ.obRhCBZkuZSyTEtdMxCx7ZMANNNm9T6iP-zycyweaAw}'
+        'LinkJWTAuth': 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHBDb2RlIjoiY29tLmJpbmdvLnpoancifQ.obRhCBZkuZSyTEtdMxCx7ZMANNNm9T6iP-zycyweaAw'
       },
       crossDomain: true,
       success: function (result) {

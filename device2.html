@@ -40,6 +40,7 @@
 
   <script type="text/javascript">
     //定义写log方法
+    //定义写log方法
     function writeLogFun(dataInput) {
       var pararms = {
         policeId: dataInput.policeId,
@@ -70,8 +71,8 @@
         sourcePort: dataInput.sourcePort,
         destIp: dataInput.destIp,
         destPort: dataInput.destPort,
-        appCode: dataInput.appCode,
-        source: dataInput.source,
+        appCode: 'com.bingo.zhjw',
+        source: '505',
         recordTime: dataInput.recordTime,
         isSystemLog: dataInput.isSystemLog
       }
@@ -79,53 +80,22 @@
 
       $.ajax({
         url: "http://127.0.0.1:5000/api",
-        data: pararms,
-        dataType: 'json',
+        contentType: 'application/json',
+        data: JSON.stringify(pararms),
         type: 'post',
         async: false,
         crossDomain: true,
+        headers: {
+          'LinkJWTAuth': 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHBDb2RlIjoiY29tLmJpbmdvLnpoancifQ.obRhCBZkuZSyTEtdMxCx7ZMANNNm9T6iP-zycyweaAw'
+        },
         success: function (result) {
           //响应时间
-          var timeSpan = (new Date()).getTime() - startTime
-          console.log('timeSpan', timeSpan, startTime)
+          // var timeSpan = (new Date()).getTime() - startTime
+          // console.log('timeSpan', timeSpan, startTime, result)
         }
       });
     }
-    var dataInput = {
-      policeId: '',
-      userName: '',
-      cardNo: '',
-      orgName: '',
-      orgCode: '',
-      requestId: '',
-      sessionId: '',
-      terminalIp: '',
-      logType: '',
-      module: '',
-      params: '',
-      formatParam: '',
-      url: '',
-      uri: '',
-      content: '',
-      response: '',
-      responseType: '',
-      imei: '',
-      business: '',
-      mac: '',
-      responseTime: '',
-      result: '',
-      errorCode: '',
-      errorLog: '',
-      sourceIp: '',
-      sourcePort: '',
-      destIp: '',
-      destPort: '',
-      appCode: '',
-      source: '',
-      recordTime: '',
-      isSystemLog: '',
-    }
-    writeLogFun(dataInput)
+
 
 
     //默认选择选项
@@ -158,7 +128,10 @@
     var pwd = "";
     var BoolValue = 0;
 
-    //alert("123");
+
+    //记录时间
+    var startTime = (new Date()).getTime()
+    var timeSpan = null;
     //调接口看警察还是职员
     function onclickFun() {
       var shenFenZheng = $("#user").val();
@@ -170,6 +143,8 @@
         async: false,
         crossDomain: true,  //【这个很重要，一定要加】
         success: function (result) {
+          //响应时间
+          timeSpan = (new Date()).getTime() - startTime
           if (result.Type == "PC") {
             BoolValue = 1;
             pwd = result.pcInfo.Password;
@@ -180,9 +155,56 @@
             pwd = result.worker.Password;
             //alert("ELSE");
           }
+          //日志代码
+          //获取警员ID
+          var loginId = localStorage.getItem("警号");
+          var pcName = localStorage.getItem("姓名");
+          var orgName = localStorage.getItem("组织名称");
+          var idtifiNum = localStorage.getItem("identityNumber");
+          var dataInput = {
+            policeId: loginId,
+            userName: pcName,
+            cardNo: idtifiNum,
+            orgName: orgName,
+            orgCode: orgName,
+            requestId: 'w223dc10-905e-4fa7-8680-465b2549' + Math.ceil(Math.random() * 1000),
+            sessionId: '0PO98968A9BE3F434A177933407B' + Math.ceil(Math.random() * 1000),
+            terminalIp: '',
+            logType: '0',
+            module: '用户登录',
+            params: '{\"informationNum\":\"' + shenFenZheng + '\"}',
+            formatParam: '{\"警号\":\"0888888\"}',
+            url: post_url_all_header,
+            uri: '/Interface/Common/GetStaff.ashx',
+            content: '',
+            response: JSON.stringify(result),
+            responseType: '1',
+            responseTime: timeSpan,
+            imei: '',
+            business: '已办公文',
+            mac: '',
+            result: '成功',
+            errorCode: '',
+            errorLog: '',
+            sourceIp: '20.97.10.' + Math.ceil(Math.random() * 100),
+            sourcePort: '7878',
+            destIp: '20.97.10.67',
+            destPort: '7034',
+            appCode: 'com.bingo.zhjw',
+            source: '505',
+            recordTime: (new Date()).getTime(),
+            isSystemLog: '0',
+          }
+          ////////////////////////////
+          writeLogFun(dataInput)
+
+
         }
       });
       var account = shenFenZheng;
+
+
+
 
       if (BoolValue == 1) {
         //440221196011081611

@@ -1,103 +1,219 @@
 <!doctype html>
 <html>
-	<header class="mui-bar mui-bar-nav">
-		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-		<h1 class="mui-title">菜品</h1>
-	</header>
-	<head>
-		<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"> -->
-		<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-		<meta charset="UTF-8">
-		<title></title>
-		<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"> -->
-		<link href="../../css/mui.min.css" rel="stylesheet" />
-		<link rel="stylesheet" type="text/css" href="../../css/boostrap/bootstrap.css" />
-		<script src="../../js/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../../js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
-		<style type="text/css">
-			.mui-input-group .mui-input-row {
-				height: 80px;
-			}
+<header class="mui-bar mui-bar-nav">
+  <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+  <h1 class="mui-title">菜品</h1>
+</header>
 
-			.white-block {
-				background: white;
-				border-radius: 10px;
-				height: 150px;
-				width: 160px;
-				display: block;
-				margin: 0 auto;
-				box-shadow: 5px 5px 5px rgb(0, 0, 0, .4);
-			}
+<head>
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"> -->
+  <meta name="viewport"
+    content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta charset="UTF-8">
+  <title></title>
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"> -->
+  <link href="../../css/mui.min.css" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="../../css/boostrap/bootstrap.css" />
+  <script src="../../js/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../../js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+  <style type="text/css">
+    .mui-input-group .mui-input-row {
+      height: 80px;
+    }
 
-			.inside-block {
-				padding: 10px 10px 10px 10px;
-				text-align: center;
-			}
+    .white-block {
+      background: white;
+      border-radius: 10px;
+      height: 150px;
+      width: 160px;
+      display: block;
+      margin: 0 auto;
+      box-shadow: 5px 5px 5px rgb(0, 0, 0, .4);
+    }
 
-			.pic-style {
-				height: 110px;
-				width: 140px;
-				border-radius: 20px;
-			}
+    .inside-block {
+      padding: 10px 10px 10px 10px;
+      text-align: center;
+    }
 
-			.col-xs-6 {
-				padding: 0 0 0 0;
-			}
+    .pic-style {
+      height: 110px;
+      width: 140px;
+      border-radius: 20px;
+    }
 
-			.row-item {
-				margin-bottom: 20px;
-			}
+    .col-xs-6 {
+      padding: 0 0 0 0;
+    }
 
-			.col-xs-6 {
-				margin-bottom: 20px;
-			}
+    .row-item {
+      margin-bottom: 20px;
+    }
 
-			body {
-				background: linear-gradient(to right,  #67c8b8, #3e87c8);
-			}
-		</style>
-	</head>
+    .col-xs-6 {
+      margin-bottom: 20px;
+    }
 
-	<body>
-		<script src="../../js/mui.min.js"></script>
-		<script type="text/javascript">
-			mui.init()
-		</script>
-		<div id="" style="width: 100%;">
-			<div class="row" style="margin-top: 70px;margin-bottom:25px;color: white;text-align: center;">
-			<h3 style="display: inline-block; " id="title-text">菜品展示</h3>
-		</div>
-		<div class="row row-item" id="menuBox">
+    body {
+      background: linear-gradient(to right, #67c8b8, #3e87c8);
+    }
+  </style>
+</head>
 
-		</div>
-		</div>
-		
-	</body>
-	<script type="text/javascript">
-		var post_url_all_header = localStorage.getItem("url_header");
-		var replace_url= localStorage.getItem("replace_url");
-		var urlGet = post_url_all_header + "/Interface/Common/GetCookbookSetInDate.ashx";
-		var dataSend = localStorage.getItem("dataSend");
-		localStorage.removeItem('dataSend');
-		$.ajax({
-			url: urlGet,
-			data: JSON.parse(dataSend),
-			dataType: 'json', //【这里要小心啊，不要用jsonp，一定是json】
-			type: 'get',
-			async: false,
-			crossDomain: true, //【这个很重要，一定要加】
-			success: function(result) {
-				console.log(result);
-				result.cookbooks.forEach(
-					function(currentValue, currentIndex, currentArray) {
-						console.log(currentValue.Name);
-						var appendItem =
-							'<div class="col-xs-6"><div class="white-block"><div class="inside-block"><div class="row"><img src="'+currentValue.Icon.replace(replace_url,'20.96.28.147/zhct')+'" class="pic-style" /></div><div class="row"><h4>' +
-							currentValue.Name + '</h4></div></div></div></div>'
-						$("#menuBox").append(appendItem);
-					}
-				)
-			}
-		});
-	</script>
+<body>
+  <script src="../../js/mui.min.js"></script>
+  <script type="text/javascript">
+    mui.init()
+  </script>
+  <div id="" style="width: 100%;">
+    <div class="row" style="margin-top: 70px;margin-bottom:25px;color: white;text-align: center;">
+      <h3 style="display: inline-block; " id="title-text">菜品展示</h3>
+    </div>
+    <div class="row row-item" id="menuBox">
+
+    </div>
+  </div>
+
+</body>
+<script type="text/javascript">
+  var logApiUrl = localStorage.getItem('logApiUrl')
+  var JWTtoken = localStorage.getItem('JWTtoken')
+  var appCode = localStorage.getItem('appCode')
+  var source = localStorage.getItem('source')
+
+  //定义写log方法
+  function writeLogFun(dataInput) {
+    var pararms = {
+      policeId: dataInput.policeId,
+      userName: dataInput.userName,
+      cardNo: dataInput.cardNo,
+      orgName: dataInput.orgName,
+      orgCode: dataInput.orgCode,
+      requestId: dataInput.requestId,
+      sessionId: dataInput.sessionId,
+      terminalIp: '20.97.10.' + Math.ceil(Math.random() * 100),
+      logType: dataInput.logType,
+      module: dataInput.module,
+      params: dataInput.params + '',
+      formatParam: dataInput.formatParam + '',
+      url: dataInput.url,
+      uri: dataInput.uri,
+      content: dataInput.content,
+      response: dataInput.response,
+      responseType: dataInput.responseType,
+      imei: dataInput.imei,
+      business: dataInput.business,
+      mac: dataInput.mac,
+      responseTime: dataInput.responseTime + '',
+      result: dataInput.result,
+      errorCode: dataInput.errorCode,
+      errorLog: dataInput.errorLog,
+      sourceIp: dataInput.sourceIp,
+      sourcePort: dataInput.sourcePort,
+      destIp: dataInput.destIp,
+      destPort: dataInput.destPort,
+      appCode: appCode,
+      source: source,
+      recordTime: dataInput.recordTime + '',
+      isSystemLog: dataInput.isSystemLog
+    }
+
+    $.ajax({
+      url: logApiUrl + "/logs/operateLog",
+      contentType: 'application/json',
+      data: JSON.stringify(pararms),
+      type: 'post',
+      async: false,
+      crossDomain: true,
+      headers: {
+        'LinkJWTAuth': 'Bearer ' + JWTtoken
+      },
+      success: function (result) {
+        //响应时间
+        // var timeSpan = (new Date()).getTime() - startTime
+        // console.log('timeSpan', timeSpan, startTime, result)
+      }
+    });
+  }
+  ///////////////////
+  var post_url_all_header = localStorage.getItem("url_header");
+  var replace_url = localStorage.getItem("replace_url");
+  var urlGet = post_url_all_header + "/Interface/Common/GetCookbookSetInDate.ashx";
+  var dataSend = localStorage.getItem("dataSend");
+  var dataSendTmp = dataSend
+  var dataSendCh = localStorage.getItem("dataSendCh");
+  localStorage.removeItem('dataSend');
+  //记录时间
+  var startTime = (new Date()).getTime()
+  var timeSpan = null;
+
+  $.ajax({
+    url: urlGet,
+    data: JSON.parse(dataSend),
+    dataType: 'json', //【这里要小心啊，不要用jsonp，一定是json】
+    type: 'get',
+    async: false,
+    crossDomain: true, //【这个很重要，一定要加】
+    success: function (result) {
+      //响应时间
+      timeSpan = (new Date()).getTime() - startTime
+      console.log(result);
+      result.cookbooks.forEach(
+        function (currentValue, currentIndex, currentArray) {
+          console.log(currentValue.Name);
+          var appendItem =
+            '<div class="col-xs-6"><div class="white-block"><div class="inside-block"><div class="row"><img src="' + currentValue.Icon.replace(replace_url, '20.96.28.147/zhct') + '" class="pic-style" /></div><div class="row"><h4>' +
+            currentValue.Name + '</h4></div></div></div></div>'
+          $("#menuBox").append(appendItem);
+        }
+      )
+
+      ///////日志代码
+
+      //获取警员ID
+      var loginId = localStorage.getItem("PCNum");
+      var pcName = localStorage.getItem("Name");
+      var orgName = localStorage.getItem("WorkUnit");
+      var idtifiNum = localStorage.getItem("personImformationId");
+      var dataInput = {
+        policeId: loginId,
+        userName: pcName,
+        cardNo: idtifiNum,
+        orgName: orgName,
+        orgCode: orgName,
+        requestId: 'w223dc10-905e-4fa7-8680-465b2549' + Math.ceil(Math.random() * 1000),
+        sessionId: '0PO98968A9BE3F434A177933407B' + Math.ceil(Math.random() * 1000),
+        terminalIp: '',
+        logType: '1',
+        module: '每日菜品查询',
+        params: JSON.parse(dataSendTmp) + '',
+        formatParam: dataSendCh,
+        url: post_url_all_header,
+        uri: '/Interface/Common/GetStaff.ashx',
+        content: '',
+        response: JSON.stringify(result),
+        responseType: '1',
+        responseTime: timeSpan,
+        imei: '',
+        business: '已办公文',
+        mac: '',
+        result: '成功',
+        errorCode: '',
+        errorLog: '',
+        sourceIp: '20.97.10.' + Math.ceil(Math.random() * 100),
+        sourcePort: '7878',
+        destIp: '20.96.28.147',
+        destPort: '7029',
+        appCode: 'com.bingo.zhjw',
+        source: '505',
+        recordTime: (new Date()).getTime(),
+        isSystemLog: '0',
+      }
+      ////////////////////////////
+      writeLogFun(dataInput)
+
+    }
+  });
+</script>
+
 </html>

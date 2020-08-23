@@ -1,133 +1,140 @@
 <!doctype html>
 <html>
-	<header class="mui-bar mui-bar-nav">
-		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-		<h1 class="mui-title">菜品</h1>
-	</header>
-	<head>
-		<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-		<meta charset="UTF-8">
-		<title></title>
-		<!-- <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" /> -->
-		<link rel="stylesheet" type="text/css" href="../../css/boostrap/bootstrap.css" />
-		<link rel="stylesheet" type="text/css" href="../../css/select/bootstrap-select.css" />
-		<link href="../../css/mui.min.css" rel="stylesheet" />
-		<!--///////////////////////////////////////////////////////////-->
-		<script src="../../js/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../../js/mui.min.js"></script>
-		<script src="../../js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../../js/bootstrap-select.js" type="text/javascript" charset="utf-8"></script>
-		<script type="text/javascript">
-			mui.init()
-		</script>
-		<style type="text/css">
-			.row-select {
-				display: inline-block;
-			}
+<header class="mui-bar mui-bar-nav">
+  <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+  <h1 class="mui-title">菜品</h1>
+</header>
 
-			.center_item {
-				text-align: center !important;
-			}
+<head>
+  <meta name="viewport"
+    content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta charset="UTF-8">
+  <title></title>
+  <!-- <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" /> -->
+  <link rel="stylesheet" type="text/css" href="../../css/boostrap/bootstrap.css" />
+  <link rel="stylesheet" type="text/css" href="../../css/select/bootstrap-select.css" />
+  <link href="../../css/mui.min.css" rel="stylesheet" />
+  <!--///////////////////////////////////////////////////////////-->
+  <script src="../../js/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../../js/mui.min.js"></script>
+  <script src="../../js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../../js/bootstrap-select.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript">
+    mui.init()
+  </script>
+  <style type="text/css">
+    .row-select {
+      display: inline-block;
+    }
 
-			.longBtn {
-				width: 220px;
-				height: 40px;
+    .center_item {
+      text-align: center !important;
+    }
 
-			}
+    .longBtn {
+      width: 220px;
+      height: 40px;
 
-			.button-font {
-				font-size: 16px;
-				font-weight: 600;
-			}
+    }
 
-			.filter-option-inner-inner {
-				text-align: center;
-				font-size: 16px;
-			}
+    .button-font {
+      font-size: 16px;
+      font-weight: 600;
+    }
 
-			.row {
-				margin-top: 10px;
-				margin-bottom: 10px;
-			}
+    .filter-option-inner-inner {
+      text-align: center;
+      font-size: 16px;
+    }
 
-			.btn-style {
-				font-weight: 500;
-				letter-spacing: 10px;
-				display: block;
-				margin: 0 auto;
-				width: 200px;
-				border-radius: 10px;
-				margin-top: 20px;
-			}
-		</style>
-	</head>
+    .row {
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
 
-	<body background="../../img/login-bg.png">
-		<div class="row center_item" style="margin:160px 0 30px 0;">
-			<h3 style="color: white;">菜单日期餐次选择</h3>
-		</div>
-		<div class="row center_item">
-			<input type="date" id="dateSelect" style="width: 220px;height:34px;display: inline-block;text-indent: 23px;" />
-		</div>
-		<div class="row center_item" style="margin-bottom: 25px;">
-			<div class="btn-group center_item">
-				<select id="select2" class="selectpicker center_item">
+    .btn-style {
+      font-weight: 500;
+      letter-spacing: 10px;
+      display: block;
+      margin: 0 auto;
+      width: 200px;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
 
-				</select>
-			</div>
-		</div>
-		<div class="row center_item">
-			<div class="btn-group center_item">
-				<select id="select3" class="selectpicker center_item">
-					<option value="Breakfast">早餐</option>
-					<option value="Lunch">午餐</option>
-					<option value="Supper">晚餐</option>
-					<option value="4">宵夜</option>
-				</select>
-			</div>
-		</div>
-		<div class="row">
-			<button id="selectBtn" type="button" class="btn btn-primary mui-btn-block btn-style">选择</button>
-		</div>
-		<script type="text/javascript">
-			var post_url_all_header = localStorage.getItem("url_header");
-			var targetUrl = post_url_all_header + "/Interface/Common/GetCafeterias.ashx";
-			$.ajax({
-				url: targetUrl,
-				data: {},
-				dataType: 'json', //【这里要小心啊，不要用jsonp，一定是json】
-				type: 'get',
-				async: false,
-				crossDomain: true, //【这个很重要，一定要加】
-				success: function(result) {
-					console.log(result)
+<body background="../../img/login-bg.png">
+  <div class="row center_item" style="margin:160px 0 30px 0;">
+    <h3 style="color: white;">菜单日期餐次选择</h3>
+  </div>
+  <div class="row center_item">
+    <input type="date" id="dateSelect" style="width: 220px;height:34px;display: inline-block;text-indent: 23px;" />
+  </div>
+  <div class="row center_item" style="margin-bottom: 25px;">
+    <div class="btn-group center_item">
+      <select id="select2" class="selectpicker center_item">
 
-					result.list.forEach(function(currentValue, currentIndex, currentArray) {
-						console.log(currentValue.Name);
-						$("#select2").append("<option value=" + currentValue.Id + ">" + currentValue.Name + "</option>");
-					});
-				}
-			});
-			
-			$("#selectBtn").click(
-				function() {
-					var urlGet = post_url_all_header + "/Interface/Common/GetCookbookSetInDate.ashx";
-					if(Datetime==""){ mui.alert("请选择查看排餐日期");return;}
-					var CafeteriaId = $("#select2").val();
-					var CookbookEnum = $("#select3").val();
-					var Datetime = $("#dateSelect").val();
-					var dataSend = {
-							'CafeteriaId': CafeteriaId,
-							'CookbookEnum': CookbookEnum,
-							'Datetime': Datetime
-						};
-						
-					localStorage.setItem('dataSend',JSON.stringify(dataSend));
-					window.location.href="MenuShow.html";
-					/////////////////////////////////////////////
-					
-				})
-		</script>
-	</body>
+      </select>
+    </div>
+  </div>
+  <div class="row center_item">
+    <div class="btn-group center_item">
+      <select id="select3" class="selectpicker center_item">
+        <option value="Breakfast">早餐</option>
+        <option value="Lunch">午餐</option>
+        <option value="Supper">晚餐</option>
+        <option value="4">宵夜</option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <button id="selectBtn" type="button" class="btn btn-primary mui-btn-block btn-style">选择</button>
+  </div>
+  <script type="text/javascript">
+    var post_url_all_header = localStorage.getItem("url_header");
+    var targetUrl = post_url_all_header + "/Interface/Common/GetCafeterias.ashx";
+    $.ajax({
+      url: targetUrl,
+      data: {},
+      dataType: 'json', //【这里要小心啊，不要用jsonp，一定是json】
+      type: 'get',
+      async: false,
+      crossDomain: true, //【这个很重要，一定要加】
+      success: function (result) {
+        console.log(result)
+
+        result.list.forEach(function (currentValue, currentIndex, currentArray) {
+          console.log(currentValue.Name);
+          $("#select2").append("<option value=" + currentValue.Id + ">" + currentValue.Name + "</option>");
+        });
+      }
+    });
+
+    $("#selectBtn").click(
+      function () {
+        var urlGet = post_url_all_header + "/Interface/Common/GetCookbookSetInDate.ashx";
+        if (Datetime == "") { mui.alert("请选择查看排餐日期"); return; }
+        var CafeteriaId = $("#select2").val();
+        var CookbookEnum = $("#select3").val();
+        var Datetime = $("#dateSelect").val();
+        var dataSend = {
+          'CafeteriaId': CafeteriaId,
+          'CookbookEnum': CookbookEnum,
+          'Datetime': Datetime
+        };
+        var dataSendCh = {
+          '餐厅编号': CafeteriaId,
+          '餐次': CookbookEnum,
+          '日期': Datetime
+        };
+        localStorage.setItem('dataSend', JSON.stringify(dataSend));
+        localStorage.setItem('dataSendCh', JSON.stringify(dataSendCh));
+        window.location.href = "MenuShow.html";
+        /////////////////////////////////////////////
+
+      })
+  </script>
+</body>
 
 </html>

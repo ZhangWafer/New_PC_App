@@ -25,7 +25,7 @@
     <!--<h1 class="text-center"style="margin-bottom: 50px; color: white;" > 食堂订餐系统</h1>-->
 
     <div class="form-group text-center">
-      <input type="text" placeholder="身份证号" class="form-control" id="user"
+      <input type="text" placeholder="身份证号" class="form-control" value="441811197304104317" id="user"
         style="display:inline;width:220px;margin-top: 20px;" autocomplete="off" />
     </div>
     <div class="form-group text-center">
@@ -39,6 +39,9 @@
   </form>
 
   <script type="text/javascript">
+    //设置日志写入接口的地址
+    localStorage.setItem("logApiUrl", 'http://127.0.0.1:5000');
+    var logApiUrl = localStorage.getItem('logApiUrl')
     //定义写log方法
     //定义写log方法
     function writeLogFun(dataInput) {
@@ -79,7 +82,7 @@
       var startTime = (new Date()).getTime()
 
       $.ajax({
-        url: "http://127.0.0.1:5000/api",
+        url: logApiUrl + "/logs/operateLog",
         contentType: 'application/json',
         data: JSON.stringify(pararms),
         type: 'post',
@@ -173,7 +176,7 @@
             logType: '0',
             module: '用户登录',
             params: '{\"informationNum\":\"' + shenFenZheng + '\"}',
-            formatParam: '{\"警号\":\"0888888\"}',
+            formatParam: '{\"身份证\":\"' + shenFenZheng + '\"}',
             url: post_url_all_header,
             uri: '/Interface/Common/GetStaff.ashx',
             content: '',
@@ -228,10 +231,13 @@
               localStorage.setItem("account", account);
               localStorage.setItem("Name", result.pcInfo.Name);
               localStorage.setItem("personId", result.pcInfo.Id);
+              localStorage.setItem("PCNum", result.pcInfo.PCNum);
+              localStorage.setItem("WorkUnit", result.pcInfo.WorkUnit);
               localStorage.setItem("PcWorkerBool", BoolValue);
               localStorage.setItem("Qrcode_url", result.pcInfo.InformationQrcodeImage);
               localStorage.setItem("money", result.pcInfo.Amount);
               localStorage.setItem("photoUrl", result.pcInfo.Icon);
+              localStorage.setItem("personImformationId", result.pcInfo.InformationNum);
               window.location.href = "PC_HTML/Pc_menuPage.html";
 
             }

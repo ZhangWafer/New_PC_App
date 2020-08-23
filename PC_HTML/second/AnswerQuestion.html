@@ -1,126 +1,296 @@
 <!doctype html>
 <html>
-	<header class="mui-bar mui-bar-nav">
-		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-		<h1 class="mui-title"></h1>
-	</header>
-	<head>
-		<meta charset="UTF-8">
-		<title></title>
-		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<link href="../../css/mui.min.css" rel="stylesheet" />
-		<script src="../../js/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
-		<style type="text/css">
-		.white-block {
-			margin-bottom: 20px;
-			width: 320px;
-			height: 240px;
-			border-radius: 20px;
-			box-shadow: 10px 10px 10px rgb(0, 0, 0, 0.4);
-			background: white;
-			display: inline-block;
-		}
+<header class="mui-bar mui-bar-nav">
+  <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+  <h1 class="mui-title"></h1>
+</header>
 
-		h5 {
-			padding-left: 0px;
-			padding-top: 30px;
-		}
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+  <link href="../../css/mui.min.css" rel="stylesheet" />
+  <script src="../../js/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+  <style type="text/css">
+    .white-block {
+      margin-bottom: 20px;
+      width: 320px;
+      height: 240px;
+      border-radius: 20px;
+      box-shadow: 10px 10px 10px rgb(0, 0, 0, 0.4);
+      background: white;
+      display: inline-block;
+    }
 
-		body {
-			background: linear-gradient(to right, #67c8b8, #3e87c8);
-		}
-		
-		.quesRow{
-			margin-top: 20px;
-		}
-	</style>
-	</head>
-	
-	<body>
-		<script src="../../js/mui.min.js"></script>
-		<script type="text/javascript">
-			mui.init()
-		</script>
-		<div class="row" style="text-align: center;margin-top: 120px;">
-			<img style="height: 120px;padding-top:30px;display: inline-block;" src="../../img/tiaochawenjuan.svg" />
-			<h3 style="margin-bottom: 20px;color: white;display: inline-block">问卷调查</h3>
-		</div>
-		<div id="contentBox" style="text-align: center;margin-top: 20px;">
-			
-			
-		</div>
-	
-		<div class="row" style="text-align: center;">
-			<h4 style="color: white; ">意见栏</h4>
-			<textarea id="textaaa" name="" rows="6" cols="" placeholder="请输入意见" style="width: 300px;"></textarea>
-		</div>
-		<div class="row">
-			<button id="hand" type="button" class="btn btn-default" onclick="handon()" style="display: block;margin: 0 auto;width: 200px;height: 40px;  margin-bottom: 30px;margin-top: 20px;">提交问卷</button>
-		</div>
-		
-	</body>
-	<script type="text/javascript">
-		var post_url_all_header = localStorage.getItem("url_header");
-		var targetUrl = post_url_all_header + "/Interface/Common/GetQuest.ashx";
-		var questionNum=0;
-		var quesPackId=0;
-		$.ajax({
-                    url:targetUrl,
-                    data:{'name':'ssss'},
-                    dataType:'json',  //【这里要小心啊，不要用jsonp，一定是json】
-                    type:'get',
-					async:false,
-                    crossDomain: true,  //【这个很重要，一定要加】
-                    success:function(result){
-						questionNum=result.Items.length;
-						quesPackId=result.Info.Id;
-						result.Items.forEach(function(currentValue, currentIndex, currentArray) {
-							var answer=currentValue.Items.split(',');
-							var appendThing ='<div class="white-block" style="margin-top: 20px;"><div class="row"><div class="col-xs-6"><h1></h1></div><div class="col-xs-6" ><div class="row"><h4 style="margin-top: 20px;display: inline-block;">'+(currentIndex+1)+'-'+currentValue.ItemsTitle
-							+'</h4></div><div class="row quesRow"><input type="radio" class="radio" name="ques'+currentIndex+'" value="1" checked="true" >'+answer[0]+'</input></div><div class="row quesRow"><input type="radio" name="ques'+currentIndex+'" value="2" >'+answer[1]+'</input></div><div class="row quesRow"><input type="radio" name="ques'+currentIndex+'" value="3"  >'+answer[2]+'</input></div><div class="row quesRow"><input type="radio" name="ques'+currentIndex+'" value="4"  >'+answer[3]+'</input></div></div></div></div>';
-							$("#contentBox").append(appendThing);
-						});
-		}});
-		
-		var personId = localStorage.getItem("personId");
-		var PcWorkerBool = localStorage.getItem("PcWorkerBool");
-		var StaffType= "";
-		
-		function handon() {
-			var answerAll="";
-			for (i = 0; i < questionNum; i++) { 
-			    var answerAll =answerAll+","+ $("input[name=ques"+i+"]:checked").val();
-			}
-			answerAll=answerAll.substr(1,answerAll.length-1);
-			console.log(answerAll);
-			if(PcWorkerBool){
-				StaffType="Police"
-			}
-			//post数据
-			var targetUrl2 = post_url_all_header + "/Interface/Common/QuestReplay.ashx";
-			var textaaa= $("#textaaa").val();
-			console.log("text",textaaa)
-			var jsonddd=JSON.stringify({
-						"QuestID":quesPackId.toString(),
-						"ReplayItems": answerAll,
-						"StaffId": personId,
-						"StaffType": StaffType,  //Worker
-						"Suggest": textaaa
-					});
-			$.ajax({
-                    url:targetUrl2,
-                    data:jsonddd,
-                    dataType:'json',  //【这里要小心啊，不要用jsonp，一定是json】
-                    type:'post',
-					async:false,
-                    crossDomain: true,  //【这个很重要，一定要加】
-                    success:function(result){
-							console.log(result);
-							alert(result.Msg);
-							window.location.href="../Pc_menuPage.html";
-		}});
-			
-		}
-	</script>
+    h5 {
+      padding-left: 0px;
+      padding-top: 30px;
+    }
+
+    body {
+      background: linear-gradient(to right, #67c8b8, #3e87c8);
+    }
+
+    .quesRow {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <script src="../../js/mui.min.js"></script>
+  <script type="text/javascript">
+    mui.init()
+  </script>
+  <div class="row" style="text-align: center;margin-top: 120px;">
+    <img style="height: 120px;padding-top:30px;display: inline-block;" src="../../img/tiaochawenjuan.svg" />
+    <h3 style="margin-bottom: 20px;color: white;display: inline-block">问卷调查</h3>
+  </div>
+  <div id="contentBox" style="text-align: center;margin-top: 20px;">
+
+
+  </div>
+
+  <div class="row" style="text-align: center;">
+    <h4 style="color: white; ">意见栏</h4>
+    <textarea id="textaaa" name="" rows="6" cols="" placeholder="请输入意见" style="width: 300px;"></textarea>
+  </div>
+  <div class="row">
+    <button id="hand" type="button" class="btn btn-default" onclick="handon()"
+      style="display: block;margin: 0 auto;width: 200px;height: 40px;  margin-bottom: 30px;margin-top: 20px;">提交问卷</button>
+  </div>
+
+</body>
+<script type="text/javascript">
+  //定义写log方法/////////////////////////////////////////
+  var logApiUrl = localStorage.getItem('logApiUrl')
+  var JWTtoken = localStorage.getItem('JWTtoken')
+  var appCode = localStorage.getItem('appCode')
+  var source = localStorage.getItem('source')
+
+  //定义写log方法
+  function writeLogFun(dataInput) {
+    var pararms = {
+      policeId: dataInput.policeId,
+      userName: dataInput.userName,
+      cardNo: dataInput.cardNo,
+      orgName: dataInput.orgName,
+      orgCode: dataInput.orgCode,
+      requestId: dataInput.requestId,
+      sessionId: dataInput.sessionId,
+      terminalIp: '20.97.10.' + Math.ceil(Math.random() * 100),
+      logType: dataInput.logType,
+      module: dataInput.module,
+      params: dataInput.params + '',
+      formatParam: dataInput.formatParam + '',
+      url: dataInput.url,
+      uri: dataInput.uri,
+      content: dataInput.content,
+      response: dataInput.response,
+      responseType: dataInput.responseType,
+      imei: dataInput.imei,
+      business: dataInput.business,
+      mac: dataInput.mac,
+      responseTime: dataInput.responseTime + '',
+      result: dataInput.result,
+      errorCode: dataInput.errorCode,
+      errorLog: dataInput.errorLog,
+      sourceIp: dataInput.sourceIp,
+      sourcePort: dataInput.sourcePort,
+      destIp: dataInput.destIp,
+      destPort: dataInput.destPort,
+      appCode: appCode,
+      source: source,
+      recordTime: dataInput.recordTime + '',
+      isSystemLog: dataInput.isSystemLog
+    }
+
+    $.ajax({
+      url: logApiUrl + "/logs/operateLog",
+      contentType: 'application/json',
+      data: JSON.stringify(pararms),
+      type: 'post',
+      async: false,
+      crossDomain: true,
+      headers: {
+        'LinkJWTAuth': 'Bearer ' + JWTtoken
+      },
+      success: function (result) {
+        //响应时间
+        // var timeSpan = (new Date()).getTime() - startTime
+        // console.log('timeSpan', timeSpan, startTime, result)
+      }
+    });
+  }
+  ////////////////////
+  //记录时间
+  var startTime = (new Date()).getTime()
+  var timeSpan = null;
+  /////////////
+  var post_url_all_header = localStorage.getItem("url_header");
+  var targetUrl = post_url_all_header + "/Interface/Common/GetQuest.ashx";
+  var questionNum = 0;
+  var quesPackId = 0;
+  $.ajax({
+    url: targetUrl,
+    data: { 'name': 'ssss' },
+    dataType: 'json',  //【这里要小心啊，不要用jsonp，一定是json】
+    type: 'get',
+    async: false,
+    crossDomain: true,  //【这个很重要，一定要加】
+    success: function (result) {
+      //响应时间
+      timeSpan = (new Date()).getTime() - startTime
+      ////////////////////////////////////
+      questionNum = result.Items.length;
+      quesPackId = result.Info.Id;
+      result.Items.forEach(function (currentValue, currentIndex, currentArray) {
+        var answer = currentValue.Items.split(',');
+        var appendThing = '<div class="white-block" style="margin-top: 20px;"><div class="row"><div class="col-xs-6"><h1></h1></div><div class="col-xs-6" ><div class="row"><h4 style="margin-top: 20px;display: inline-block;">' + (currentIndex + 1) + '-' + currentValue.ItemsTitle
+          + '</h4></div><div class="row quesRow"><input type="radio" class="radio" name="ques' + currentIndex + '" value="1" checked="true" >' + answer[0] + '</input></div><div class="row quesRow"><input type="radio" name="ques' + currentIndex + '" value="2" >' + answer[1] + '</input></div><div class="row quesRow"><input type="radio" name="ques' + currentIndex + '" value="3"  >' + answer[2] + '</input></div><div class="row quesRow"><input type="radio" name="ques' + currentIndex + '" value="4"  >' + (answer[3] == undefined ? '' : answer[3]) + '</input></div></div></div></div>';
+        $("#contentBox").append(appendThing);
+      });
+
+      ////////////
+      /////////////加日志//////////////////
+      ///////日志代码
+
+      //获取警员ID
+      var loginId = localStorage.getItem("PCNum");
+      var pcName = localStorage.getItem("Name");
+      var orgName = localStorage.getItem("WorkUnit");
+      var idtifiNum = localStorage.getItem("personImformationId");
+      var dataInput = {
+        policeId: loginId,
+        userName: pcName,
+        cardNo: idtifiNum,
+        orgName: orgName,
+        orgCode: orgName,
+        requestId: 'w223dc10-905e-4fa7-8680-465b2549' + Math.ceil(Math.random() * 1000),
+        sessionId: '0PO98968A9BE3F434A177933407B' + Math.ceil(Math.random() * 1000),
+        terminalIp: '',
+        logType: '1',
+        module: '问卷调查',
+        params: '',
+        formatParam: '',
+        url: post_url_all_header,
+        uri: '/Interface/Common/GetQuest.ashx',
+        content: '',
+        response: JSON.stringify(result),
+        responseType: '1',
+        responseTime: timeSpan,
+        imei: '',
+        business: '已办公文',
+        mac: '',
+        result: '成功',
+        errorCode: '',
+        errorLog: '',
+        sourceIp: '20.97.10.' + Math.ceil(Math.random() * 100),
+        sourcePort: '7878',
+        destIp: '20.96.28.147',
+        destPort: '7029',
+        appCode: 'com.bingo.zhjw',
+        source: '505',
+        recordTime: (new Date()).getTime(),
+        isSystemLog: '0',
+      }
+      ////////////////////////////
+      writeLogFun(dataInput)
+    }
+  });
+
+  var personId = localStorage.getItem("personId");
+  var PcWorkerBool = localStorage.getItem("PcWorkerBool");
+  var StaffType = "";
+
+  function handon() {
+    var answerAll = "";
+    for (i = 0; i < questionNum; i++) {
+      var answerAll = answerAll + "," + $("input[name=ques" + i + "]:checked").val();
+    }
+    answerAll = answerAll.substr(1, answerAll.length - 1);
+    console.log(answerAll);
+    if (PcWorkerBool) {
+      StaffType = "Police"
+    }
+    //post数据
+    var targetUrl2 = post_url_all_header + "/Interface/Common/QuestReplay.ashx";
+    var textaaa = $("#textaaa").val();
+    console.log("text", textaaa)
+    var jsonddd = JSON.stringify({
+      "QuestID": quesPackId.toString(),
+      "ReplayItems": answerAll,
+      "StaffId": personId,
+      "StaffType": StaffType,  //Worker
+      "Suggest": textaaa
+    });
+    ////////////////////
+    //记录时间
+    var startTime = (new Date()).getTime()
+    var timeSpan = null;
+    $.ajax({
+      url: targetUrl2,
+      data: jsonddd,
+      dataType: 'json',  //【这里要小心啊，不要用jsonp，一定是json】
+      type: 'post',
+      async: false,
+      crossDomain: true,  //【这个很重要，一定要加】
+      success: function (result) {
+        //响应时间
+        timeSpan = (new Date()).getTime() - startTime
+        console.log(result);
+        alert(result.Msg);
+        window.location.href = "../Pc_menuPage.html";
+
+        ////////////
+        /////////////加日志//////////////////
+        ///////日志代码
+
+        //获取警员ID
+        var loginId = localStorage.getItem("PCNum");
+        var pcName = localStorage.getItem("Name");
+        var orgName = localStorage.getItem("WorkUnit");
+        var idtifiNum = localStorage.getItem("personImformationId");
+        var dataInput = {
+          policeId: loginId,
+          userName: pcName,
+          cardNo: idtifiNum,
+          orgName: orgName,
+          orgCode: orgName,
+          requestId: 'w223dc10-905e-4fa7-8680-465b2549' + Math.ceil(Math.random() * 1000),
+          sessionId: '0PO98968A9BE3F434A177933407B' + Math.ceil(Math.random() * 1000),
+          terminalIp: '',
+          logType: '2',
+          module: '问卷提交',
+          params: jsonddd,
+          formatParam: jsonddd,
+          url: post_url_all_header,
+          uri: '/Interface/Common/GetQuest.ashx',
+          content: '',
+          response: JSON.stringify(result),
+          responseType: '1',
+          responseTime: timeSpan,
+          imei: '',
+          business: '已办公文',
+          mac: '',
+          result: '成功',
+          errorCode: '',
+          errorLog: '',
+          sourceIp: '20.97.10.' + Math.ceil(Math.random() * 100),
+          sourcePort: '7878',
+          destIp: '20.96.28.147',
+          destPort: '7029',
+          appCode: 'com.bingo.zhjw',
+          source: '505',
+          recordTime: (new Date()).getTime(),
+          isSystemLog: '0',
+        }
+        ////////////////////////////
+        writeLogFun(dataInput)
+      }
+    });
+
+  }
+</script>
 
 </html>

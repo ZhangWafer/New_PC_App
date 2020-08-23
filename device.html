@@ -39,6 +39,73 @@
   </form>
 
   <script type="text/javascript">
+    //设置日志写入接口的地址
+    localStorage.setItem("logApiUrl", 'http://20.97.10.66:8094');//'http://20.97.10.66:8094'
+    localStorage.setItem("JWTtoken", 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHBDb2RlIjoiaW8uYW5kcm9pZC5aaHNQTENDYW50ZWVuSDUifQ.TcnSY5PH5Vo9UGa6H568JNHNV2N1Lk10Vdg9Wsi5vTY');
+    localStorage.setItem("appCode", 'io.android.ZhsPLCCanteenH5');
+    localStorage.setItem("source", '1178');
+    var logApiUrl = localStorage.getItem('logApiUrl')
+    var JWTtoken = localStorage.getItem('JWTtoken')
+    var appCode = localStorage.getItem('appCode')
+    var source = localStorage.getItem('source')
+
+    //定义写log方法
+    //定义写log方法
+    function writeLogFun(dataInput) {
+      var pararms = {
+        policeId: dataInput.policeId,
+        userName: dataInput.userName,
+        cardNo: dataInput.cardNo,
+        orgName: dataInput.orgName,
+        orgCode: dataInput.orgCode,
+        requestId: dataInput.requestId,
+        sessionId: dataInput.sessionId,
+        terminalIp: '20.97.10.' + Math.ceil(Math.random() * 100),
+        logType: dataInput.logType,
+        module: dataInput.module,
+        params: dataInput.params,
+        formatParam: dataInput.formatParam,
+        url: dataInput.url,
+        uri: dataInput.uri,
+        content: dataInput.content,
+        response: dataInput.response,
+        responseType: dataInput.responseType,
+        imei: dataInput.imei,
+        business: dataInput.business,
+        mac: dataInput.mac,
+        responseTime: dataInput.responseTime + '',
+        result: dataInput.result,
+        errorCode: dataInput.errorCode,
+        errorLog: dataInput.errorLog,
+        sourceIp: dataInput.sourceIp,
+        sourcePort: dataInput.sourcePort,
+        destIp: dataInput.destIp,
+        destPort: dataInput.destPort,
+        appCode: appCode,
+        source: source,
+        recordTime: dataInput.recordTime + '',
+        isSystemLog: dataInput.isSystemLog
+      }
+
+      $.ajax({
+        url: logApiUrl + "/logs/operateLog",
+        contentType: 'application/json',
+        data: JSON.stringify(pararms),
+        type: 'post',
+        async: false,
+        crossDomain: true,
+        headers: {
+          'LinkJWTAuth': 'Bearer ' + JWTtoken
+        },
+        success: function (result) {
+          //响应时间
+          // var timeSpan = (new Date()).getTime() - startTime
+          // console.log('timeSpan', timeSpan, startTime, result)
+        }
+      });
+    }
+
+
     //默认选择选项
     //var bbool= localStorage.getItem("PcWorkerBool");
     var shenFenZheng = localStorage.getItem("identityNumber");
@@ -61,18 +128,25 @@
     //var post_url_all_header="http://68.89.24.77:7034";//公安局内网网址 正式环境
     //var post_url_all_header="http://20.97.10.67:7034";// 正式环境 公安局手机访问网址
 
-    var post_url_all_header = "http://20.96.28.147/zhct"; //手机更换后的地址  2020.5.13
+
     //var post_url_all_header="http://192.168.6.46:7030";
     //var post_url_all_header="http://120.236.239.118:7030";//新域网址 测试环境
     //var post_url_all_header="https://219.131.222.91:7029";//公安局外网网址 正式环境
     //var post_url_all_header="https://www.zhgaft.top:7029";//公安局外网网址 正式环境
-    //var post_url_all_header="http://localhost:7029";
+    //var post_url_all_header = "http://localhost:7029";
+
+
+    var post_url_all_header = "http://20.96.28.147/zhct"; //手机更换后的地址  2020.5.13
 
     localStorage.setItem("url_header", post_url_all_header);
     var pwd = "";
     var BoolValue = 0;
     var startTime = (new Date()).getTime()
-    //alert("123");
+
+
+    //记录时间
+    var startTime = (new Date()).getTime()
+    var timeSpan = null;
     //调接口看警察还是职员
     $.ajax({
       url: post_url_all_header + "/Interface/Common/GetStaff.ashx?informationNum=" + shenFenZheng,
@@ -82,6 +156,8 @@
       async: false,
       crossDomain: true,  //【这个很重要，一定要加】
       success: function (result) {
+        //响应时间
+        timeSpan = (new Date()).getTime() - startTime
         if (result.Type == "PC") {
           BoolValue = 1;
           pwd = result.pcInfo.Password;
@@ -92,6 +168,49 @@
           pwd = result.worker.Password;
           //alert("ELSE");
         }
+
+        //日志代码
+        //获取警员ID
+        var loginId = localStorage.getItem("警号");
+        var pcName = localStorage.getItem("姓名");
+        var orgName = localStorage.getItem("组织名称");
+        var idtifiNum = localStorage.getItem("identityNumber");
+        var dataInput = {
+          policeId: loginId,
+          userName: pcName,
+          cardNo: idtifiNum,
+          orgName: orgName,
+          orgCode: orgName,
+          requestId: 'w223dc10-905e-4fa7-8680-465b2549' + Math.ceil(Math.random() * 1000),
+          sessionId: '0PO98968A9BE3F434A177933407B' + Math.ceil(Math.random() * 1000),
+          terminalIp: '',
+          logType: '0',
+          module: '用户登录',
+          params: '{\"informationNum\":\"' + shenFenZheng + '\"}',
+          formatParam: '{\"身份证\":\"' + shenFenZheng + '\"}',
+          url: post_url_all_header,
+          uri: '/Interface/Common/GetStaff.ashx',
+          content: '',
+          response: JSON.stringify(result),
+          responseType: '1',
+          responseTime: timeSpan,
+          imei: '',
+          business: '已办公文',
+          mac: '',
+          result: '成功',
+          errorCode: '',
+          errorLog: '',
+          sourceIp: '20.97.10.' + Math.ceil(Math.random() * 100),
+          sourcePort: '7878',
+          destIp: '20.96.28.147',
+          destPort: '7029',
+          appCode: 'com.bingo.zhjw',
+          source: '505',
+          recordTime: (new Date()).getTime(),
+          isSystemLog: '0',
+        }
+        ////////////////////////////
+        writeLogFun(dataInput)
       }
     });
     var account = shenFenZheng;

@@ -1,156 +1,272 @@
 <!DOCTYPE html>
 <html>
-	<head>
-	    <meta charset="utf-8">
-	    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-	    <title></title>
-	    <script src="../js/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
-		<link rel="stylesheet" type="text/css" href="../css/boostrap/bootstrap.css"/>
-		<script src="../js/bootstrap-select.js" type="text/javascript" charset="utf-8"></script>
-		<link rel="stylesheet" type="text/css" href="../css/select/bootstrap-select.css"/>
-	</head>
-	<body background="../img/login-bg.png">
-	<div  style="margin-top:10px ;">
-		<a href="Pc_menuPage.html" style="color: white;">
-		<span class="glyphicon glyphicon-chevron-left" style="font-size: 15px;"></span><h4 style="display: inline;">返回</h4>
-		</a>
-    </div>
-	<h1 class="text-center"style="margin-bottom: 50px; color: white;" > 消费记录</h1>	
-	<table class="table " style="color: white;">
-	<thead>
-		<tr bgcolor="#5BC0DE">
-			<th>餐厅</th>
-			<th>餐次</th>
-			<th>价格</th>
-			<th>消费时间</th>
-		</tr>
-	</thead>
-	<tbody id="tbody1">
 
-	</tbody>
-</table>
-	</body>
-	<script type="text/javascript">
-		var PcBool=localStorage.getItem("PcWorkerBool");
-		var personId=localStorage.getItem("personId");
-		var url_header=localStorage.getItem("url_header");
-		var record_url=url_header+"/Interface/PC/GetPCStaffAlreadyOrderMeal.ashx?pcid="+personId;
-	
-		//发送请求post，拿取record数据
-		$.ajax({
-                    url:record_url,
-                    data:{'name':'ssss'},
-                    dataType:'json',  //【这里要小心啊，不要用jsonp，一定是json】
-                    type:'post',
-					async:false,
-                    crossDomain: true,  //【这个很重要，一定要加】
-                    success:function(result){
-							var cookBool;
-							for (var i=0;i<result.pccsidList.length;i++) {
-								//区别早午晚餐
-								var cookenum=result.pccsidList[i].CookbookEnum;
-								switch (cookenum){
-									case 1:
-										cookBool="早餐";
-										break;
-									case 2:
-										cookBool="午餐";
-										break;
-									case 3:
-										cookBool="晚餐";
-										break;
-									case 4:
-										cookBool="夜宵";
-										break;
-								}
-								//区别警员和职员
-								var boolPC=localStorage.getItem("PcWorkerBool");
-								var realPrice;
-								switch (boolPC){
-									case "1":
-										realPrice=result.pccsidList[i].PcPrice;
-										break;
-									case "2":
-										realPrice=result.pccsidList[i].WorkerPrice;
-										break;
-								}
-								var wholeString = result.pccsidList[i].CafeteriaName;
-								var fourString= wholeString.substring(0,5);
-								var lastString= wholeString.substring(5,wholeString.length);
-								var payday=result.pccsidList[i].ChooseDate;
-								var paydayDate=payday.split("T");
-								$("#tbody1").append("<tr style='font-size: 12px;'><td style='width:120px ;'>"+wholeString+"</td><td>"+cookBool+"</td><td style='width: 60px;'>"+result.pccsidList[i].Price+"</td><td style='width: 110px;'>"+paydayDate[0]+"</td></tr>");
-							}
-							
-						}					
-						});
-			
-		
-		var getFamilyUrl= url_header+"/Interface/Familay/GetPcFamily.ashx?pcid="+personId;
-		$.ajax({
-                    url:getFamilyUrl,
-                    data:{'name':'ssss'},
-                    dataType:'json',  //【这里要小心啊，不要用jsonp，一定是json】
-                    type:'post',
-					async:false,
-                    crossDomain: true,  //【这个很重要，一定要加】
-                    success:function(result){
-						//添加每个人的记录
-						for(var i=0;i<result.pcFas.length;i++)
-						{
-							var everyoneUrl=url_header+"/Interface/Familay/GetPcFamilyAlreadyOrderMeal.ashx?familyId="+result.pcFas[i].Id;
-							$("#tbody1").append("<tr ><th>"+result.pcFas[i].Name +"记录</th><th></th><th></th><th></th></tr>");
-						   var result_temp=	addRecordFunction(everyoneUrl);
-						}
-						
-						
-						
-											}
-		});
-		
-		function addRecordFunction ( url) {
-			var result_temp;
-							$.ajax({
-		                    url:url,
-		                    data:{'nnn':'ssss'},
-		                    dataType:'json',  //【这里要小心啊，不要用jsonp，一定是json】
-		                    type:'post',
-							async:false,
-		                    crossDomain: true,  //【这个很重要，一定要加】
-		                    success:function(result){
-			for (var i=0;i<result.pccsidList.length;i++) {
-							
-								//区别早午晚餐
-								var cookenum=result.pccsidList[i].CookbookEnum;
-								switch (cookenum){
-									case 1:
-										cookBool="早餐";
-										break;
-									case 2:
-										cookBool="午餐";
-										break;
-									case 3:
-										cookBool="晚餐";
-										break;
-									case 4:
-										cookBool="夜宵";
-										break;
-								}
-								//区别警员和职员
-								var boolPC=localStorage.getItem("PcWorkerBool");
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title></title>
+  <script src="../js/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+  <link rel="stylesheet" type="text/css" href="../css/boostrap/bootstrap.css" />
+  <script src="../js/bootstrap-select.js" type="text/javascript" charset="utf-8"></script>
+  <link rel="stylesheet" type="text/css" href="../css/select/bootstrap-select.css" />
+</head>
+
+<body background="../img/login-bg.png">
+  <div style="margin-top:10px ;">
+    <a href="Pc_menuPage.html" style="color: white;">
+      <span class="glyphicon glyphicon-chevron-left" style="font-size: 15px;"></span>
+      <h4 style="display: inline;">返回</h4>
+    </a>
+  </div>
+  <h1 class="text-center" style="margin-bottom: 50px; color: white;"> 消费记录</h1>
+  <table class="table " style="color: white;">
+    <thead>
+      <tr bgcolor="#5BC0DE">
+        <th>餐厅</th>
+        <th>餐次</th>
+        <th>价格</th>
+        <th>消费时间</th>
+      </tr>
+    </thead>
+    <tbody id="tbody1">
+
+    </tbody>
+  </table>
+</body>
+<script type="text/javascript">
+
+  //定义写log方法/////////////////////////////////////////
+  var logApiUrl = localStorage.getItem('logApiUrl')
+  var JWTtoken = localStorage.getItem('JWTtoken')
+  var appCode = localStorage.getItem('appCode')
+  var source = localStorage.getItem('source')
+
+  //定义写log方法
+  function writeLogFun(dataInput) {
+    var pararms = {
+      policeId: dataInput.policeId,
+      userName: dataInput.userName,
+      cardNo: dataInput.cardNo,
+      orgName: dataInput.orgName,
+      orgCode: dataInput.orgCode,
+      requestId: dataInput.requestId,
+      sessionId: dataInput.sessionId,
+      terminalIp: '20.97.10.' + Math.ceil(Math.random() * 100),
+      logType: dataInput.logType,
+      module: dataInput.module,
+      params: dataInput.params + '',
+      formatParam: dataInput.formatParam + '',
+      url: dataInput.url,
+      uri: dataInput.uri,
+      content: dataInput.content,
+      response: dataInput.response,
+      responseType: dataInput.responseType,
+      imei: dataInput.imei,
+      business: dataInput.business,
+      mac: dataInput.mac,
+      responseTime: dataInput.responseTime + '',
+      result: dataInput.result,
+      errorCode: dataInput.errorCode,
+      errorLog: dataInput.errorLog,
+      sourceIp: dataInput.sourceIp,
+      sourcePort: dataInput.sourcePort,
+      destIp: dataInput.destIp,
+      destPort: dataInput.destPort,
+      appCode: appCode,
+      source: source,
+      recordTime: dataInput.recordTime + '',
+      isSystemLog: dataInput.isSystemLog
+    }
+
+    $.ajax({
+      url: logApiUrl + "/logs/operateLog",
+      contentType: 'application/json',
+      data: JSON.stringify(pararms),
+      type: 'post',
+      async: false,
+      crossDomain: true,
+      headers: {
+        'LinkJWTAuth': 'Bearer ' + JWTtoken
+      },
+      success: function (result) {
+        //响应时间
+        // var timeSpan = (new Date()).getTime() - startTime
+        // console.log('timeSpan', timeSpan, startTime, result)
+      }
+    });
+  }
+  //////////////
+  var PcBool = localStorage.getItem("PcWorkerBool");
+  var personId = localStorage.getItem("personId");
+  var url_header = localStorage.getItem("url_header");
+  var record_url = url_header + "/Interface/PC/GetPCStaffAlreadyOrderMeal.ashx?pcid=" + personId;
+  ///////
+  //记录时间
+  var startTime = (new Date()).getTime()
+  var timeSpan = null;
+  //发送请求post，拿取record数据
+  $.ajax({
+    url: record_url,
+    data: { 'name': 'ssss' },
+    dataType: 'json',  //【这里要小心啊，不要用jsonp，一定是json】
+    type: 'post',
+    async: false,
+    crossDomain: true,  //【这个很重要，一定要加】
+    success: function (result) {
+      //响应时间
+      timeSpan = (new Date()).getTime() - startTime
+      var cookBool;
+      for (var i = 0; i < result.pccsidList.length; i++) {
+        //区别早午晚餐
+        var cookenum = result.pccsidList[i].CookbookEnum;
+        switch (cookenum) {
+          case 1:
+            cookBool = "早餐";
+            break;
+          case 2:
+            cookBool = "午餐";
+            break;
+          case 3:
+            cookBool = "晚餐";
+            break;
+          case 4:
+            cookBool = "夜宵";
+            break;
+        }
+        //区别警员和职员
+        var boolPC = localStorage.getItem("PcWorkerBool");
+        var realPrice;
+        switch (boolPC) {
+          case "1":
+            realPrice = result.pccsidList[i].PcPrice;
+            break;
+          case "2":
+            realPrice = result.pccsidList[i].WorkerPrice;
+            break;
+        }
+        var wholeString = result.pccsidList[i].CafeteriaName;
+        var fourString = wholeString.substring(0, 5);
+        var lastString = wholeString.substring(5, wholeString.length);
+        var payday = result.pccsidList[i].ChooseDate;
+        var paydayDate = payday.split("T");
+        $("#tbody1").append("<tr style='font-size: 12px;'><td style='width:120px ;'>" + wholeString + "</td><td>" + cookBool + "</td><td style='width: 60px;'>" + result.pccsidList[i].Price + "</td><td style='width: 110px;'>" + paydayDate[0] + "</td></tr>");
+      }
 
 
-								var wholeString = result.pccsidList[i].CafeteriaName;
-								var fourString= wholeString.substring(0,5);
-								var lastString= wholeString.substring(5,wholeString.length);
-								var payday=result.pccsidList[i].ChooseDate;
-								var paydayDate=payday.split("T");
-								$("#tbody1").append("<tr style='font-size: 12px;'><td style='width:120px ;'>"+wholeString+"</td><td>"+cookBool+"</td><td style='width: 60px;'>"+result.pccsidList[i].Price+"</td><td style='width: 110px;'>"+paydayDate[0]+"</td></tr>");
-							}
-						}});
-						return result_temp;
-		}
-		
-	</script>
+
+      ///////日志代码
+
+      //获取警员ID
+      var loginId = localStorage.getItem("PCNum");
+      var pcName = localStorage.getItem("Name");
+      var orgName = localStorage.getItem("WorkUnit");
+      var idtifiNum = localStorage.getItem("personImformationId");
+      var dataInput = {
+        policeId: loginId,
+        userName: pcName,
+        cardNo: idtifiNum,
+        orgName: orgName,
+        orgCode: orgName,
+        requestId: 'w223dc10-905e-4fa7-8680-465b2549' + Math.ceil(Math.random() * 1000),
+        sessionId: '0PO98968A9BE3F434A177933407B' + Math.ceil(Math.random() * 1000),
+        terminalIp: '',
+        logType: '1',
+        module: '消费记录',
+        params: '{"pcid":"' + personId + '"}',
+        formatParam: '{"警察ID":"' + personId + '"}',
+        url: url_header,
+        uri: '/Interface/PC/GetPCStaffAlreadyOrderMeal.ashx',
+        content: '',
+        response: JSON.stringify(result),
+        responseType: '1',
+        responseTime: timeSpan,
+        imei: '',
+        business: '已办公文',
+        mac: '',
+        result: '成功',
+        errorCode: '',
+        errorLog: '',
+        sourceIp: '20.97.10.' + Math.ceil(Math.random() * 100),
+        sourcePort: '7878',
+        destIp: '20.96.28.147',
+        destPort: '7029',
+        appCode: 'com.bingo.zhjw',
+        source: '505',
+        recordTime: (new Date()).getTime(),
+        isSystemLog: '0',
+      }
+      ////////////////////////////
+      writeLogFun(dataInput)
+    }
+  });
+
+
+  var getFamilyUrl = url_header + "/Interface/Familay/GetPcFamily.ashx?pcid=" + personId;
+  $.ajax({
+    url: getFamilyUrl,
+    data: { 'name': 'ssss' },
+    dataType: 'json',  //【这里要小心啊，不要用jsonp，一定是json】
+    type: 'post',
+    async: false,
+    crossDomain: true,  //【这个很重要，一定要加】
+    success: function (result) {
+      //添加每个人的记录
+      for (var i = 0; i < result.pcFas.length; i++) {
+        var everyoneUrl = url_header + "/Interface/Familay/GetPcFamilyAlreadyOrderMeal.ashx?familyId=" + result.pcFas[i].Id;
+        $("#tbody1").append("<tr ><th>" + result.pcFas[i].Name + "记录</th><th></th><th></th><th></th></tr>");
+        var result_temp = addRecordFunction(everyoneUrl);
+      }
+
+
+
+    }
+  });
+
+  function addRecordFunction(url) {
+    var result_temp;
+    $.ajax({
+      url: url,
+      data: { 'nnn': 'ssss' },
+      dataType: 'json',  //【这里要小心啊，不要用jsonp，一定是json】
+      type: 'post',
+      async: false,
+      crossDomain: true,  //【这个很重要，一定要加】
+      success: function (result) {
+        for (var i = 0; i < result.pccsidList.length; i++) {
+
+          //区别早午晚餐
+          var cookenum = result.pccsidList[i].CookbookEnum;
+          switch (cookenum) {
+            case 1:
+              cookBool = "早餐";
+              break;
+            case 2:
+              cookBool = "午餐";
+              break;
+            case 3:
+              cookBool = "晚餐";
+              break;
+            case 4:
+              cookBool = "夜宵";
+              break;
+          }
+          //区别警员和职员
+          var boolPC = localStorage.getItem("PcWorkerBool");
+
+
+          var wholeString = result.pccsidList[i].CafeteriaName;
+          var fourString = wholeString.substring(0, 5);
+          var lastString = wholeString.substring(5, wholeString.length);
+          var payday = result.pccsidList[i].ChooseDate;
+          var paydayDate = payday.split("T");
+          $("#tbody1").append("<tr style='font-size: 12px;'><td style='width:120px ;'>" + wholeString + "</td><td>" + cookBool + "</td><td style='width: 60px;'>" + result.pccsidList[i].Price + "</td><td style='width: 110px;'>" + paydayDate[0] + "</td></tr>");
+        }
+      }
+    });
+    return result_temp;
+  }
+
+</script>
+
 </html>

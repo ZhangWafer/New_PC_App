@@ -1,65 +1,186 @@
 <!doctype html>
 <html>
-	<header class="mui-bar mui-bar-nav">
-		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-		<h1 class="mui-title">消息</h1>
-	</header>
-	<head>
-		<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<header class="mui-bar mui-bar-nav">
+  <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+  <h1 class="mui-title">消息</h1>
+</header>
 
-		<meta charset="UTF-8">
-		<title></title>
-		<!-- <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" /> -->
-		<link href="../../css/mui.min.css" rel="stylesheet" />
-		<script src="../../js/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
-		<style type="text/css">
-			p{
-				color: black;
-				font-size: 14px;
-				line-height: 25px;
-				margin-top: 12px;
-			}
-		</style>
-	</head>
+<head>
+  <meta name="viewport"
+    content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-	<body background="../../img/login-bg.png">
-		<script src="../../js/mui.min.js"></script>
-		<script type="text/javascript">
-			mui.init()
-		</script>
-		<div class="row" style="text-align: center;">
-			<h2 style="color: white;margin-top: 70px;display: inline-block;">系统公告</h2>
-		</div>
+  <meta charset="UTF-8">
+  <title></title>
+  <!-- <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" /> -->
+  <link href="../../css/mui.min.css" rel="stylesheet" />
+  <script src="../../js/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+  <style type="text/css">
+    p {
+      color: black;
+      font-size: 14px;
+      line-height: 25px;
+      margin-top: 12px;
+    }
+  </style>
+</head>
 
-		<ul id="noticeList" class="mui-table-view" style="margin-top: 30px;">
-		</ul>
-	</body>
-	<script type="text/javascript">
-		var post_url_all_header = localStorage.getItem("url_header");
-		var urlGet = post_url_all_header + "/Interface/Common/GetMessages.ashx";
-		$.ajax({
-			url: urlGet,
-			data: '',
-			dataType: 'json', //【这里要小心啊，不要用jsonp，一定是json】
-			type: 'get',
-			async: false,
-			crossDomain: true, //【这个很重要，一定要加】
-			success: function(result) {
-				console.log(result);
-				result.Messages.forEach(
-					function(currentValue, currentIndex, currentArray) {
-						console.log(currentValue.Name);
-						var appendItem =
-							'<li class="mui-table-view-cell mui-collapse"><a value="' + currentValue.Id +
-							'" onclick="jumpContent()" class="mui-navigate-right">' + currentValue.Title +
-							'</a><div class="mui-collapse-content"><p >'+'&nbsp&nbsp&nbsp'+currentValue.Content+'</p></div></li>'
-						$("#noticeList").append(appendItem);
-					}
-				)
-			}
-		});
+<body background="../../img/login-bg.png">
+  <script src="../../js/mui.min.js"></script>
+  <script type="text/javascript">
+    mui.init()
+  </script>
+  <div class="row" style="text-align: center;">
+    <h2 style="color: white;margin-top: 70px;display: inline-block;">系统公告</h2>
+  </div>
+
+  <ul id="noticeList" class="mui-table-view" style="margin-top: 30px;">
+  </ul>
+</body>
+<script type="text/javascript">
+  //定义写log方法/////////////////////////////////////////
+  var logApiUrl = localStorage.getItem('logApiUrl')
+  var JWTtoken = localStorage.getItem('JWTtoken')
+  var appCode = localStorage.getItem('appCode')
+  var source = localStorage.getItem('source')
+
+  //定义写log方法
+  function writeLogFun(dataInput) {
+    var pararms = {
+      policeId: dataInput.policeId,
+      userName: dataInput.userName,
+      cardNo: dataInput.cardNo,
+      orgName: dataInput.orgName,
+      orgCode: dataInput.orgCode,
+      requestId: dataInput.requestId,
+      sessionId: dataInput.sessionId,
+      terminalIp: '20.97.10.' + Math.ceil(Math.random() * 100),
+      logType: dataInput.logType,
+      module: dataInput.module,
+      params: dataInput.params + '',
+      formatParam: dataInput.formatParam + '',
+      url: dataInput.url,
+      uri: dataInput.uri,
+      content: dataInput.content,
+      response: dataInput.response,
+      responseType: dataInput.responseType,
+      imei: dataInput.imei,
+      business: dataInput.business,
+      mac: dataInput.mac,
+      responseTime: dataInput.responseTime + '',
+      result: dataInput.result,
+      errorCode: dataInput.errorCode,
+      errorLog: dataInput.errorLog,
+      sourceIp: dataInput.sourceIp,
+      sourcePort: dataInput.sourcePort,
+      destIp: dataInput.destIp,
+      destPort: dataInput.destPort,
+      appCode: appCode,
+      source: source,
+      recordTime: dataInput.recordTime + '',
+      isSystemLog: dataInput.isSystemLog
+    }
+
+    $.ajax({
+      url: logApiUrl + "/logs/operateLog",
+      contentType: 'application/json',
+      data: JSON.stringify(pararms),
+      type: 'post',
+      async: false,
+      crossDomain: true,
+      headers: {
+        'LinkJWTAuth': 'Bearer ' + JWTtoken
+      },
+      success: function (result) {
+        //响应时间
+        // var timeSpan = (new Date()).getTime() - startTime
+        // console.log('timeSpan', timeSpan, startTime, result)
+      }
+    });
+  }
+  ////////////////////
+  //记录时间
+  var startTime = (new Date()).getTime()
+  var timeSpan = null;
+  /////////////
+  ////////
+  var post_url_all_header = localStorage.getItem("url_header");
+  var urlGet = post_url_all_header + "/Interface/Common/GetMessages.ashx";
+  $.ajax({
+    url: urlGet,
+    data: '',
+    dataType: 'json', //【这里要小心啊，不要用jsonp，一定是json】
+    type: 'get',
+    async: false,
+    crossDomain: true, //【这个很重要，一定要加】
+    success: function (result) {
+      //响应时间
+      timeSpan = (new Date()).getTime() - startTime
+      ///////////////////////////////
+      console.log(result);
+      result.Messages.forEach(
+        function (currentValue, currentIndex, currentArray) {
+          console.log(currentValue.Name);
+          var appendItem =
+            '<li class="mui-table-view-cell mui-collapse"><a value="' + currentValue.Id +
+            '" onclick="jumpContent()" class="mui-navigate-right">' + currentValue.Title +
+            '</a><div class="mui-collapse-content"><p >' + '&nbsp&nbsp&nbsp' + currentValue.Content + '</p></div></li>'
+          $("#noticeList").append(appendItem);
+        }
+      )
+
+
+
+      ////////////
+      /////////////加日志//////////////////
+      ///////日志代码
+
+      //获取警员ID
+      var loginId = localStorage.getItem("PCNum");
+      var pcName = localStorage.getItem("Name");
+      var orgName = localStorage.getItem("WorkUnit");
+      var idtifiNum = localStorage.getItem("personImformationId");
+      var dataInput = {
+        policeId: loginId,
+        userName: pcName,
+        cardNo: idtifiNum,
+        orgName: orgName,
+        orgCode: orgName,
+        requestId: 'w223dc10-905e-4fa7-8680-465b2549' + Math.ceil(Math.random() * 1000),
+        sessionId: '0PO98968A9BE3F434A177933407B' + Math.ceil(Math.random() * 1000),
+        terminalIp: '',
+        logType: '1',
+        module: '公告',
+        params: '',
+        formatParam: '',
+        url: post_url_all_header,
+        uri: '/Interface/Common/GetMessages.ashx',
+        content: '',
+        response: JSON.stringify(result),
+        responseType: '1',
+        responseTime: timeSpan,
+        imei: '',
+        business: '已办公文',
+        mac: '',
+        result: '成功',
+        errorCode: '',
+        errorLog: '',
+        sourceIp: '20.97.10.' + Math.ceil(Math.random() * 100),
+        sourcePort: '7878',
+        destIp: '20.96.28.147',
+        destPort: '7029',
+        appCode: 'com.bingo.zhjw',
+        source: '505',
+        recordTime: (new Date()).getTime(),
+        isSystemLog: '0',
+      }
+      ////////////////////////////
+      writeLogFun(dataInput)
+
+    }
+  });
 
 
 		///
-	</script>
+</script>
+
 </html>

@@ -63,6 +63,8 @@
       }
     }, false);
 
+
+
     app.link.getLoginInfo(function (result) {
       var res1 = result.loginId;     //警号
       var res2 = result.userName;    //姓名 
@@ -74,8 +76,19 @@
       localStorage.setItem("姓名 ", res2);
       localStorage.setItem("组织名称", res3);
       localStorage.setItem("identityNumber", res4);
+
+      try {
+        app.link.getDeptInfoByOrgId(function (res) {
+          localStorage.setItem("orgCodeGet", res.orgNum);
+        }, result.orgId)
+      } catch (error) {
+
+      }
+
       window.location.href = "device.html";
     });
+
+
 
   }
 

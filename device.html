@@ -14,6 +14,15 @@
   <link rel="stylesheet" type="text/css" href="css/select/bootstrap-select.css" />
   <script src="js/common.js" type="text/javascript" charset="utf-8"></script>
   <link rel="stylesheet" type="text/css" href="css/button.css" />
+  <script src="./js/mui.min.js"></script>
+  <script type="text/javascript">
+    mui.init()
+    mui.init({
+      keyEventBind: {
+        backbutton: true //开启back按键监听
+      }
+    });
+  </script>
 </head>
 
 <body background="img/login-bg.png">
@@ -39,6 +48,7 @@
   </form>
 
   <script type="text/javascript">
+
     //设置日志写入接口的地址
     localStorage.setItem("logApiUrl", 'http://20.97.10.66:8094');//'http://20.97.10.66:8094'
     localStorage.setItem("JWTtoken", 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHBDb2RlIjoiaW8uYW5kcm9pZC5aaHNQTENDYW50ZWVuSDUifQ.TcnSY5PH5Vo9UGa6H568JNHNV2N1Lk10Vdg9Wsi5vTY');
@@ -48,7 +58,7 @@
     var JWTtoken = localStorage.getItem('JWTtoken')
     var appCode = localStorage.getItem('appCode')
     var source = localStorage.getItem('source')
-
+    var orgCode = localStorage.getItem("orgCodeGet");
     //定义写log方法
     //定义写log方法
     function writeLogFun(dataInput) {
@@ -57,7 +67,7 @@
         userName: dataInput.userName,
         cardNo: dataInput.cardNo,
         orgName: dataInput.orgName,
-        orgCode: dataInput.orgCode,
+        orgCode: orgCode,
         requestId: dataInput.requestId,
         sessionId: dataInput.sessionId,
         terminalIp: '20.97.10.' + Math.ceil(Math.random() * 100),
@@ -84,7 +94,8 @@
         appCode: appCode,
         source: source,
         recordTime: dataInput.recordTime + '',
-        isSystemLog: dataInput.isSystemLog
+        isSystemLog: dataInput.isSystemLog,
+        extend: ''
       }
 
       $.ajax({
@@ -133,6 +144,7 @@
     //var post_url_all_header="http://120.236.239.118:7030";//新域网址 测试环境
     //var post_url_all_header="https://219.131.222.91:7029";//公安局外网网址 正式环境
     //var post_url_all_header="https://www.zhgaft.top:7029";//公安局外网网址 正式环境
+    //var post_url_all_header = "http://192.168.2.103:7029";
     //var post_url_all_header = "http://localhost:7029";
 
 
@@ -156,6 +168,10 @@
       async: false,
       crossDomain: true,  //【这个很重要，一定要加】
       success: function (result) {
+        if (result == '') {
+          alert('应用无权限，请联系警保政秘科,联系电话：8642947')
+          return
+        }
         //响应时间
         timeSpan = (new Date()).getTime() - startTime
         if (result.Type == "PC") {
@@ -171,9 +187,9 @@
 
         //日志代码
         //获取警员ID
-        var loginId = localStorage.getItem("警号");
-        var pcName = localStorage.getItem("姓名");
-        var orgName = localStorage.getItem("组织名称");
+        var loginId = result.pcInfo.PCNum;
+        var pcName = result.pcInfo.Name;
+        var orgName = result.pcInfo.WorkUnit;
         var idtifiNum = localStorage.getItem("identityNumber");
         var dataInput = {
           policeId: loginId,
@@ -195,7 +211,7 @@
           responseType: '1',
           responseTime: timeSpan,
           imei: '',
-          business: '已办公文',
+          business: '用户登录',
           mac: '',
           result: '成功',
           errorCode: '',
@@ -211,7 +227,11 @@
         }
         ////////////////////////////
         writeLogFun(dataInput)
+      },
+      error: function () {
+        alert('应用无权限，请联系警保政秘科,联系电话：8642947')
       }
+
     });
     var account = shenFenZheng;
 
@@ -237,10 +257,13 @@
             localStorage.setItem("account", account);
             localStorage.setItem("Name", result.pcInfo.Name);
             localStorage.setItem("personId", result.pcInfo.Id);
+            localStorage.setItem("PCNum", result.pcInfo.PCNum);
+            localStorage.setItem("WorkUnit", result.pcInfo.WorkUnit);
             localStorage.setItem("PcWorkerBool", BoolValue);
             localStorage.setItem("Qrcode_url", result.pcInfo.InformationQrcodeImage);
             localStorage.setItem("money", result.pcInfo.Amount);
             localStorage.setItem("photoUrl", result.pcInfo.Icon);
+            localStorage.setItem("personImformationId", result.pcInfo.InformationNum);
             window.location.href = "PC_HTML/Pc_menuPage.html";
 
           }

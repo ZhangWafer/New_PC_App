@@ -134,7 +134,8 @@
       appCode: appCode,
       source: source,
       recordTime: dataInput.recordTime + '',
-      isSystemLog: dataInput.isSystemLog
+      isSystemLog: dataInput.isSystemLog,
+      extend: ''
     }
 
     $.ajax({
@@ -291,7 +292,7 @@
         responseType: '1',
         responseTime: timeSpan,
         imei: '',
-        business: '已办公文',
+        business: '每日菜品投票',
         mac: '',
         result: '成功',
         errorCode: '',
@@ -433,7 +434,7 @@
           responseType: '1',
           responseTime: timeSpan,
           imei: '',
-          business: '已办公文',
+          business: '投票提交',
           mac: '',
           result: '成功',
           errorCode: '',

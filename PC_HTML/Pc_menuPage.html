@@ -8,6 +8,17 @@
   <meta charset="utf-8">
   <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title></title>
+
+  <!-- 函数库 -->
+  <script src="../js/cordova.js"></script>
+  <script src="../js/iscroll.js"></script>
+  <script src="../js/bingotouch.js"></script>
+  <script src="../js/require.js"></script>
+  <script src="../js/linkplugins.js"></script>
+
+  <!-- 应用脚本 -->
+  <script src="../js/app/app.js"></script>
+
   <script src="../js/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
   <script src="../js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
   <link rel="stylesheet" type="text/css" href="../css/boostrap/bootstrap.css" />
@@ -31,17 +42,22 @@
       display: block;
       margin: 0 auto;
     }
+
+    .aboutStyle {
+      width: 30px;
+      height: 20px;
+      display: block;
+      margin: 0 auto;
+    }
   </style>
 </head>
 
-<body background="../img/login-bg.png">
+<body background="../img/login-bg.png" style="height:100%;width:100%;overflow: hidden;background-size:cover;">
 
 
   <div class="row center_item" style="margin-top: 70px;">
-    <div class="col-xs-6">
-      <div style="margin-left: 45px;">
-        <img id="img1" style="border-radius: 5px;height: 127px;width: 96px;" />
-      </div>
+    <div class="col-xs-6" style="position: relative;">
+      <img id="img1" style="border-radius: 5px;height: 127px;width: 96px;position: absolute;right: 5%;" />
     </div>
     <div class="col-xs-6">
       <div style="text-align: left;margin-top: 25px;">
@@ -115,12 +131,68 @@
         </div>
       </div>
     </div>
+    <div class="row" style="margin-top: 30px;padding: 0 45px 0 45px;">
+      <div class="col-xs-4">
+        <!-- <button style="position: absolute;left:0%;width: 80px;">
+          <div class="row">
+            <div class="col-xs-6"> <img src="../img/about.svg" class="aboutStyle" /></div>
+            <div class="col-xs-6">
+              <h5 style="margin-left: -22px;">关于</h5>
+            </div>
+
+          </div>
+        </button> -->
+        &nbsp
+      </div>
+      <div class="col-xs-4" style="position: relative;">
+        <div style="text-align: center;">
+          <img src="../img/about.svg" class="aboutStyle" onclick="junpGuanYu()" />
+          <h2>关于</h2>
+        </div>
+      </div>
+      <div class="col-xs-4">
+        <div style="text-align: center;">
+          <img src="../img/quit.svg" class="aboutStyle" onclick="quit()" />
+          <h2>退出</h2>
+        </div>
+      </div>
+    </div>
   </div>
 
 </body>
 <script type="text/javascript">
+  try {
+    app.page.onLoad = function () {
+      //app.hint("欢迎使用BingoTouch!");
+      //后退键
+      var flag = 0;
+      document.addEventListener("backbutton", function () {
+        if (flag == 0) {
+          app.hint("再按一次就退出应用了!");
+          flag = flag + 1;
+          //5s后重新设置回去
+          setTimeout(function () {
+            flag = 0;
+          }, 5000);
+        } else if (flag == 1) {
+          app.exit();
+        }
+
+      }, false);
+
+    }
+  } catch (error) {
+
+  }
+
+
   function quit() {
-    app.exit();
+    try {
+      app.exit();
+    } catch (error) {
+
+    }
+
   }
 
   //取index传的值,Name,id
@@ -145,6 +217,11 @@
   $("#moneyBox").html("余额：" + money);
 
 
+
+  //关于页面
+  function junpGuanYu() {
+    window.location.href = "second/GuanYu.html"
+  }
   //问卷
   function junpQueryPaper() {
     window.location.href = "second/AnswerQuestion.html"
@@ -220,8 +297,8 @@
       watermark_txt: "text",
       watermark_x: 20, //水印起始位置x轴坐标
       watermark_y: 20, //水印起始位置Y轴坐标
-      watermark_rows: 20, //水印行数
-      watermark_cols: 20, //水印列数
+      watermark_rows: 0, //水印行数
+      watermark_cols: 0, //水印列数
       watermark_x_space: 30, //水印x轴间隔
       watermark_y_space: 10, //水印y轴间隔
       watermark_color: '#aaa', //水印字体颜色

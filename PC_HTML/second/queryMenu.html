@@ -6,6 +6,17 @@
 </header>
 
 <head>
+
+  <!-- 函数库 -->
+  <script src="../js/cordova.js"></script>
+  <script src="../js/iscroll.js"></script>
+  <script src="../js/bingotouch.js"></script>
+  <script src="../js/require.js"></script>
+  <script src="../js/linkplugins.js"></script>
+
+  <!-- 应用脚本 -->
+  <script src="../js/app/app.js"></script>
+  <!-- //// -->
   <meta name="viewport"
     content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta charset="UTF-8">
@@ -64,7 +75,7 @@
   </style>
 </head>
 
-<body background="../../img/login-bg.png">
+<body background="../../img/login-bg.png" style="height:100%;width:100%;overflow: hidden;background-size:cover;">
   <div class="row center_item" style="margin:160px 0 30px 0;">
     <h3 style="color: white;">菜单日期餐次选择</h3>
   </div>
@@ -74,7 +85,8 @@
   <div class="row center_item" style="margin-bottom: 25px;">
     <div class="btn-group center_item">
       <select id="select2" class="selectpicker center_item">
-
+        <option value='16'>
+          机关饭堂(二楼)</option>
       </select>
     </div>
   </div>
@@ -92,24 +104,40 @@
     <button id="selectBtn" type="button" class="btn btn-primary mui-btn-block btn-style">选择</button>
   </div>
   <script type="text/javascript">
+    try {
+      app.page.onLoad = function () {
+        //app.hint("欢迎使用BingoTouch!");
+        //后退键
+        var flag = 0;
+        document.addEventListener("backbutton", function () {
+          ui.Page.back();
+        }, false);
+
+      }
+    } catch (error) {
+
+    }
+
+
+
     var post_url_all_header = localStorage.getItem("url_header");
     var targetUrl = post_url_all_header + "/Interface/Common/GetCafeterias.ashx";
-    $.ajax({
-      url: targetUrl,
-      data: {},
-      dataType: 'json', //【这里要小心啊，不要用jsonp，一定是json】
-      type: 'get',
-      async: false,
-      crossDomain: true, //【这个很重要，一定要加】
-      success: function (result) {
-        console.log(result)
+    // $.ajax({
+    //   url: targetUrl,
+    //   data: {},
+    //   dataType: 'json', //【这里要小心啊，不要用jsonp，一定是json】
+    //   type: 'get',
+    //   async: false,
+    //   crossDomain: true, //【这个很重要，一定要加】
+    //   success: function (result) {
+    //     console.log(result)
 
-        result.list.forEach(function (currentValue, currentIndex, currentArray) {
-          console.log(currentValue.Name);
-          $("#select2").append("<option value=" + currentValue.Id + ">" + currentValue.Name + "</option>");
-        });
-      }
-    });
+    //     result.list.forEach(function (currentValue, currentIndex, currentArray) {
+    //       console.log(currentValue.Name);
+    //       $("#select2").append("<option value=" + currentValue.Id + ">" + currentValue.Name + "</option>");
+    //     });
+    //   }
+    // });
 
     $("#selectBtn").click(
       function () {
@@ -143,8 +171,8 @@
         watermark_txt: "text",
         watermark_x: 20, //水印起始位置x轴坐标
         watermark_y: 20, //水印起始位置Y轴坐标
-        watermark_rows: 20, //水印行数
-        watermark_cols: 20, //水印列数
+        watermark_rows: 0, //水印行数
+        watermark_cols: 0, //水印列数
         watermark_x_space: 30, //水印x轴间隔
         watermark_y_space: 10, //水印y轴间隔
         watermark_color: '#aaa', //水印字体颜色

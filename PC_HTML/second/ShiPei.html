@@ -1,17 +1,31 @@
-<!DOCTYPE html>
+﻿<!doctype html>
 <html>
+<header class="mui-bar mui-bar-nav">
+  <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+  <h1 class="mui-title">消息</h1>
+</header>
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport"
+    content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+  <meta charset="UTF-8">
   <title></title>
-  <script src="js/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
-  <script src="js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
-  <link rel="stylesheet" type="text/css" href="css/boostrap/bootstrap.css" />
-  <script src="js/bootstrap-select.js" type="text/javascript" charset="utf-8"></script>
-  <link rel="stylesheet" type="text/css" href="css/select/bootstrap-select.css" />
-  <link rel="stylesheet" href="./css/mui.min.css">
-  <script src="./js/mui.min.js"></script>
+  <!-- <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" /> -->
+  <link href="../../css/mui.min.css" rel="stylesheet" />
+  <script src="../../js/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+  <style type="text/css">
+    p {
+      color: black;
+      font-size: 14px;
+      line-height: 25px;
+      margin-top: 12px;
+    }
+  </style>
+</head>
+
+<body background="../../img/login-bg.png" style="height:100%;width:100%;overflow: hidden;background-size:cover;">
+  <script src="../../js/mui.min.js"></script>
   <script type="text/javascript">
     mui.init()
     mui.init({
@@ -20,26 +34,115 @@
       }
     });
   </script>
-</head>
-
-<body background="img/login-bg.png" style="height:100%;width:100%;overflow: hidden;background-size:cover;">
-  <div style="margin-top:10px ;">
-    <a href="PC_HTML/Pc_menuPage.html" style="color: white;">
-      <span class="glyphicon glyphicon-chevron-left" style="font-size: 15px;"></span>
-      <h4 style="display: inline;">返回</h4>
-    </a>
+  <div class="row" style="text-align: center;">
+    <h2 style="color: white;margin-top: 70px;display: inline-block;">应用适配情况</h2>
   </div>
-  <h1 class="text-center" style="margin-bottom: 50px; color: white;">我的二维码</h1>
-
-  <div class="text-center" style="margin-top:20px ;">
-    <img id="img_qrcode" class="text-center" style="margin-top: 20px" />
+  <div class="mui-row" style="border:1px solid gray;color:white;margin-top:20px;text-align: center;">
+    <div class="mui-col-xs-4">
+      序号
+    </div>
+    <div class="mui-col-xs-4">
+      终端型号
+    </div>
+    <div class="mui-col-xs-4">
+      是否适配
+    </div>
   </div>
+  <div class="mui-row" style="border:1px solid gray;color:white;text-align: center;">
+    <div class="mui-col-xs-4">
+      1
+    </div>
+    <div class="mui-col-xs-4">
+      华为mate9
+    </div>
+    <div class="mui-col-xs-4">
+      是
+    </div>
+  </div>
+  <div class="mui-row" style="border:1px solid gray;color:white;text-align: center;">
+    <div class="mui-col-xs-4">
+      2
+    </div>
+    <div class="mui-col-xs-4">
+      华为mate10
+    </div>
+    <div class="mui-col-xs-4">
+      是
+    </div>
+  </div>
+  <div class="mui-row" style="border:1px solid gray;color:white;text-align: center;">
+    <div class="mui-col-xs-4">
+      3
+    </div>
+    <div class="mui-col-xs-4">
+      华为mate10pro
+    </div>
+    <div class="mui-col-xs-4">
+      是
+    </div>
+  </div>
+  <div class="mui-row" style="border:1px solid gray;color:white;text-align: center;">
+    <div class="mui-col-xs-4">
+      4
+    </div>
+    <div class="mui-col-xs-4">
+      华为mate20
+    </div>
+    <div class="mui-col-xs-4">
+      是
+    </div>
+  </div>
+  <div class="mui-row" style="border:1px solid gray;color:white;text-align: center;">
+    <div class="mui-col-xs-4">
+      5
+    </div>
+    <div class="mui-col-xs-4">
+      华为mate30
+    </div>
+    <div class="mui-col-xs-4">
+      是
+    </div>
+  </div>
+  <div class="mui-row" style="border:1px solid gray;color:white;text-align: center;">
+    <div class="mui-col-xs-4">
+      6
+    </div>
+    <div class="mui-col-xs-4">
+      中兴天机
+    </div>
+    <div class="mui-col-xs-4">
+      是
+    </div>
+  </div>
+  <div class="mui-row" style="border:1px solid gray;color:white;text-align: center;">
+    <div class="mui-col-xs-4">
+      7
+    </div>
+    <div class="mui-col-xs-4">
+      华为m5
+    </div>
+    <div class="mui-col-xs-4">
+      是
+    </div>
+  </div>
+  <div class="mui-row" style="border:1px solid gray;color:white;text-align: center;">
+    <div class="mui-col-xs-4">
+      8
+    </div>
+    <div class="mui-col-xs-4">
+      华为m6
+    </div>
+    <div class="mui-col-xs-4">
+      是
+    </div>
+  </div>
+  <!-- <ul id="noticeList" class="mui-table-view" style="margin-top: 30px;"> -->
+  <!-- </ul> -->
 </body>
 <script type="text/javascript">
-  function getQrcode() {
-    $("#img_qrcode").attr("src", localStorage.getItem("Qrcode_url"));
+  function jumpShiPei() {
+    window.location.href = "ShiPei.html"
   }
-  getQrcode();
   ///加水印代码
   var pcFullNum = localStorage.getItem("PCNum")//警号
   var peopleFullName = localStorage.getItem("Name");
@@ -125,11 +228,7 @@
   }
   watermark({ "watermark_txt": pcFullNum + peopleFullName });
 
-  mui.init({
-    keyEventBind: {
-      backbutton: true //开启back按键监听
-    }
-  });
+		///
 </script>
 
 </html>

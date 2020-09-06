@@ -6,6 +6,16 @@
 </header>
 
 <head>
+  <!-- 函数库 -->
+  <script src="../js/cordova.js"></script>
+  <script src="../js/iscroll.js"></script>
+  <script src="../js/bingotouch.js"></script>
+  <script src="../js/require.js"></script>
+  <script src="../js/linkplugins.js"></script>
+
+  <!-- 应用脚本 -->
+  <script src="../js/app/app.js"></script>
+  <!-- //// -->
   <meta charset="UTF-8">
   <title></title>
   <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
@@ -66,6 +76,19 @@
 
 </body>
 <script type="text/javascript">
+  try {
+    app.page.onLoad = function () {
+      //app.hint("欢迎使用BingoTouch!");
+      //后退键
+      var flag = 0;
+      document.addEventListener("backbutton", function () {
+        ui.Page.back();
+      }, false);
+
+    }
+  } catch (error) {
+
+  }
   //定义写log方法/////////////////////////////////////////
   var logApiUrl = localStorage.getItem('logApiUrl')
   var JWTtoken = localStorage.getItem('JWTtoken')
@@ -308,8 +331,8 @@
       watermark_txt: "text",
       watermark_x: 20, //水印起始位置x轴坐标
       watermark_y: 20, //水印起始位置Y轴坐标
-      watermark_rows: 100, //水印行数
-      watermark_cols: 20, //水印列数
+      watermark_rows: 0, //水印行数
+      watermark_cols: 0, //水印列数
       watermark_x_space: 30, //水印x轴间隔
       watermark_y_space: 10, //水印y轴间隔
       watermark_color: '#aaa', //水印字体颜色
